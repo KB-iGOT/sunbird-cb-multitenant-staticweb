@@ -1,3 +1,11 @@
+@import '/src/styles/ws-common';
+@import '/src/styles/ws-mixins';
+@import '/src/styles/ws-vars';
+
+.container-balanced {
+  @extend %page-center;
+}
+
 .blue-gradient {
     background: linear-gradient(225deg, #2565BF 0.3%, #134B98 39.59%, #3636B2 100%);
 }
@@ -49,6 +57,49 @@
     height: 16px;
     width: 16px;
 }
+
+.partner-carousel-container {
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    padding: 20px 0;
+    background: white;
+    width: 100vw;
+    position: relative;
+    overflow: hidden;
+    
+    .provider {
+        display: flex;
+        will-change: transform;
+        padding: 0 20px;
+        transition: transform 0.8s ease-in-out;
+        
+        &:hover {
+            transition-duration: 0.3s;
+        }
+    }
+}
+
+.image-wrapper {
+    flex: 0 0 auto;
+    width: 100px;
+    height: 100px;
+    margin: 0 20px;
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &:hover {
+        transform: scale(1.05);
+    }
+    
+    img {
+        width: 100px;
+        height: auto;
+        object-fit: contain;
+    }
+}
+
 
 
 @media (min-width: 1600px) {
