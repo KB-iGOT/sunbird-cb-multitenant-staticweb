@@ -1,6 +1,6 @@
 {
   "/apis/*": {
-    "target": "https://portal.qa.karmayogibharat.net",
+    "target": "https://portal.dev.karmayogibharat.net",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true,
@@ -8,7 +8,7 @@
       "/apis": "/apis"
     },
     "headers": {
-      "Cookie": "connect.sid=s%3A59V2Vac0M8IJbHSTMLlAA-u3Dlkk6dDz.afICSm%2FevFroTlqZZZVImZvQJapx8V1kI9y97LUHd%2Fw"
+      "Cookie": ""
     }
   },
   "/api/*": {

@@ -1,6 +1,7 @@
 {
   "id": "tenant1",
   "name": "IIDEM",
+  "portalURL": "https://iiidem-portal.dev.karmayogibharat.net",
   "theme": {
     "primaryColor": "#1976d2",
     "secondaryColor": "#3F51B5",
@@ -22,7 +23,72 @@
     "subtitle": "Strengthening Democratic Institutions Through Excellence in Training and Research",
     "description": "IIDEM is committed to enhancing the capacity of election management bodies and promoting democratic governance through comprehensive training programs, research initiatives, and international collaboration.",
     "ctaButton": "Apply",
-    "heroImage": "https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=600&h=400&fit=crop&crop=center",
+    "sliderData": {
+        "styleData": {
+            "bannerMetaClass": "",
+            "bannerMeta": "visible",
+            "bannerMetaAlign": "right",
+            "navigationArrows": "visible",
+            "borderRadius": "12px",
+            "customHeight": "334px",
+            "arrowsPlacement": "",
+            "imageBorderWidth": 3,
+            "imageBorderColor": "#FFFFFF",
+            "imageBorderStyle": "solid",
+            "responsive": {
+                "bannerMetaClass": "inline-meta",
+                "customHeight": "232px",
+                "bannerMetaAlign": "center",
+                "navigationArrows": "visible",
+                "dots": "hidden",
+                "arrowsPlacement": "middle-inline"
+            }
+        },
+        "sliders": [
+            {
+                "active": true,
+                "banners": {
+                    "l": "https://portal.igotkarmayogi.gov.in/content-store/orgStore/0133783095823810560/1733319226555_Image1.png",
+                    "m": "https://portal.igotkarmayogi.gov.in/content-store/orgStore/0133783095823810560/1733319226555_Image1.png",
+                    "s": "https://portal.igotkarmayogi.gov.in/content-store/orgStore/0133783095823810560/1733319226555_Image1.png",
+                    "xl": "https://portal.igotkarmayogi.gov.in/content-store/orgStore/0133783095823810560/1733319226555_Image1.png",
+                    "xs": "https://portal.igotkarmayogi.gov.in/content-store/orgStore/0133783095823810560/1733319226555_Image1.png",
+                    "xxl": "https://portal.igotkarmayogi.gov.in/content-store/orgStore/0133783095823810560/1733319226555_Image1.png"
+                },
+                "redirectUrl": "",
+                "queryParams": {},
+                "title": ""
+            },
+            {
+                "active": true,
+                "banners": {
+                    "l": "https://portal.igotkarmayogi.gov.in/content-store/orgStore/0133783095823810560/1733319282850_Image2.png",
+                    "m": "https://portal.igotkarmayogi.gov.in/content-store/orgStore/0133783095823810560/1733319282850_Image2.png",
+                    "s": "https://portal.igotkarmayogi.gov.in/content-store/orgStore/0133783095823810560/1733319282850_Image2.png",
+                    "xl": "https://portal.igotkarmayogi.gov.in/content-store/orgStore/0133783095823810560/1733319282850_Image2.png",
+                    "xs": "https://portal.igotkarmayogi.gov.in/content-store/orgStore/0133783095823810560/1733319282850_Image2.png",
+                    "xxl": "https://portal.igotkarmayogi.gov.in/content-store/orgStore/0133783095823810560/1733319282850_Image2.png"
+                },
+                "redirectUrl": "",
+                "queryParams": {},
+                "title": ""
+            },
+            {
+                "active": true,
+                "banners": {
+                    "l": "https://portal.igotkarmayogi.gov.in/content-store/orgStore/0133783095823810560/1733319343983_Image3.png",
+                    "m": "https://portal.igotkarmayogi.gov.in/content-store/orgStore/0133783095823810560/1733319343983_Image3.png",
+                    "s": "https://portal.igotkarmayogi.gov.in/content-store/orgStore/0133783095823810560/1733319343983_Image3.png",
+                    "xl": "https://portal.igotkarmayogi.gov.in/content-store/orgStore/0133783095823810560/1733319343983_Image3.png",
+                    "xs": "https://portal.igotkarmayogi.gov.in/content-store/orgStore/0133783095823810560/1733319343983_Image3.png",
+                    "xxl": "https://portal.igotkarmayogi.gov.in/content-store/orgStore/0133783095823810560/1733319343983_Image3.png"
+                },
+                "redirectUrl": "",
+                "queryParams": {},
+                "title": ""
+            }
+        ]
+    },
     "statistics": [
       { "value": "13+", "label": "Years of Excellence" },
       { "value": "1700+", "label": "Training Programs Conducted" },

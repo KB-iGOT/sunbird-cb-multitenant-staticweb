@@ -46,19 +46,22 @@
           <p class="text-xl mb-8 text-blue-100">
             {{ tenant.content.subtitle }}
           </p>
-
-          <!-- Statistics -->
-          <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <div *ngFor="let stat of tenant.content.statistics; let i = index" class="text-center stat-counter pl-6"
-              [ngClass]="{'border-l-2 border-white border-opacity-30': i > 0}">
-              <div class="text-3xl lg:text-4xl font-bold mb-2">{{ stat.value }}</div>
-              <div class="text-sm text-blue-200 leading-tight">{{ stat.label }}</div>
-            </div>
-          </div>
         </div>
 
         <div class="relative">
-          <img [src]="tenant.content.heroImage" [alt]="tenant.content.title" class="w-full rounded-lg shadow-2xl" />
+          <!-- <img [src]="tenant.content.heroImage" [alt]="tenant.content.title" class="w-full rounded-lg shadow-2xl" /> -->
+          <div class="slider slider-box" *ngIf="tenant.content.sliderData && tenant.content.sliderData.sliders">
+            <sb-uic-sliders [widgetData]="tenant.content.sliderData.sliders" [styleData]="tenant.content.sliderData.styleData" ></sb-uic-sliders>
+          </div>
+        </div>
+      </div>
+      <!-- Statistics -->
+      <div class="flex justify-center items-center mt-12">
+        <div *ngFor="let stat of tenant.content.statistics; let i = index"
+          class="text-left stat-counter pl-4 mr-5 md:mr-15 lg:mr-15"
+          [ngClass]="{'border-l-2 border-white border-opacity-30': i > 0}">
+          <div class="text-3xl lg:text-4xl font-bold mb-2">{{ stat.value }}</div>
+          <div class="text-sm text-blue-200 leading-tight">{{ stat.label }}</div>
         </div>
       </div>
     </div>

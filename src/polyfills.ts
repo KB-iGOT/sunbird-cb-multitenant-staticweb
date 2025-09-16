@@ -45,13 +45,13 @@
 /***************************************************************************************************
  * Zone JS is required by default for Angular itself.
  */
+import '@angular/localize/init';
 import 'zone.js' // Included with Angular CLI.
 
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
 import 'hammerjs'
-import '@angular/localize/init'
 // these changes are for SVG Preview
 (window as any).global = window
 global.Buffer = global.Buffer || require('buffer').Buffer

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { TenantService } from './services/tenant.service';
 import { TenantConfig } from './models/tenant.interface';
+import { InitService } from './services/init.service';
 
 @Component({
   selector: 'app-root',
@@ -12,21 +13,19 @@ export class AppComponent implements OnInit {
   tenant: TenantConfig | null = null;
   loading = true;
 
-  constructor(private tenantService: TenantService) {}
+  constructor(
+    private tenantService: TenantService,
+    private initService: InitService
+  ) {}
 
   ngOnInit(): void {
-    const tenantId = this.tenantService.getTenantFromUrl();
-    
-    this.tenantService.loadTenant(tenantId).subscribe(tenant => {
-      this.tenant = tenant;
-      this.loading = false;
-      
-      if (tenant) {
-        this.tenantService.applyTheme(tenant.theme);
-        this.tenantService.updateTitle(tenant.content.title);
-        this.tenantService.updateFavicon(tenant.branding.favicon);
-      }
-    });
+    this.tenant = this.initService.configDetails;
+    this.loading = false;
+    if (this.tenant) {
+      this.tenantService.applyTheme(this.tenant.theme);
+      this.tenantService.updateTitle(this.tenant.content.title);
+      this.tenantService.updateFavicon(this.tenant.branding.favicon);
+    }
   }
 
   getCountryPercentage(count: string): number {

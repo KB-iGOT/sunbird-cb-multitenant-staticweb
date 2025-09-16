@@ -6,7 +6,8 @@
     "allowJs": true,
     "skipLibCheck": true,
     "types": [
-      "jest"
+      "jest",
+      "node"
     ],
     "alwaysStrict": true,
     "baseUrl": "./",
