@@ -1,0 +1,150 @@
+{
+  "id": "tenant1",
+  "name": "IIDEM",
+  "theme": {
+    "primaryColor": "#1976d2",
+    "secondaryColor": "#3F51B5",
+    "backgroundColor": "#ffffff",
+    "textColor": "#333333"
+  },
+  "branding": {
+    "logo": "/assets/images/IIIDEM-logo.png",
+    "favicon": "favicon.ico",
+    "companyName": "Indian International \n Institute of Democracy \n& Election Management"
+  },
+  "navigation": [
+    { "label": "Home", "url": "", "icon":"home" },
+    { "label": "+91-11-25303400", "url": "", "icon":"record_voice_over" },
+    { "label": "English", "url": "", "icon":"translate" }
+  ],
+  "content": {
+    "title": "Indian International  \nInstitute of Democracy & \n Election Management",
+    "subtitle": "Strengthening Democratic Institutions Through Excellence in Training and Research",
+    "description": "IIDEM is committed to enhancing the capacity of election management bodies and promoting democratic governance through comprehensive training programs, research initiatives, and international collaboration.",
+    "ctaButton": "Apply",
+    "heroImage": "https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=600&h=400&fit=crop&crop=center",
+    "statistics": [
+      { "value": "13+", "label": "Years of Excellence" },
+      { "value": "1700+", "label": "Training Programs Conducted" },
+      { "value": "1L+", "label": "Officials Trained" },
+      { "value": "141+", "label": "Countries Collaborated" }
+    ],
+    "photoGallery": {
+      "title": "IIDEM PHOTO & \nVIDEO GALLERY",
+      "description": "Explore our comprehensive collection of training programs, workshops, and international collaborations through our visual gallery showcasing the diversity and impact of our initiatives across different domains of democracy and election management.",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=300&h=200&fit=crop&crop=center",
+          "alt": "Training Conference",
+          "caption": "International Training Conference"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1560523160-754a9e792b35?w=300&h=200&fit=crop&crop=center",
+          "alt": "Workshop Session",
+          "caption": "Interactive Workshop Session"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1551818255-e6e10975bc17?w=300&h=200&fit=crop&crop=center",
+          "alt": "Group Discussion",
+          "caption": "Collaborative Learning"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=300&h=200&fit=crop&crop=center",
+          "alt": "Graduation Ceremony",
+          "caption": "Certificate Presentation"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=300&h=200&fit=crop&crop=center",
+          "alt": "Research Team",
+          "caption": "Research & Development"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=300&h=200&fit=crop&crop=center",
+          "alt": "Technology Training",
+          "caption": "Digital Election Systems"
+        }
+      ]
+    },
+    "trainingPrograms": {
+      "title": "IIDEM'S TRAINING PROGRAMS AND \nACADEMIC COURSES",
+      "subtitle": "Comprehensive capacity building programs for election officials and democracy practitioners",
+      "programs": [
+        {
+          "icon": "/assets/images/domestic-training-icon.svg",
+          "title": "Domestic Training Programs",
+          "description": "IIIDEM caters to the training needs of the core election personnel who are involved in the conduct of Presidential & Vice-Presidential Elections, Elections to Rajya Sabha Elections & State Legislative Councils & General Elections.",
+          "features": [
+
+          ]
+        },
+        {
+          "icon": "/assets/images/internation-training-icon.svg",
+          "title": "International Training Programs",
+          "description": "IIDEM conducts Capacity Development Programs for Officers of other Election Management Bodies on various electoral thematic like Election Planning, Election management, Voter Education.",
+          "features": [
+          ]
+        },
+        {
+          "icon": "/assets/images/academic-courses-icon.svg",
+          "title": "Academic Courses at IIIDEM",
+          "description": "A specialized Master’s Program in International Electoral Management and Practices (MIEMP) has been developed by ECI through IIIDEM in collaboration with Tata Institute of Social Sciences (TISS), Mumbai.",
+          "features": [
+          ]
+        }
+      ]
+    },
+    "internationalTraining": {
+      "title": "IIDEM'S INTERNATIONAL TRAINING \nFOOTPRINT OF <span class='country-count-gradient'>141 COUNTRIES</span>",
+      "countries": [
+        { "name": "Oceania", "count": "9", "color": "#846FFF" },
+        { "name": "South America", "count": "12", "color": "#F68BB4" },
+        { "name": "Europe", "count": "15", "color": "#EED77A" },
+        { "name": "North & Central America", "count": "18", "color": "#F58121" },
+        { "name": "Asia", "count": "41", "color": "#96FFC2" },
+        { "name": "Africa", "count": "46", "color": "#F7C0B8" }
+      ],
+      "mapImage": "/assets/images/maps.svg"
+    },
+    "partners": {
+      "title": "COLLABORATION & PARTNERSHIPS WITH SOME INTERNATIONAL \nORGANIZATIONS & INSTITUTION",
+      "logos": [
+        { "name": "UN", "logo": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=100&h=60&fit=crop&crop=center" },
+        { "name": "Commonwealth", "logo": "https://images.unsplash.com/photo-1563986768711-ca384817b6f1?w=100&h=60&fit=crop&crop=center" },
+        { "name": "European Union", "logo": "https://images.unsplash.com/photo-1563986768494-4df6bc04d3cb?w=100&h=60&fit=crop&crop=center" },
+        { "name": "USAID", "logo": "https://images.unsplash.com/photo-1563986768284-9c8bccd4b5d8?w=100&h=60&fit=crop&crop=center" },
+        { "name": "UNDP", "logo": "https://images.unsplash.com/photo-1563986768358-4d8bccd4b5ea?w=100&h=60&fit=crop&crop=center" },
+        { "name": "IFES", "logo": "https://images.unsplash.com/photo-1563986768432-9c8bccd4b5fb?w=100&h=60&fit=crop&crop=center" }
+      ]
+    },
+    "showcasedCourses": {
+      "title": "Showcased Courses",
+      "courses": [
+        {
+          "title": "AI in Governance",
+          "description": "Exploring artificial intelligence applications in democratic governance",
+          "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=300&h=200&fit=crop&crop=center"
+        },
+        {
+          "title": "Digital Democracy",
+          "description": "Understanding digital transformation in electoral processes",
+          "image": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=300&h=200&fit=crop&crop=center"
+        },
+        {
+          "title": "Election Security",
+          "description": "Comprehensive training on securing electoral processes",
+          "image": "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=300&h=200&fit=crop&crop=center"
+        },
+        {
+          "title": "Voter Engagement",
+          "description": "Strategies for enhancing citizen participation in democracy",
+          "image": "https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=300&h=200&fit=crop&crop=center"
+        }
+      ]
+    }
+  },
+  "contact": {
+    "phone": "+91-11-IIDEM-100",
+    "email": "info@iidem.gov.in",
+    "address": "New Delhi, India"
+  }
+}

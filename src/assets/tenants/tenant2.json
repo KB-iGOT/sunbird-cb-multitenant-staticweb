@@ -1,0 +1,166 @@
+{
+  "id": "tenant2",
+  "name": "TechVision Solutions",
+  "theme": {
+    "primaryColor": "#4caf50",
+    "secondaryColor": "#ff9800",
+    "backgroundColor": "#f5f5f5",
+    "textColor": "#212121"
+  },
+  "branding": {
+    "logo": "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=100&h=100&fit=crop&crop=center",
+    "favicon": "favicon.ico",
+    "companyName": "TechVision Solutions"
+  },
+  "navigation": [
+    { "label": "Home", "url": "#" },
+    { "label": "Services", "url": "#" },
+    { "label": "Solutions", "url": "#" },
+    { "label": "About", "url": "#" },
+    { "label": "Contact", "url": "#" }
+  ],
+  "content": {
+    "title": "TechVision Solutions - Future Forward",
+    "subtitle": "Transforming businesses through innovative technology solutions",
+    "description": "Leading provider of digital transformation services, helping businesses adapt to the modern digital landscape with cutting-edge solutions.",
+    "ctaButton": "Get Started",
+    "heroImage": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop&crop=center",
+    "statistics": [
+      { "value": "500+", "label": "Projects Completed" },
+      { "value": "15+", "label": "Years Experience" },
+      { "value": "200+", "label": "Happy Clients" },
+      { "value": "24/7", "label": "Support Available" }
+    ],
+    "photoGallery": {
+      "title": "TECHVISION INNOVATION GALLERY",
+      "description": "Discover our latest technological innovations and successful project implementations across various industries and domains.",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=300&h=200&fit=crop&crop=center",
+          "alt": "AI Development",
+          "caption": "AI & Machine Learning Solutions"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=300&h=200&fit=crop&crop=center",
+          "alt": "Cloud Infrastructure",
+          "caption": "Cloud Infrastructure Setup"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1560472355-536de3962603?w=300&h=200&fit=crop&crop=center",
+          "alt": "Data Analytics",
+          "caption": "Advanced Data Analytics"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1551434678-e076c223a692?w=300&h=200&fit=crop&crop=center",
+          "alt": "Mobile Development",
+          "caption": "Mobile App Development"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=300&h=200&fit=crop&crop=center",
+          "alt": "Web Development",
+          "caption": "Web Application Solutions"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=300&h=200&fit=crop&crop=center",
+          "alt": "IoT Solutions",
+          "caption": "Internet of Things Integration"
+        }
+      ]
+    },
+    "trainingPrograms": {
+      "title": "TECHVISION TRAINING & CERTIFICATION PROGRAMS",
+      "subtitle": "Comprehensive technology training programs for professionals and organizations",
+      "programs": [
+        {
+          "icon": "💻",
+          "title": "Software Development Training",
+          "description": "Comprehensive training programs for modern software development technologies",
+          "features": [
+            "Full-Stack Development",
+            "Mobile App Development",
+            "DevOps & CI/CD",
+            "Agile Methodologies",
+            "Code Review & Testing"
+          ]
+        },
+        {
+          "icon": "☁️",
+          "title": "Cloud Technology Certification",
+          "description": "Industry-recognized cloud certification programs for AWS, Azure, and GCP",
+          "features": [
+            "Cloud Architecture Design",
+            "Container Orchestration",
+            "Serverless Computing",
+            "Cloud Security",
+            "Cost Optimization"
+          ]
+        },
+        {
+          "icon": "🤖",
+          "title": "AI & Data Science Programs",
+          "description": "Advanced programs in artificial intelligence and data science applications",
+          "features": [
+            "Machine Learning Algorithms",
+            "Deep Learning Frameworks",
+            "Natural Language Processing",
+            "Computer Vision",
+            "Big Data Analytics"
+          ]
+        }
+      ]
+    },
+    "internationalTraining": {
+      "title": "TECHVISION'S GLOBAL TECHNOLOGY FOOTPRINT",
+      "countries": [
+        { "name": "North America", "count": "25", "color": "#4caf50" },
+        { "name": "Europe", "count": "30", "color": "#ff9800" },
+        { "name": "Asia Pacific", "count": "35", "color": "#2196f3" },
+        { "name": "South America", "count": "15", "color": "#9c27b0" },
+        { "name": "Africa", "count": "12", "color": "#f44336" },
+        { "name": "Middle East", "count": "8", "color": "#ff5722" }
+      ],
+      "mapImage": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=500&fit=crop&crop=center"
+    },
+    "partners": {
+      "title": "STRATEGIC TECHNOLOGY PARTNERSHIPS",
+      "logos": [
+        { "name": "Microsoft", "logo": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=100&h=60&fit=crop&crop=center" },
+        { "name": "Amazon Web Services", "logo": "https://images.unsplash.com/photo-1563986768711-ca384817b6f1?w=100&h=60&fit=crop&crop=center" },
+        { "name": "Google Cloud", "logo": "https://images.unsplash.com/photo-1563986768494-4df6bc04d3cb?w=100&h=60&fit=crop&crop=center" },
+        { "name": "IBM", "logo": "https://images.unsplash.com/photo-1563986768284-9c8bccd4b5d8?w=100&h=60&fit=crop&crop=center" },
+        { "name": "Oracle", "logo": "https://images.unsplash.com/photo-1563986768358-4d8bccd4b5ea?w=100&h=60&fit=crop&crop=center" },
+        { "name": "Salesforce", "logo": "https://images.unsplash.com/photo-1563986768432-9c8bccd4b5fb?w=100&h=60&fit=crop&crop=center" }
+      ]
+    },
+    "showcasedCourses": {
+      "title": "Featured Technology Courses",
+      "courses": [
+        {
+          "title": "Full-Stack Development",
+          "description": "Complete web development using modern frameworks and technologies",
+          "image": "https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=300&h=200&fit=crop&crop=center"
+        },
+        {
+          "title": "Cloud Architecture",
+          "description": "Design and implement scalable cloud infrastructure solutions",
+          "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=300&h=200&fit=crop&crop=center"
+        },
+        {
+          "title": "AI & Machine Learning",
+          "description": "Advanced artificial intelligence and machine learning techniques",
+          "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=200&fit=crop&crop=center"
+        },
+        {
+          "title": "Mobile Development",
+          "description": "Cross-platform mobile application development",
+          "image": "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=300&h=200&fit=crop&crop=center"
+        }
+      ]
+    }
+  },
+  "contact": {
+    "phone": "+1-555-TECH",
+    "email": "hello@techvision.com",
+    "address": "456 Innovation Drive, Tech Park, TP 67890"
+  }
+}

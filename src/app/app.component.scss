@@ -1,0 +1,188 @@
+.blue-gradient {
+    background: linear-gradient(225deg, #2565BF 0.3%, #134B98 39.59%, #3636B2 100%);
+}
+.black-gradient-bg{
+    background: linear-gradient(225deg, #313C59 0%, #161C2D 100%);
+    background-color: #1B2133;
+}
+
+.bottom-minum5 {
+    bottom: -5px;
+}
+
+.tricolr-border{
+    background: url('/assets/images/tricolor-border.svg') no-repeat;
+    padding-left: 24px;
+}
+
+.program-card-img {
+    width: 40px;
+    height: 40px;
+}
+.divider-small{
+    opacity: 10%;
+    height: 1px;
+    width: 162px;
+    border: 1px solid #FFFFFF;
+    background-color: #fff;
+}
+
+.divider-thin{
+    height: 1px;
+    background-color:  #00000029;
+}
+
+.country-count-gradient{
+    background-image: linear-gradient(90deg, #E44D25 38.94%, #EFA422 100%);
+    color: transparent;
+    background-clip: text;
+    
+}
+.nav-link .mat-icon {
+    font-size: 16px;
+    height: 16px;
+    width: 16px;
+}
+
+
+@media (min-width: 1600px) {
+    .gallery {
+        padding: 160px 200px 191px 245px;
+        .base {
+            width: 339.368px;
+            height: 340.737px;
+        }
+        img.base {
+            width: 339.368px;
+            height: 340.737px;
+            z-index: 1;
+            position: relative;
+        }
+        .pic1 {
+            width: 206px;
+            height: 206px;
+            top: -63px;
+            left: -243px;
+            z-index: 1;
+        }
+        .pic-svg {
+            width: 167.909px;
+            height: 152.657px;
+            top: 50%;
+            left: -50%;
+            transform: translate(46%, -50%);
+            z-index: 0;
+        }
+        .pic2 {
+            width: 221px;
+            height: 221px;
+            top: -160px;
+            right: -76px;
+            z-index: 2;
+        }
+        .pic3 {
+            width: 175px;
+            height: 175px;
+            right: 0;
+            top: 31%;
+            z-index: 1;
+            transform: translateX(200px);
+        }
+        .pic4 {
+            width: 213px;
+            height: 213px;
+            bottom: -190px;
+            z-index: 1;
+            left: -50%;
+        }
+        .pic-circle {
+            width: 250px;
+            height: 250px;
+            border-radius: 380px;
+            opacity: 0.0994;
+            background: var(--Tertiary, #039349);
+            right: -50%;
+            bottom: -40%;
+            transform: translate(-41px, -17px);
+        }
+        .pic1, .pic2, .pic3, .pic4 {
+            border-radius: 10px;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1599px) {
+    .gallery {
+        padding: 150px 180px 160px 200px;
+        .base {
+            width: 293.614px;
+            height: 294.798px;
+        }
+        img.base {
+            width: 293.614px;
+            height: 294.798px;
+            z-index: 1;
+            position: relative;
+        }
+        .pic1 {
+            width: 178.226px;
+            height: 178.226px;
+            top: -50px;
+            left: -198px;
+            z-index: 1;
+        }
+        .pic-svg {
+            width: 145.27px;
+            height: 132.074px;
+            top: 50%;
+            left: -50%;
+            transform: translate(46%, -50%);
+            z-index: 0;
+        }
+        .pic2 {
+            width: 191px;
+            height: 191px;
+            top: -150px;
+            right: -66px;
+            z-index: 2;
+        }
+        .pic3 {
+            width: 151px;
+            height: 151px;
+            right: 10px;
+            top: 33%;
+            z-index: 1;
+            transform: translateX(190px);
+        }
+        .pic4 {
+            width: 184px;
+            height: 184px;
+            bottom: -160px;
+            z-index: 1;
+            left: -54%;
+        }
+        .pic-circle {
+            width: 216px;
+            height: 216px;
+            border-radius: 380px;
+            opacity: 0.0994;
+            background: var(--Tertiary, #039349);
+            right: -50%;
+            bottom: -40%;
+            transform: translate(-41px, -17px);
+        }
+        .pic1, .pic2, .pic3, .pic4 {
+            border-radius: 10px;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+}

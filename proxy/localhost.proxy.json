@@ -1,0 +1,53 @@
+{
+  "/apis/*": {
+    "target": "https://portal.qa.karmayogibharat.net",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "/apis": "/apis"
+    },
+    "headers": {
+      "Cookie": "connect.sid=s%3A59V2Vac0M8IJbHSTMLlAA-u3Dlkk6dDz.afICSm%2FevFroTlqZZZVImZvQJapx8V1kI9y97LUHd%2Fw"
+    }
+  },
+  "/api/*": {
+    "target": "https://portal.qa.karmayogibharat.net",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "/apis": "/apis"
+    }
+  },
+  "/scormapis/*": {
+    "target": "https://tarento-demo.engine.scorm.com/RusticiEngine/",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "/scormapis": ""
+    },
+    "headers": {
+      "Authorization": "Basic UnVzdGljaUVuZ2luZTprTHZFdHZZRWU3TkpMaWVzRDdvREZOUEt6WXNBM0Vj"
+    }
+  },
+  "/content-api/*": {
+    "target": "http://localhost:3004",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "/apis": ""
+    }
+  },
+  "/content-store/*": {
+    "target": "http://localhost:3005",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "/apis": ""
+    }
+  }
+}

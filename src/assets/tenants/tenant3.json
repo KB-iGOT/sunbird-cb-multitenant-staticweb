@@ -1,0 +1,166 @@
+{
+  "id": "tenant3",
+  "name": "Global Finance Group",
+  "theme": {
+    "primaryColor": "#673ab7",
+    "secondaryColor": "#ffc107",
+    "backgroundColor": "#fafafa",
+    "textColor": "#424242"
+  },
+  "branding": {
+    "logo": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=100&h=100&fit=crop&crop=center",
+    "favicon": "favicon.ico",
+    "companyName": "Global Finance Group"
+  },
+  "navigation": [
+    { "label": "Home", "url": "#" },
+    { "label": "Services", "url": "#" },
+    { "label": "Investment", "url": "#" },
+    { "label": "About", "url": "#" },
+    { "label": "Contact", "url": "#" }
+  ],
+  "content": {
+    "title": "Global Finance Group",
+    "subtitle": "Your trusted partner for financial success and wealth management",
+    "description": "Premier financial services provider offering comprehensive solutions for individuals and businesses worldwide with over two decades of expertise.",
+    "ctaButton": "Consult Now",
+    "heroImage": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop&crop=center",
+    "statistics": [
+      { "value": "$50B+", "label": "Assets Under Management" },
+      { "value": "25+", "label": "Years of Excellence" },
+      { "value": "10K+", "label": "Satisfied Clients" },
+      { "value": "50+", "label": "Global Markets" }
+    ],
+    "photoGallery": {
+      "title": "GLOBAL FINANCE PORTFOLIO GALLERY",
+      "description": "Explore our comprehensive financial services portfolio and successful client partnerships across diverse investment sectors and global markets.",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=300&h=200&fit=crop&crop=center",
+          "alt": "Investment Advisory",
+          "caption": "Investment Advisory Services"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&h=200&fit=crop&crop=center",
+          "alt": "Portfolio Management",
+          "caption": "Portfolio Management Solutions"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=300&h=200&fit=crop&crop=center",
+          "alt": "Financial Planning",
+          "caption": "Strategic Financial Planning"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=300&h=200&fit=crop&crop=center",
+          "alt": "Risk Analysis",
+          "caption": "Risk Assessment & Analysis"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=300&h=200&fit=crop&crop=center",
+          "alt": "Market Research",
+          "caption": "Market Research & Insights"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=300&h=200&fit=crop&crop=center",
+          "alt": "Global Trading",
+          "caption": "Global Trading Operations"
+        }
+      ]
+    },
+    "trainingPrograms": {
+      "title": "GLOBAL FINANCE TRAINING & CERTIFICATION PROGRAMS",
+      "subtitle": "Professional development programs for financial professionals and investment managers",
+      "programs": [
+        {
+          "icon": "📊",
+          "title": "Investment Management Training",
+          "description": "Comprehensive training programs for portfolio and investment management",
+          "features": [
+            "Portfolio Optimization",
+            "Asset Allocation Strategies",
+            "Risk Management Techniques",
+            "Market Analysis Methods",
+            "Investment Research"
+          ]
+        },
+        {
+          "icon": "🌍",
+          "title": "Global Markets Certification",
+          "description": "International certification programs for global financial markets",
+          "features": [
+            "Foreign Exchange Markets",
+            "International Banking",
+            "Cross-border Investments",
+            "Regulatory Compliance",
+            "Market Entry Strategies"
+          ]
+        },
+        {
+          "icon": "💼",
+          "title": "Financial Advisory Programs",
+          "description": "Professional certification for financial advisors and wealth managers",
+          "features": [
+            "Client Relationship Management",
+            "Wealth Planning Strategies",
+            "Tax Optimization",
+            "Estate Planning",
+            "Financial Product Knowledge"
+          ]
+        }
+      ]
+    },
+    "internationalTraining": {
+      "title": "GLOBAL FINANCE'S INTERNATIONAL PRESENCE",
+      "countries": [
+        { "name": "Americas", "count": "15", "color": "#673ab7" },
+        { "name": "Europe", "count": "25", "color": "#ffc107" },
+        { "name": "Asia Pacific", "count": "20", "color": "#4caf50" },
+        { "name": "Middle East", "count": "10", "color": "#ff9800" },
+        { "name": "Africa", "count": "8", "color": "#f44336" },
+        { "name": "Oceania", "count": "3", "color": "#2196f3" }
+      ],
+      "mapImage": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=500&fit=crop&crop=center"
+    },
+    "partners": {
+      "title": "STRATEGIC FINANCIAL PARTNERSHIPS",
+      "logos": [
+        { "name": "Goldman Sachs", "logo": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=100&h=60&fit=crop&crop=center" },
+        { "name": "Morgan Stanley", "logo": "https://images.unsplash.com/photo-1563986768711-ca384817b6f1?w=100&h=60&fit=crop&crop=center" },
+        { "name": "JPMorgan Chase", "logo": "https://images.unsplash.com/photo-1563986768494-4df6bc04d3cb?w=100&h=60&fit=crop&crop=center" },
+        { "name": "BlackRock", "logo": "https://images.unsplash.com/photo-1563986768284-9c8bccd4b5d8?w=100&h=60&fit=crop&crop=center" },
+        { "name": "Vanguard", "logo": "https://images.unsplash.com/photo-1563986768358-4d8bccd4b5ea?w=100&h=60&fit=crop&crop=center" },
+        { "name": "Fidelity", "logo": "https://images.unsplash.com/photo-1563986768432-9c8bccd4b5fb?w=100&h=60&fit=crop&crop=center" }
+      ]
+    },
+    "showcasedCourses": {
+      "title": "Featured Financial Courses",
+      "courses": [
+        {
+          "title": "Wealth Management",
+          "description": "Comprehensive wealth management strategies for high-net-worth clients",
+          "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=300&h=200&fit=crop&crop=center"
+        },
+        {
+          "title": "Investment Banking",
+          "description": "Advanced investment banking principles and practices",
+          "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&h=200&fit=crop&crop=center"
+        },
+        {
+          "title": "Risk Management",
+          "description": "Comprehensive risk assessment and mitigation strategies",
+          "image": "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=300&h=200&fit=crop&crop=center"
+        },
+        {
+          "title": "Global Markets",
+          "description": "Understanding and navigating international financial markets",
+          "image": "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=300&h=200&fit=crop&crop=center"
+        }
+      ]
+    }
+  },
+  "contact": {
+    "phone": "+1-555-FINANCE",
+    "email": "info@globalfinance.com",
+    "address": "789 Financial Plaza, Capital City, CC 54321"
+  }
+}
