@@ -37,7 +37,7 @@ node('build-slave') {
                   then
                   sudo rm -rf package-lock.json
                   fi                  
-                docker run -v $(pwd):/opt node:14.21 /bin/sh -c "cd /opt && npm install && npm run build"
+                docker run -v $(pwd):/opt node:22 /bin/sh -c "cd /opt && npm install && npm run build"
                 '''
             }
           stage('Package') {
