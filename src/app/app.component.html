@@ -39,7 +39,7 @@
           <ng-container *ngIf="nav.label === 'Language'">
             <div class="language flex items-center justify-center nav-link">
               <img src="./assets/images/translate.svg" alt="language-icon" class="mr-2 img-icon">
-              <select name="language" class="custom-select" [(ngModel)]="currentLanguage" >
+              <select name="language" class="custom-select" [(ngModel)]="currentLanguage" (change)="languageChange($event)">
                 <option [value]="item.key" *ngFor="let item of languages">{{item.value}}</option>
               </select>
             </div>
