@@ -1,18 +1,14 @@
-FROM httpd:alpine
-#FROM php:7.0-apache
-ADD dist/sunbird-cb-multitenant-staticweb /usr/local/apache2/htdocs
-COPY ./.htaccess /usr/local/apache2/htdocs
-ADD src/404.html /usr/local/apache2/htdocs/404.html
-RUN sed -i '/LoadModule rewrite_module/s/^#//g' /usr/local/apache2/conf/httpd.conf
-RUN { \
-  echo 'IncludeOptional conf.d/*.conf'; \
-  echo 'ErrorDocument 404 /404.html'; \
-} >> /usr/local/apache2/conf/httpd.conf \
-  && mkdir /usr/local/apache2/conf.d
+FROM node:22.6.0
+WORKDIR /app
+COPY . .
+#RUN npm i yarn
+#RUN yarn global add @angular/cli@latest
+RUN yarn && yarn add moment && yarn add vis-util && npm run build --prod --build-optimizer
+#RUN ng build --prod --outputPath=dist/www/en --baseHref=/ --i18nLocale=en --verbose=true
+#RUN npm run compress:brotli
+#RUN npm run compress:gzip
 
-#COPY ./dist/subbird-cb-staticweb /var/www/html/
-EXPOSE 80
-#FROM php:7.0-apache
-#ADD dist/sunbird-cb-multitenant-staticweb /var/www/html
-#COPY ./dist/subbird-cb-staticweb /var/www/html/
-#EXPOSE 80
+WORKDIR /app/dist
+RUN npm install --legacy-peer-deps --production
+EXPOSE 3004
+CMD [ "npm", "run", "serve:prod" ]
