@@ -2,9 +2,7 @@
 @import '/src/styles/ws-mixins';
 @import '/src/styles/ws-vars';
 
-.container-balanced {
-  @extend %page-center;
-}
+
 
 .blue-gradient {
     background: linear-gradient(225deg, #2565BF 0.3%, #134B98 39.59%, #3636B2 100%);

@@ -1444,3 +1444,74 @@ ngx-guided-tour {
   gap: 8px !important;
   display: flex !important;
 }
+
+.container {
+  width: 100%;
+}
+
+.container-balanced {
+  @extend %page-center;
+}
+
+@media (min-width: 320px) {
+  .container {
+    max-width: 320px;
+  }
+  .container-balanced {
+    max-width: 300px;
+  }
+}
+
+@media (min-width: 460px) {
+  .container {
+    max-width: 460px;
+  }
+  .container-balanced {
+    max-width: 440px;
+  }
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+  .container-balanced {
+    max-width: 600px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+   .container-balanced {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+   .container-balanced {
+    max-width: 998px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+   .container-balanced {
+    max-width: 1203px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px;
+  }
+  .container-balanced {
+    max-width: 1203px;
+  }
+}
