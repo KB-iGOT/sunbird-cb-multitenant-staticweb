@@ -7,6 +7,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="shortcut icon" type="image/png" href="favicon.png">
+  <script rel="preload">
+    (async function getData() {
+      const url = "/assets/env.json";
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`Response status: ${response.status}`);
+        }
+        const envJson = await response.json();
+          window["env"] = window["env"] || {};
+          // Environment variables
+          window["env"]["name"] = envJson.name
+          window["env"]["production"] = envJson.production;
+          window["env"]["contentHost"] = envJson.contentHost
+          window["env"]["contentBucket"] = envJson.contentBucket;
+          window["env"]["ordId"] = envJson.ordId;
+          window["env"]["portalURL"] = envJson.portalURL;
+          window["env"]["telmetryUrl"] = envJson.telmetryUrl;
+      } catch (error) {
+        console.error("Error in fetching env json");
+      }
+    })(this);
+  </script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>

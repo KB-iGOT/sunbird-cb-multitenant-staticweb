@@ -2,7 +2,7 @@
   <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
 </div>
 
-<div *ngIf="!loading && tenant" class="min-h-screen">
+<div *ngIf="!loading && tenant" class="min-h-screen overflow-hidden">
   <!-- Header/Navigation -->
   <header class="bg-white shadow-sm container-balanced">
     <div class=" mx-auto">
@@ -25,15 +25,29 @@
     <div class="disc2 absolute top-0 left-0">
       <img src="/assets/images/oval-disc2.svg" alt="Decorative Disc 1" class="w-80 h-80" />
     </div>
-    <div class="navs flex justify-end px-4 pb-6 gap-8">
+    <div class="navs flex justify-end items-center px-4 pb-6 gap-8">
       <nav class=" space-x-8 flex">
-        <a *ngFor="let nav of tenant.navigation" href="#"
-          class="mat-body-2 nav-link flex items-center cursor-pointer hover:opacity-80 transition-colors">{{ nav.label
-          }}
-          <mat-icon class="ml-2 mat-icon" *ngIf="nav.icon">{{ nav.icon }}</mat-icon>
-        </a>
+        <ng-container *ngFor="let nav of tenant.navigation">
+          <ng-container *ngIf="nav.label !== 'Language'"> 
+            <a  href="#"
+              class="mat-body-2 nav-link flex items-center cursor-pointer hover:opacity-80 transition-colors">
+              <mat-icon class="mr-2 mat-icon" *ngIf="nav.icon">{{ nav.icon }}</mat-icon>
+              {{ nav.label
+              }}
+            </a>
+          </ng-container>
+          <ng-container *ngIf="nav.label === 'Language'">
+            <div class="language flex items-center justify-center nav-link">
+              <img src="./assets/images/translate.svg" alt="language-icon" class="mr-2 img-icon">
+              <select name="language" class="custom-select" [(ngModel)]="currentLanguage" >
+                <option [value]="item.key" *ngFor="let item of languages">{{item.value}}</option>
+              </select>
+            </div>
+          </ng-container>
+        </ng-container>
+
       </nav>
-      <button class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition-colors">
+      <button class="mat-button login-button h-10">
         {{ tenant.content.ctaButton }}
       </button>
     </div>
@@ -87,6 +101,11 @@
               [innerHTML]="tenant.content.photoGallery.title">
             </h2>
             <p class="text-gray-600 max-w-3xl">{{ tenant.content.photoGallery.description }}</p>
+            <a [href]="tenant.content.photoGallery.ctaLink" target="_blank"
+                class="custom-program-btn gallery-btn flex items-center mt-4">
+                <span class="mat-body-2">{{ tenant.content.photoGallery.ctaText }}</span>
+                <mat-icon class="ml-3 mat-icon icon">{{ tenant.content.photoGallery.ctaIcon }}</mat-icon>
+              </a>
           </div>
         </div>
         <!-- Gallery visible on screens >= 1200px -->
@@ -207,16 +226,21 @@
 
         <div class="grid md:grid-cols-3 gap-8">
           <div *ngFor="let program of tenant.content.trainingPrograms.programs"
-            class="program-card program-card p-6 flex gap-4">
+            class="program-card program-card p-5 flex gap-3">
             <div class="text-4xl mb-4">
               <img [src]="program.icon" [alt]="program.title + ' Icon'" class="mt-4 program-card-img" />
             </div>
-            <div>
+            <div class="flex flex-col">
               <h3 class="text-xl text-white font-semibold mb-3">{{ program.title }}</h3>
-              <p class="mb-4 mat-body-1 text-white text-opacity-60">{{ program.description }}</p>
-              <ul class="text-sm">
+              <p class="mb-6 mat-body-1 text-white text-opacity-60 flex-1">{{ program.description }}</p>
+              <ul class="text-sm" *ngIf="program.features && program.features.length > 0">
                 <li *ngFor="let feature of program.features" class="mb-1">• {{ feature }}</li>
               </ul>
+              <a [href]="program.ctaLink" target="_blank"
+                class="custom-program-btn training flex items-center mt-4">
+                <span class="mat-body-2">{{ program.ctaText }}</span>
+                <mat-icon class="ml-3 mat-icon icon">{{ program.ctaIcon }}</mat-icon>
+              </a>
             </div>
           </div>
         </div>
@@ -288,21 +312,25 @@
   </section>
 
   <!-- Showcased Courses Section -->
-  <section class="py-16 bg-white" *ngIf="tenant.content.showcasedCourses">
+  <section class="pb-16 pt-0 bg-white" *ngIf="tenant.content.showcasedCourses">
     <div class="container-balanced mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-left text-gray-800 mb-12 tricolr-border whitespace-pre"
         [innerHTML]="tenant.content.showcasedCourses.title">
       </h2>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div *ngFor="let course of tenant.content.showcasedCourses.courses"
+      <div class="w-full">
+        <!-- <div *ngFor="let course of tenant.content.showcasedCourses.courses"
           class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow hover-lift">
           <img [src]="course.image" [alt]="course.title" class="w-full h-48 object-cover rounded-t-lg" />
           <div class="p-6">
             <h3 class="font-semibold text-gray-800 mb-2">{{ course.title }}</h3>
             <p class="text-sm text-gray-600">{{ course.description }}</p>
           </div>
-        </div>
+        </div> -->
+          <sb-uic-content-strip-with-tabs
+                    [widgetData]="tenant.content.showcasedCourses.stripWidgetData"
+                    >
+          </sb-uic-content-strip-with-tabs>
       </div>
     </div>
   </section>

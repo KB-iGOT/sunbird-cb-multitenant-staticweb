@@ -109,7 +109,6 @@ export interface TenantContact {
 export interface TenantConfig {
   id: string;
   name: string;
-  portalURL: string;
   theme: TenantTheme;
   branding: TenantBranding;
   navigation: TenantNavigation[];

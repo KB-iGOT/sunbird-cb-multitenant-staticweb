@@ -2,6 +2,11 @@ import { Component, OnInit, ViewEncapsulation, AfterViewInit, ElementRef, ViewCh
 import { TenantService } from './services/tenant.service';
 import { TenantConfig } from './models/tenant.interface';
 import { InitService } from './services/init.service';
+import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
+import { WsEvents } from './services/events';
+import { EventService } from './services/event.service';
+import { LANGUAGES } from './constant/app.constant';
 
 @Component({
   selector: 'app-root',
@@ -14,13 +19,21 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   loading = true;
   private carouselInterval: any;
   private currentIndex = 0;
+  currentLanguage: string = 'en';
+  languages = LANGUAGES;
   
   @ViewChild('carouselTrack', { static: false }) carouselTrack!: ElementRef;
 
   constructor(
     private tenantService: TenantService,
-    private initService: InitService
-  ) {}
+    private initService: InitService,
+    private router: Router,
+    private eventSvc: EventService
+  ) {
+    const lang = localStorage.getItem('lang');
+    if (lang) this.currentLanguage = lang;
+    else this.currentLanguage = 'en';
+  }
 
   ngOnInit(): void {
     this.tenant = this.initService.configDetails;
@@ -47,6 +60,83 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.carouselInterval) {
       clearInterval(this.carouselInterval);
     }
+  }
+
+  languageChange(event: any) {
+    const telemetryURL = environment.telmetryUrl || ''
+    this.currentLanguage = event.target.value;
+    let currentURL = window.location.href; 
+    console.log('currentURL', currentURL)
+    this.raiseTemeletyInterat(event.target.value)
+   // this.translate.use(this.currentLanguage);
+    localStorage.setItem('lang', this.currentLanguage);
+   // this.miltilingualService.setlanguageChange(this.currentLanguage);
+    let hostName = telemetryURL
+    const parsedUrl = new URL(hostName);
+    const domain = parsedUrl.hostname;
+    let protocol = window.location.protocol  
+    let url = ''
+    url = `${protocol}://${hostName}`
+    let path = this.router.url
+    console.log(path); 
+    // console.log(hostName)
+    // console.log(protocol)
+    if(event.target.value === 'en') {
+      url = `${telemetryURL}/#${path}`
+     window.location.href = url
+    } else if(event.target.value === 'hi') {
+      let subdomain = this.addSubdomain('hi', domain)
+      console.log('subdomain', subdomain)
+      url =  `${protocol}//hi.${domain}/#${path}`
+      window.location.href = url
+    } else if(event.target.value === 'ta') {
+      let subdomain = this.addSubdomain('ta', domain)
+      console.log('subdomain', subdomain)
+      url = `${protocol}//ta.${domain}/#${path}`
+      window.location.href = url
+    } else if(event.target.value === 'be') {
+      let subdomain = this.addSubdomain('be', domain)
+      console.log('subdomain', subdomain)
+      url = `${protocol}//be.${domain}/#${path}`
+      window.location.href = url
+    } else if(event.target.value === 'ka') {
+      let subdomain = this.addSubdomain('ka', domain)
+      console.log('subdomain', subdomain)
+      url = `${protocol}//ka.${domain}/#${path}`
+      window.location.href = url
+    } else if(event.target.value === 'mr') {
+      let subdomain = this.addSubdomain('mr', domain)
+      console.log('subdomain', subdomain)
+      url = `${protocol}//mr.${domain}/#${path}`
+      window.location.href = url
+    }
+    console.log(url)
+  }
+
+  addSubdomain(subdomain: any, domain: any) {
+    // Ensure no leading/trailing dots
+    subdomain = subdomain.replace(/\.+$/, '');
+    domain = domain.replace(/^\.+/, '');
+    
+    return `${subdomain}.${domain}`;
+  }
+
+  raiseTemeletyInterat(id: string) {
+    console.log("id ", id)
+    const event: any = {
+      eventType: WsEvents.WsEventType.Telemetry,
+      eventLogLevel: WsEvents.WsEventLogLevel.Info,
+      data: {
+        edata: { type: 'click', id: id, subType: 'language-toggle' },
+        state: WsEvents.EnumTelemetrySubType.Interact,
+        eventSubType: WsEvents.EnumTelemetrySubType.cardContent,
+        mode: 'view'
+      },
+      pageContext: { pageId: '/', module: 'Landing Page' },
+      from: '',
+      to: 'Telemetry',
+    }
+    this.eventSvc.dispatchChatbotEvent<WsEvents.IWsEventTelemetryInteract>(event)
   }
   
   private startCarouselAnimation() {

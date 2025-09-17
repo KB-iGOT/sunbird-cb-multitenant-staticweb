@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core'
 import { Observable, of} from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
 import { TenantService } from './tenant.service'
+import { SbUiResolverService } from '@sunbird-cb/resolver-v2'
+import { environment } from 'src/environments/environment'
 
 const API_END_POINTS = {
   FORM_READ: `/apis/v1/form/read`,
@@ -18,7 +20,8 @@ export class InitService {
 
   constructor(
     private http: HttpClient,
-    private tenantService: TenantService
+    private tenantService: TenantService,
+    private sbUiResolverService: SbUiResolverService
   ) {
 
   }
@@ -29,12 +32,25 @@ export class InitService {
 
   async init() {
     await this.setConfiDetails()
+    this.initializeWidgetResolver()
+  }
+
+  private initializeWidgetResolver() {
+    // Initialize the widget resolver service
+    this.sbUiResolverService.initialize(
+      null, // restrictedWidgetKeys - no widgets are restricted
+      null, // roles - no role-based restrictions
+      null, // groups - no group-based restrictions  
+      null  // restrictedFeatures - no feature restrictions
+    )
+    
+    console.log('Widget Resolver Service initialized successfully')
   }
 
   private async setConfiDetails(configDetails: any = null): Promise<any> {
     if (configDetails) {
       this.configDetails = configDetails
-      this.baseUrl = configDetails.portalURL
+      this.baseUrl = environment.portalURL
     } else {
       try {
         const requestData: any = {
@@ -51,7 +67,7 @@ export class InitService {
           map((rData: any) => {
             const finalData = rData && rData.result.form.data
             this.configDetails = finalData || {}
-            this.baseUrl = finalData.portalURL
+            this.baseUrl = environment.portalURL
             return finalData
           }),
           catchError((_error: any) => {
@@ -59,7 +75,7 @@ export class InitService {
             return this.tenantService.loadTenant(tenantId).pipe(
               map(tenant => {
                 this.configDetails = tenant;
-                this.baseUrl = tenant?.portalURL || '';
+                this.baseUrl = environment.portalURL || '';
                 return tenant;
               }),
               catchError((err: any) => {

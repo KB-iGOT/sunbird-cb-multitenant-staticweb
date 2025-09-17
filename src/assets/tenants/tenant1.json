@@ -1,7 +1,22 @@
 {
   "id": "tenant1",
   "name": "IIDEM",
-  "portalURL": "https://iiidem-portal.dev.karmayogibharat.net",
+  "telemetryConfig": {
+    "pdata": {
+      "id": "sunbird-cb-staticportal",
+      "ver": "3.0.1",
+      "pid": "sunbird-cb-staticportal"
+    },
+    "env": "prod",
+    "channel": "igot",
+    "batchsize": 10,
+    "host": "",
+    "endpoint": "api/data/v1/public/telemetry",
+    "apislug": "",
+    "object": {},
+    "publicEndpoint": "apis/data/v1/public/telemetry",
+    "protectedEndpoint": "apis/protected/v8/user/telemetry"
+  },
   "theme": {
     "primaryColor": "#1976d2",
     "secondaryColor": "#3F51B5",
@@ -16,13 +31,13 @@
   "navigation": [
     { "label": "Home", "url": "", "icon":"home" },
     { "label": "+91-11-25303400", "url": "", "icon":"record_voice_over" },
-    { "label": "English", "url": "", "icon":"translate" }
+    { "label": "Language", "url": "", "icon":"translate" }
   ],
   "content": {
     "title": "Indian International  \nInstitute of Democracy & \n Election Management",
     "subtitle": "Strengthening Democratic Institutions Through Excellence in Training and Research",
     "description": "IIDEM is committed to enhancing the capacity of election management bodies and promoting democratic governance through comprehensive training programs, research initiatives, and international collaboration.",
-    "ctaButton": "Apply",
+    "ctaButton": "Log in",
     "sliderData": {
         "styleData": {
             "bannerMetaClass": "",
@@ -98,6 +113,9 @@
     "photoGallery": {
       "title": "IIDEM PHOTO & \nVIDEO GALLERY",
       "description": "Explore our comprehensive collection of training programs, workshops, and international collaborations through our visual gallery showcasing the diversity and impact of our initiatives across different domains of democracy and election management.",
+       "ctaText":  "Know More",
+        "ctaIcon": ">>>",
+        "ctaLink": "https://iiidem.eci.gov.in/",
       "images": [
         {
           "url": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=300&h=200&fit=crop&crop=center",
@@ -141,21 +159,30 @@
           "description": "IIIDEM caters to the training needs of the core election personnel who are involved in the conduct of Presidential & Vice-Presidential Elections, Elections to Rajya Sabha Elections & State Legislative Councils & General Elections.",
           "features": [
 
-          ]
+          ],
+          "ctaText":  "Know More",
+          "ctaIcon": ">>>",
+          "ctaLink": "https://iiidem.eci.gov.in/"
         },
         {
           "icon": "/assets/images/internation-training-icon.svg",
           "title": "International Training Programs",
           "description": "IIDEM conducts Capacity Development Programs for Officers of other Election Management Bodies on various electoral thematic like Election Planning, Election management, Voter Education.",
           "features": [
-          ]
+          ],
+         "ctaText":  "Know More",
+          "ctaIcon": ">>>",
+          "ctaLink": "https://iiidem.eci.gov.in/"
         },
         {
           "icon": "/assets/images/academic-courses-icon.svg",
           "title": "Academic Courses at IIIDEM",
           "description": "A specialized Master’s Program in International Electoral Management and Practices (MIEMP) has been developed by ECI through IIIDEM in collaboration with Tata Institute of Social Sciences (TISS), Mumbai.",
           "features": [
-          ]
+          ],
+          "ctaText":  "Know More",
+          "ctaIcon": ">>>",
+          "ctaLink": "https://iiidem.eci.gov.in/"
         }
       ]
     },
@@ -184,28 +211,84 @@
     },
     "showcasedCourses": {
       "title": "Showcased Courses",
-      "courses": [
-        {
-          "title": "AI in Governance",
-          "description": "Exploring artificial intelligence applications in democratic governance",
-          "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=300&h=200&fit=crop&crop=center"
+      "stripWidgetData": {
+        "strips": [{
+  "active": true,
+  "key": "showcasedCourses",
+  "logo": "school",
+  "title": "",
+  "stripTitleLink": {
+    "link": "",
+    "icon": ""
+  },
+  "sliderConfig": {
+    "showNavs": true,
+    "showDots": true,
+    "maxWidgets": 12
+  },
+  "loader": true,
+  "loaderConfig": {
+    "cardSubType": "card-portrait-lib-skeleton"
+  },
+  "stripBackground": "",
+  "titleDescription": "",
+  "stripConfig": {
+    "cardSubType": "card-portrait-lib"
+  },
+  "tabs": [],
+  "filters": [],
+  "request": {
+    "searchV6": {
+      "request": {
+        "filters": {
+           "primaryCategory": "course", 
+            "createdFor":  [
+                            
+                        ],
+            "topics": []
         },
-        {
-          "title": "Digital Democracy",
-          "description": "Understanding digital transformation in electoral processes",
-          "image": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=300&h=200&fit=crop&crop=center"
+        "offset": 0,
+        "limit": 10,
+        "query": "",
+        "sort_by": {
+          "lastUpdatedOn": "desc"
         },
-        {
-          "title": "Election Security",
-          "description": "Comprehensive training on securing electoral processes",
-          "image": "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=300&h=200&fit=crop&crop=center"
-        },
-        {
-          "title": "Voter Engagement",
-          "description": "Strategies for enhancing citizen participation in democracy",
-          "image": "https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=300&h=200&fit=crop&crop=center"
-        }
-      ]
+        "fields": [
+          "name",
+          "appIcon",
+          "instructions",
+          "description",
+          "purpose",
+          "mimeType",
+          "gradeLevel",
+          "identifier",
+          "medium",
+          "pkgVersion",
+          "board",
+          "subject",
+          "resourceType",
+          "primaryCategory",
+          "languageMapV1",
+          "contentType",
+          "channel",
+          "organisation",
+          "trackable",
+          "license",
+          "posterImage",
+          "idealScreenSize",
+          "learningMode",
+          "creatorLogo",
+          "duration",
+          "version",
+          "programDuration",
+          "avgRating",
+          "additionalTags"
+        ]
+      }
+    }
+  }
+}]
+      }
     }
   },
   "contact": {

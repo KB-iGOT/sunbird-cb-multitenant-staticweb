@@ -9,16 +9,18 @@ import { AppComponent } from './app.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
 import {
   AnnouncementsModule,
-  CardsModule,
   CommonStripModule,
   CommonMethodsService,
   ContentStripWithTabsLibModule,
   DataPointsModule,
   HttpLoaderFactory,
   SlidersLibModule,
+  WIDGET_REGISTRATION_LIB_CONFIG,
 } from '@sunbird-cb/consumption'
+import { LoggerService } from '@sunbird-cb/utils-v2'
 import { InitService } from './services/init.service';
 import { environment } from '../environments/environment';
+import { SbUiResolverModule } from '@sunbird-cb/resolver-v2';
 
 export const ENVIRONMENT = new InjectionToken<any>('environment');
 
@@ -41,12 +43,12 @@ const appInitializer = (initSvc: InitService) => async () => {
     MatIconModule,
     AppRoutingModule,
     AnnouncementsModule,
-    CardsModule,
     CommonStripModule,
     ContentStripWithTabsLibModule,
     DataPointsModule,
     SlidersLibModule,
     TranslateModule,
+    SbUiResolverModule.forRoot([...WIDGET_REGISTRATION_LIB_CONFIG]),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -57,6 +59,7 @@ const appInitializer = (initSvc: InitService) => async () => {
   ],
   providers: [
     CommonMethodsService,
+    LoggerService,
     {
       provide: ENVIRONMENT,
       useValue: environment
