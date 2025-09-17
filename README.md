@@ -1,4 +1,4 @@
-# Multi-Tenant Angular Application
+# sunbird-cb-multitenant-staticweb Angular Application
 
 This is a multi-tenant Angular application built with Angular Material 16 and Tailwind CSS 2.2.19. The application shows different content, branding, and styling for different tenants based on JSON configuration files.
 

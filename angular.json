@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "multi-tenant": {
+    "sunbird-cb-multitenant-staticweb": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/multi-tenant",
+            "outputPath": "dist/sunbird-cb-multitenant-staticweb",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -86,10 +86,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "multi-tenant:build:production"
+              "browserTarget": "sunbird-cb-multitenant-staticweb:build:production"
             },
             "development": {
-              "browserTarget": "multi-tenant:build:development"
+              "browserTarget": "sunbird-cb-multitenant-staticweb:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -97,7 +97,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "multi-tenant:build"
+            "browserTarget": "sunbird-cb-multitenant-staticweb:build"
           }
         },
         "test": {
