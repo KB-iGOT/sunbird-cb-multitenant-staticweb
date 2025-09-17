@@ -68,6 +68,10 @@
     color: #FFFFFF;
 }
 
+.maxw-percent {
+    max-width: 235px;
+}
+
 .custom-program-btn{
     height: 24px;
     padding: 8px 12px;
@@ -307,5 +311,11 @@
                 object-fit: cover;
             }
         }
+    }
+}
+
+@media (min-width: 300px) and (max-width: 768px) {
+    .maxw-percent {
+        max-width: 100%;
     }
 }

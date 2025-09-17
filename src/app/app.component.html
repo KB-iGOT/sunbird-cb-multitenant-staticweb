@@ -57,7 +57,7 @@
           <h1 class="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
             {{ tenant.content.title }}
           </h1>
-          <p class="text-xl mb-8 text-blue-100">
+          <p class="mat-body-2 mb-8 text-blue-100 opacity-80">
             {{ tenant.content.subtitle }}
           </p>
         </div>
@@ -76,7 +76,7 @@
           class="text-left stat-counter pl-4 mr-5 md:mr-15 lg:mr-15"
           [ngClass]="{'border-l-2 border-white border-opacity-30': i > 0}">
           <div class="text-3xl lg:text-4xl font-bold mb-2">{{ stat.value }}</div>
-          <div class="text-sm text-blue-200 leading-tight">{{ stat.label }}</div>
+          <div class="text-blue-200 leading-tight maxw-percent text-sm md:text-base">{{ stat.label }}</div>
         </div>
       </div>
     </div>
@@ -100,7 +100,7 @@
             <h2 class="text-3xl font-bold text-gray-800 mb-4 flex items-center tricolr-border whitespace-pre"
               [innerHTML]="tenant.content.photoGallery.title">
             </h2>
-            <p class="text-gray-600 max-w-3xl">{{ tenant.content.photoGallery.description }}</p>
+            <p class="mat-body-2 text-gray-600 max-w-3xl">{{ tenant.content.photoGallery.description }}</p>
             <a [href]="tenant.content.photoGallery.ctaLink" target="_blank"
                 class="custom-program-btn gallery-btn flex items-center mt-4">
                 <span class="mat-body-2">{{ tenant.content.photoGallery.ctaText }}</span>
@@ -220,7 +220,7 @@
         <div class="text-left mb-12">
           <h2 class="text-3xl text-white font-bold mb-4 section-title-white tricolr-border whitespace-pre"
             [innerHTML]="tenant.content.trainingPrograms.title"></h2>
-          <p class="section-subtitle-light text-lg" style="color: #cbd5e1; max-width: 600px;">{{
+          <p class="section-subtitle-light mat-body-2" style="color: #cbd5e1; max-width: 600px;">{{
             tenant.content.trainingPrograms.subtitle }}</p>
         </div>
 
