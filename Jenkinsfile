@@ -21,44 +21,37 @@ node('build-slave') {
                 commit_hash = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
                 build_tag = sh(script: "echo " + params.github_release_tag.split('/')[-1] + "_" + commit_hash + "_" + env.BUILD_NUMBER, returnStdout: true).trim()
                 echo "build_tag: " + build_tag
- 
-        stage('Build') {
-   //             env.NODE_ENV = "build"
-   //             print "Environment will be : ${env.NODE_ENV}"
-   //             sh('chmod 777 build.sh')
-   //             sh("bash -x build.sh ${build_tag} ${env.NODE_NAME} ${hub_org}")
-          sh '''
-                  ls -al
-                  if [ -f "$(pwd)/dist" ]
-                  then
-                  sudo rm -rf $(pwd)/dist
-                  fi
-                  if [ -f "package-lock.json" ]
-                  then
-                  sudo rm -rf package-lock.json
-                  fi                  
-                docker run -v $(pwd):/opt node:22 /bin/sh -c "cd /opt && npm install && npm run build"
-                '''
+		
+
+        	if(params.enable_code_analysis){
+            	stage('Code analysis'){
+               	build job: "Build/CodeReview/${JOB_BASE_NAME}", wait: true
+	     	}
+       	    }
+
+		stage('Build') {
+		// Docker build
+                env.NODE_ENV = "build"
+                print "Environment will be : ${env.NODE_ENV}"
+                sh('chmod 777 build.sh')
+                sh("bash -x build.sh ${build_tag} ${env.NODE_NAME} ${hub_org}")
             }
-          stage('Package') {
-                  env.NODE_ENV = "build"
-                  print "Environment will be : ${env.NODE_ENV}"
-                  sh('chmod 777 build.sh')
-                  sh("bash -x build.sh ${build_tag} ${env.NODE_NAME} ${hub_org}") 
-          }
-         stage('ArchiveArtifacts') {
+		  
+	      
+               stage('ArchiveArtifacts') {
+	       	   sh ("echo ${build_tag} > build_tag.txt")
                    archiveArtifacts "metadata.json"		     
+                    archiveArtifacts "build_tag.txt" 
                     currentBuild.description = "${build_tag}"
                 }
-
-      }
-        
-	}
+            
+        }
+    }
     catch (err) {
         currentBuild.result = "FAILURE"
         throw err
     }
-     finally {
+    finally {
       //  email_notify()
     }
 }
