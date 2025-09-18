@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "export NODE_OPTIONS=--openssl-legacy-provider && node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng serve --proxy-config proxy/localhost.proxy.json -o",
     "build": "export NODE_OPTIONS=--openssl-legacy-provider && node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng build --configuration production --output-path=dist/sunbird-cb-multitenant-staticweb --base-href=/ --subresource-integrity --optimization=true --aot=false --build-optimizer=false",
+    "serve:prod": "export NODE_OPTIONS=--openssl-legacy-provider && ng serve --configuration production  --optimization=true",
     "test": "jest",
     "test-coverage": "./node_modules/jest/bin/jest.js --clearCache && node --max_old_space_size=30000 ./node_modules/jest/bin/jest.js --silent --ci --collectCoverage=true --coverageReporters=lcov --detectOpenHandles --forceExit=true",
     "lint": "ng lint",
