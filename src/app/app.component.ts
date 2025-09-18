@@ -38,7 +38,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
     this.tenant = this.initService.configDetails;
-    this.baseURl = environment.learnerPortalURL
+    this.baseURl = environment.portalURL
     this.loading = false;
     if (this.tenant) {
       this.tenantService.applyTheme(this.tenant.theme);
