@@ -11,6 +11,7 @@ RUN yarn && yarn add moment && yarn add vis-util && npm run build --prod --build
 WORKDIR /app/dist
 RUN npm install --legacy-peer-deps --production
 EXPOSE 3004
-CMD [ "npm", "run", "serve, "--prod" ]
+CMD [ "npm", "run", "serve", "--prod" ]
+
 
 
