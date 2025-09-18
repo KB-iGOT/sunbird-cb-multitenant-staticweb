@@ -21,6 +21,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   private currentIndex = 0;
   currentLanguage: string = 'en';
   languages = LANGUAGES;
+  baseURl: string = ''
   
   @ViewChild('carouselTrack', { static: false }) carouselTrack!: ElementRef;
 
@@ -37,6 +38,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
     this.tenant = this.initService.configDetails;
+    this.baseURl = environment.portalURL
     this.loading = false;
     if (this.tenant) {
       this.tenantService.applyTheme(this.tenant.theme);
