@@ -71,12 +71,12 @@
         </div>
       </div>
       <!-- Statistics -->
-      <div class="flex justify-center items-center mt-12">
+      <div class="grid grid-cols-4 lg:grid-cols-6  mt-12">
         <div *ngFor="let stat of tenant.content.statistics; let i = index"
           class="text-left stat-counter pl-4 mr-5 md:mr-15 lg:mr-15"
-          [ngClass]="{'border-l-2 border-white border-opacity-30': i > 0}">
-          <div class="text-3xl lg:text-4xl font-bold mb-2">{{ stat.value }}</div>
-          <div class="text-blue-200 leading-tight maxw-percent text-sm md:text-base">{{ stat.label }}</div>
+          [ngClass]="{'border-l-2 border-white border-opacity-30': i > 0, 'lg:col-start-2': i === 0}">
+          <div class="text-3xl font-bold mb-2">{{ stat.value }}</div>
+          <div class="text-blue-200 leading-tight maxw-percent text-sm">{{ stat.label }}</div>
         </div>
       </div>
     </div>

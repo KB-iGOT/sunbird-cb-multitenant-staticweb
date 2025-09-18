@@ -214,9 +214,11 @@
       "stripWidgetData": {
         "strips": [{
   "active": true,
-  "key": "showcasedCourses",
+  "key": "featuredContents",
   "logo": "school",
-  "title": "",
+  "title": " ",
+  "type": "learningContent",
+  "disableTranslate": true,
   "stripTitleLink": {
     "link": "",
     "icon": ""
@@ -224,67 +226,30 @@
   "sliderConfig": {
     "showNavs": true,
     "showDots": true,
-    "maxWidgets": 12
+    "maxWidgets": 100,
+    "showNavsSpacing": true
   },
+  "stripBackground": "",
+  "titleDescription": "For you",
+  "stripConfig": {
+    "cardSubType": "card-portrait-lib",
+    "hideShowAll": true
+  },
+  "viewMoreUrl": {},
+  "hideViewMoreUrl": true,
   "loader": true,
   "loaderConfig": {
     "cardSubType": "card-portrait-lib-skeleton"
   },
-  "stripBackground": "",
-  "titleDescription": "",
-  "stripConfig": {
-    "cardSubType": "card-portrait-lib"
-  },
   "tabs": [],
   "filters": [],
+  "stripRequestType": "get",
+  "stripRequestFor": "search",
+  "onTabClickRequest": false,
   "request": {
-    "searchV6": {
-      "request": {
-        "filters": {
-           "primaryCategory": "course", 
-            "createdFor":  [
-                            
-                        ],
-            "topics": []
-        },
-        "offset": 0,
-        "limit": 10,
-        "query": "",
-        "sort_by": {
-          "lastUpdatedOn": "desc"
-        },
-        "fields": [
-          "name",
-          "appIcon",
-          "instructions",
-          "description",
-          "purpose",
-          "mimeType",
-          "gradeLevel",
-          "identifier",
-          "medium",
-          "pkgVersion",
-          "board",
-          "subject",
-          "resourceType",
-          "primaryCategory",
-          "languageMapV1",
-          "contentType",
-          "channel",
-          "organisation",
-          "trackable",
-          "license",
-          "posterImage",
-          "idealScreenSize",
-          "learningMode",
-          "creatorLogo",
-          "duration",
-          "version",
-          "programDuration",
-          "avgRating",
-          "additionalTags"
-        ]
-      }
+    "apiUrl": "/api/playList/v2/01379305664500531251MDO_GROUP_A_ANDAMAN/01379305664500531251/01379305664500531251",
+    "playlistRead": {
+      "type": "ORG_FEATURED_COURSES"
     }
   }
 }]
