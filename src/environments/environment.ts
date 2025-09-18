@@ -19,6 +19,7 @@ export const environment: IEnvironment = {
   contentBucket: getEnvValue('contentBucket', 'assets/public'),
   ordId: getEnvValue('ordId', '01376822290813747263'),
   portalURL: getEnvValue('portalURL', 'https://iiidem-portal.dev.karmayogibharat.net'),
+  learnerPortalURL: getEnvValue('portalURL', 'https://portal.dev.karmayogibharat.net'),
   telmetryUrl: getEnvValue('telmetryUrl', 'https://iiidem-portal.dev.karmayogibharat.net'),
 }
 interface IEnvironment {
@@ -28,5 +29,6 @@ interface IEnvironment {
   contentBucket: string
   ordId: string
   portalURL: string
+  learnerPortalURL: string
   telmetryUrl: string
 }
