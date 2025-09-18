@@ -5,7 +5,8 @@
     "ng": "ng",
     "start": "export NODE_OPTIONS=--openssl-legacy-provider && node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng serve --proxy-config proxy/localhost.proxy.json -o",
     "build": "export NODE_OPTIONS=--openssl-legacy-provider && node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng build --configuration production --output-path=dist/sunbird-cb-multitenant-staticweb --base-href=/ --subresource-integrity --optimization=true --aot=false --build-optimizer=false",
-    "serve:prod": "export NODE_OPTIONS=--openssl-legacy-provider && ng serve --configuration production  --optimization=true",
+    "serve:prod": "npx http-server dist/sunbird-cb-multitenant-staticweb -p 4200 -a 0.0.0.0 -c-1 --cors",
+    "serve": "npx http-server . -p 3004 -a 0.0.0.0",
     "test": "jest",
     "test-coverage": "./node_modules/jest/bin/jest.js --clearCache && node --max_old_space_size=30000 ./node_modules/jest/bin/jest.js --silent --ci --collectCoverage=true --coverageReporters=lcov --detectOpenHandles --forceExit=true",
     "lint": "ng lint",
@@ -56,7 +57,8 @@
     "ts-jest": "29.2.5",
     "tslib": "^2.3.0",
     "vis-util": "^6.0.0",
-    "zone.js": "~0.13.3"
+    "zone.js": "~0.13.3",
+    "http-server": "^14.1.1"
   },
   "devDependencies": {
     "@angular-builders/jest": "^16.0.0",
