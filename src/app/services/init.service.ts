@@ -50,7 +50,7 @@ export class InitService {
   private async setConfiDetails(configDetails: any = null): Promise<any> {
     if (configDetails) {
       this.configDetails = configDetails
-      this.baseUrl = environment.portalURL
+      this.baseUrl = environment.baseUrl
     } else {
       try {
         const requestData: any = {
@@ -67,7 +67,7 @@ export class InitService {
           map((rData: any) => {
             const finalData = rData && rData.result.form.data
             this.configDetails = finalData || {}
-            this.baseUrl = environment.portalURL
+            this.baseUrl = environment.baseUrl || '';
             return finalData
           }),
           catchError((_error: any) => {
@@ -75,7 +75,7 @@ export class InitService {
             return this.tenantService.loadTenant(tenantId).pipe(
               map(tenant => {
                 this.configDetails = tenant;
-                this.baseUrl = environment.portalURL || '';
+                this.baseUrl = environment.baseUrl || '';
                 return tenant;
               }),
               catchError((err: any) => {
