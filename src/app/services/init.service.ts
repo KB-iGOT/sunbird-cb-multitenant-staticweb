@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http'
-import { Injectable } from '@angular/core'
+import { Injectable, Injector } from '@angular/core'
 import { Observable, of} from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
 import { TenantService } from './tenant.service'
@@ -21,7 +21,7 @@ export class InitService {
   constructor(
     private http: HttpClient,
     private tenantService: TenantService,
-    private sbUiResolverService: SbUiResolverService
+    private injector: Injector
   ) {
 
   }
@@ -36,15 +36,23 @@ export class InitService {
   }
 
   private initializeWidgetResolver() {
-    // Initialize the widget resolver service
-    this.sbUiResolverService.initialize(
-      null, // restrictedWidgetKeys - no widgets are restricted
-      null, // roles - no role-based restrictions
-      null, // groups - no group-based restrictions  
-      null  // restrictedFeatures - no feature restrictions
-    )
-    
-    console.log('Widget Resolver Service initialized successfully')
+    try {
+      // Get the resolver service from the injector to avoid injection context issues
+      const sbUiResolverService = this.injector.get(SbUiResolverService);
+      
+      // Initialize the widget resolver service
+      sbUiResolverService.initialize(
+        null, // restrictedWidgetKeys - no widgets are restricted
+        null, // roles - no role-based restrictions
+        null, // groups - no group-based restrictions  
+        null  // restrictedFeatures - no feature restrictions
+      )
+      
+      console.log('Widget Resolver Service initialized successfully')
+    } catch (error) {
+      console.warn('Widget Resolver Service not available or already initialized:', error)
+      // Don't treat this as a critical error during development
+    }
   }
 
   private async setConfiDetails(configDetails: any = null): Promise<any> {

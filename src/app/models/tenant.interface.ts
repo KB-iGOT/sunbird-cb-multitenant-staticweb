@@ -97,7 +97,7 @@ export interface TenantContent {
   trainingPrograms?: TenantTrainingPrograms;
   internationalTraining?: TenantInternationalTraining;
   partners?: TenantPartners;
-  showcasedCourses?: TenantShowcasedCourses;
+  showcasedCourses?: any;
 }
 
 export interface TenantContact {

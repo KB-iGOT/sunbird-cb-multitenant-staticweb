@@ -61,10 +61,20 @@ export class TenantService {
 
   applyTheme(theme: any): void {
     const root = document.documentElement;
+    const body = document.body;
+    
+    // Set CSS custom properties
     root.style.setProperty('--primary-color', theme.primaryColor);
     root.style.setProperty('--secondary-color', theme.secondaryColor);
     root.style.setProperty('--background-color', theme.backgroundColor);
     root.style.setProperty('--text-color', theme.textColor);
+    
+    // Apply theme CSS classes
+    // Remove any existing theme classes
+    body.classList.remove('theme-igot', 'day-mode', 'night-mode');
+    
+    // Add the appropriate theme classes
+    body.classList.add('theme-igot', theme.mode || 'day-mode');
   }
 
   updateFavicon(faviconUrl: string): void {

@@ -20,7 +20,7 @@ import {
 import { LoggerService } from '@sunbird-cb/utils-v2'
 import { InitService } from './services/init.service';
 import { environment } from '../environments/environment';
-import { SbUiResolverModule } from '@sunbird-cb/resolver-v2';
+import { SbUiResolverModule, SbUiResolverService } from '@sunbird-cb/resolver-v2';
 
 export const ENVIRONMENT = new InjectionToken<any>('environment');
 
@@ -60,6 +60,7 @@ const appInitializer = (initSvc: InitService) => async () => {
   providers: [
     CommonMethodsService,
     LoggerService,
+    SbUiResolverService,
     {
       provide: ENVIRONMENT,
       useValue: environment
@@ -73,6 +74,11 @@ const appInitializer = (initSvc: InitService) => async () => {
       multi: true,
       provide: APP_INITIALIZER,
       useFactory: appInitializer,
+    },
+    {
+      provide: TranslateLoader,
+      useFactory: HttpLoaderFactory,
+      deps: [HttpClient],
     },
   ],
   bootstrap: [AppComponent]

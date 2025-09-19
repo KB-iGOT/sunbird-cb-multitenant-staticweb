@@ -247,7 +247,7 @@
   "stripRequestFor": "search",
   "onTabClickRequest": false,
   "request": {
-    "apiUrl": "/api/playList/v2/01379305664500531251MDO_GROUP_A_ANDAMAN/01379305664500531251/01379305664500531251",
+    "apiUrl": "/api/playList/v2/read/01379305664500531251MDO_GROUP_A_ANDAMAN/01379305664500531251",
     "playlistRead": {
       "type": "ORG_FEATURED_COURSES"
     }
