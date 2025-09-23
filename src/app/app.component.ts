@@ -38,7 +38,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
     this.tenant = this.initService.configDetails;
-    this.baseURl = environment.baseUrl;
+    this.baseURl = environment.portalURL;
     debugger
     if(this.tenant && this.tenant.content && 
       this.tenant.content.showcasedCourses && 
