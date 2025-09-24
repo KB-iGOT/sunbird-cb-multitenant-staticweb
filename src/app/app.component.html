@@ -111,11 +111,12 @@
         <!-- Gallery visible on screens >= 1200px -->
         <div class="gallery col-span-8 mx-auto px-4 sm:px-6 lg:px-8 hidden xl:block">
           <div class="base relative"
-            *ngIf="tenant.content.photoGallery.images && tenant.content.photoGallery.images.length >= 6">
-            <img *ngIf="tenant.content.photoGallery.images[0]" [src]="tenant.content.photoGallery.images[0].url"
+            *ngIf="tenant.content.photoGallery.images && tenant.content.photoGallery.images.length >= 5">
+            <img *ngIf="tenant.content.photoGallery.images[0]" [src]="tenant.content.photoGallery.images[0].url | pipePublicURL"
               [alt]="tenant.content.photoGallery.images[0].alt" class="base object-cover rounded-lg shadow-md" />
-            <div class="pic1 absolute" *ngIf="tenant.content.photoGallery.images[5]">
-              <img [src]="tenant.content.photoGallery.images[5].url" [alt]="tenant.content.photoGallery.images[5].alt"
+
+            <div class="pic1 absolute" *ngIf="tenant.content.photoGallery.images[1]">
+              <img [src]="tenant.content.photoGallery.images[1].url | pipePublicURL" [alt]="tenant.content.photoGallery.images[1].alt"
                 class=" object-cover rounded-lg shadow-md" />
             </div>
             <div class="pic-svg absolute">
@@ -123,15 +124,15 @@
               <img src="/assets/images/gallery-dots.svg" alt="Dotted pattern SVG" class="w-full h-full" />
             </div>
             <div class="pic2 absolute" *ngIf="tenant.content.photoGallery.images[2]">
-              <img [src]="tenant.content.photoGallery.images[2].url" [alt]="tenant.content.photoGallery.images[2].alt"
+              <img [src]="tenant.content.photoGallery.images[2].url | pipePublicURL" [alt]="tenant.content.photoGallery.images[2].alt"
                 class=" object-cover rounded-lg shadow-md" />
             </div>
             <div class="pic3 absolute" *ngIf="tenant.content.photoGallery.images[3]">
-              <img [src]="tenant.content.photoGallery.images[3].url" [alt]="tenant.content.photoGallery.images[3].alt"
+              <img [src]="tenant.content.photoGallery.images[3].url | pipePublicURL" [alt]="tenant.content.photoGallery.images[3].alt"
                 class=" object-cover rounded-lg shadow-md" />
             </div>
-            <div class="pic4 absolute" *ngIf="tenant.content.photoGallery.images[3]">
-              <img [src]="tenant.content.photoGallery.images[4].url" [alt]="tenant.content.photoGallery.images[4].alt"
+            <div class="pic4 absolute" *ngIf="tenant.content.photoGallery.images[4]">
+              <img [src]="tenant.content.photoGallery.images[4].url | pipePublicURL" [alt]="tenant.content.photoGallery.images[4].alt"
                 class=" object-cover rounded-lg shadow-md" />
             </div>
             <div class="pic-circle absolute">
@@ -145,7 +146,7 @@
             *ngIf="tenant.content.photoGallery.images && tenant.content.photoGallery.images.length >= 6">
             <!-- Large image top left -->
             <div class="col-span-6 row-span-2 relative group hover-lift">
-              <img [src]="tenant.content.photoGallery.images[0].url" [alt]="tenant.content.photoGallery.images[0].alt"
+              <img [src]="tenant.content.photoGallery.images[0].url | pipePublicURL" [alt]="tenant.content.photoGallery.images[0].alt"
                 class="w-full h-64 object-cover rounded-lg shadow-md" />
               <div
                 class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
@@ -155,7 +156,7 @@
 
             <!-- Top right images -->
             <div class="col-span-3 relative group hover-lift">
-              <img [src]="tenant.content.photoGallery.images[1].url" [alt]="tenant.content.photoGallery.images[1].alt"
+              <img [src]="tenant.content.photoGallery.images[1].url | pipePublicURL" [alt]="tenant.content.photoGallery.images[1].alt"
                 class="w-full h-32 object-cover rounded-lg shadow-md" />
               <div
                 class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
@@ -164,7 +165,7 @@
             </div>
 
             <div class="col-span-3 relative group hover-lift">
-              <img [src]="tenant.content.photoGallery.images[2].url" [alt]="tenant.content.photoGallery.images[2].alt"
+              <img [src]="tenant.content.photoGallery.images[2].url | pipePublicURL" [alt]="tenant.content.photoGallery.images[2].alt"
                 class="w-full h-32 object-cover rounded-lg shadow-md" />
               <div
                 class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
@@ -174,7 +175,7 @@
 
             <!-- Bottom right images -->
             <div class="col-span-3 relative group hover-lift">
-              <img [src]="tenant.content.photoGallery.images[3].url" [alt]="tenant.content.photoGallery.images[3].alt"
+              <img [src]="tenant.content.photoGallery.images[3].url | pipePublicURL" [alt]="tenant.content.photoGallery.images[3].alt"
                 class="w-full h-28 object-cover rounded-lg shadow-md" />
               <div
                 class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
@@ -183,7 +184,7 @@
             </div>
 
             <div class="col-span-3 relative group hover-lift">
-              <img [src]="tenant.content.photoGallery.images[4].url" [alt]="tenant.content.photoGallery.images[4].alt"
+              <img [src]="tenant.content.photoGallery.images[4].url | pipePublicURL" [alt]="tenant.content.photoGallery.images[4].alt"
                 class="w-full h-28 object-cover rounded-lg shadow-md" />
               <div
                 class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
@@ -192,14 +193,14 @@
             </div>
 
             <!-- Bottom center image -->
-            <div class="col-span-6 col-start-4 relative group hover-lift">
-              <img [src]="tenant.content.photoGallery.images[5].url" [alt]="tenant.content.photoGallery.images[5].alt"
+            <!-- <div class="col-span-6 col-start-4 relative group hover-lift">
+              <img [src]="tenant.content.photoGallery.images[5].url | pipePublicURL" [alt]="tenant.content.photoGallery.images[5].alt"
                 class="w-full h-32 object-cover rounded-lg shadow-md" />
               <div
                 class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
                 <p class="text-white text-sm text-center p-2">{{ tenant.content.photoGallery.images[5].caption }}</p>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
