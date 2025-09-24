@@ -21,6 +21,7 @@ import { LoggerService } from '@sunbird-cb/utils-v2'
 import { InitService } from './services/init.service';
 import { environment } from '../environments/environment';
 import { SbUiResolverModule, SbUiResolverService } from '@sunbird-cb/resolver-v2';
+import { PipePublicURL } from './pipes/pipe-public-URL/pipe-public-URL.pipe';
 
 export const ENVIRONMENT = new InjectionToken<any>('environment');
 
@@ -48,6 +49,7 @@ const appInitializer = (initSvc: InitService) => async () => {
     DataPointsModule,
     SlidersLibModule,
     TranslateModule,
+    PipePublicURL,
     SbUiResolverModule.forRoot([...WIDGET_REGISTRATION_LIB_CONFIG]),
     TranslateModule.forRoot({
       loader: {
