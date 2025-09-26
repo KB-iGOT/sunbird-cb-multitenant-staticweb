@@ -5,6 +5,7 @@ import { catchError, map } from 'rxjs/operators'
 import { TenantService } from './tenant.service'
 import { SbUiResolverService } from '@sunbird-cb/resolver-v2'
 import { environment } from 'src/environments/environment'
+import { TranslateService } from '@ngx-translate/core'
 
 const API_END_POINTS = {
   FORM_READ: `/apis/v1/form/read`,
@@ -21,7 +22,8 @@ export class InitService {
   constructor(
     private http: HttpClient,
     private tenantService: TenantService,
-    private injector: Injector
+    private injector: Injector,
+    private translate: TranslateService,
   ) {
 
   }
@@ -31,6 +33,14 @@ export class InitService {
   }
 
   async init() {
+    if (localStorage.getItem('websiteLanguage')) {
+      let lang = JSON.stringify(localStorage.getItem('websiteLanguage'))
+      lang = lang.replace(/\"/g, '')
+      this.translate.use(lang)
+    } else {
+      this.translate.setDefaultLang('en')
+      localStorage.setItem('websiteLanguage', 'en')
+    }
     await this.setConfiDetails()
     this.initializeWidgetResolver()
   }

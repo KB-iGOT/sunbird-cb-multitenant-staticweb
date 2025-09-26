@@ -141,9 +141,9 @@
           </div>
         </div>
         <!-- Gallery responsive visible on screens < 1200px -->
-        <div class="gallery-resonsive col-span-10 col-start-2 xl:hidden md:col-span-8">
+        <div class="gallery-resonsive col-span-10 col-start-2 xl:hidden md:block md:col-span-8">
           <div class="grid grid-cols-12 gap-3 auto-rows-min"
-            *ngIf="tenant.content.photoGallery.images && tenant.content.photoGallery.images.length >= 6">
+            *ngIf="tenant.content.photoGallery.images && tenant.content.photoGallery.images.length >= 5">
             <!-- Large image top left -->
             <div class="col-span-6 row-span-2 relative group hover-lift">
               <img [src]="tenant.content.photoGallery.images[0].url | pipePublicURL" [alt]="tenant.content.photoGallery.images[0].alt"
