@@ -1,11 +1,11 @@
 export const LANGUAGES = [
     {
-        "value": "বাংলা",
-        "key": "be"
-    },
-    {
         "value": "English",
         "key": "en"
+    },
+    {
+        "value": "বাংলা",
+        "key": "be"
     },
     {
         "value": "हिंदी",

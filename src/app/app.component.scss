@@ -21,6 +21,13 @@
     padding-left: 24px;
 }
 
+.translate-z-0 {
+    transform: translateZ(0px);
+}
+.translate-z-1 {
+    transform: translateZ(1px);
+}
+
 .program-card-img {
     width: 40px;
     height: 40px;
@@ -74,7 +81,8 @@
     height: 24px;
     padding: 8px 12px;
     border-radius: 4px;
-    width: 120px;
+    min-width: 120px;
+    width: fit-content;
 
     &.training{
         background: #FFFFFF1F;
@@ -163,6 +171,8 @@
     outline: none;
     cursor: pointer;
     background: transparent;
+    opacity: 1 !important;
+    cursor: inherit;
 }
 .custom-select::-ms-expand {
     display: none;

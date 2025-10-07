@@ -19,13 +19,13 @@
 
   <!-- Hero Section with Blue Gradient -->
   <section class="relative blue-gradient text-white pt-5 pb-40">
-    <div class="disc1 absolute top-0 left-0">
+    <div class="disc1 absolute top-0 left-0 translate-z-0">
       <img src="/assets/images/oval-disc1.svg" alt="Decorative Disc 1" class="w-40 h-40" />
     </div>
-    <div class="disc2 absolute top-0 left-0">
+    <div class="disc2 absolute top-0 left-0 translate-z-0">
       <img src="/assets/images/oval-disc2.svg" alt="Decorative Disc 1" class="w-80 h-80" />
     </div>
-    <div class="navs flex justify-end items-center px-4 pb-6 gap-8">
+    <div class="navs flex justify-end items-center px-4 pb-6 gap-8 translate-z-1">
       <nav class=" space-x-8 flex">
         <ng-container *ngFor="let nav of tenant.navigation">
           <ng-container *ngIf="nav.label !== 'Language'"> 
@@ -39,7 +39,7 @@
           <ng-container *ngIf="nav.label === 'Language'">
             <div class="language flex items-center justify-center nav-link">
               <img src="./assets/images/translate.svg" alt="language-icon" class="mr-2 img-icon">
-              <select name="language" class="custom-select" [(ngModel)]="currentLanguage" (change)="languageChange($event)">
+              <select name="language" class="custom-select" [(ngModel)]="currentLanguage" (change)="languageChange($event)" disabled>
                 <option [value]="item.key" *ngFor="let item of languages">{{item.value}}</option>
               </select>
             </div>
@@ -221,7 +221,7 @@
         <div class="text-left mb-12">
           <h2 class="text-3xl text-white font-bold mb-4 section-title-white tricolr-border whitespace-pre"
             [innerHTML]="tenant.content.trainingPrograms.title"></h2>
-          <p class="section-subtitle-light mat-body-2" style="color: #cbd5e1; max-width: 600px;">{{
+          <p class="section-subtitle-light mat-body-2" style="color: #cbd5e1;">{{
             tenant.content.trainingPrograms.subtitle }}</p>
         </div>
 
@@ -337,7 +337,7 @@
   </section>
 
   <!-- Footer -->
-  <footer class="bg-gray-800 text-white py-12">
+  <footer class="bg-gray-800 text-white py-12 hidden">
     <div class="container-balanced mx-auto ">
       <!-- <div class="grid md:grid-cols-4 gap-8">
         <div class="md:col-span-2">
