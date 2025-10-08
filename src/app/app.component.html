@@ -283,10 +283,10 @@
 
   <!-- Partners Section -->
   <section class="py-16 bg-white" *ngIf="tenant.content.partners">
-    <div class="container-balanced mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="container-balanced mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center">
       <h2 class="text-2xl font-bold text-left text-gray-800 mb-12 
-      tricolr-border  lg:whitespace-pre">
-        <!-- <img src="/assets/images/tricolor-border.svg" alt="Tricolor Border" class="inline-block align-middle mr-2" /> -->
+        lg:whitespace-pre flex items-center justify-center">
+        <img src="/assets/images/tricolor-border.svg" alt="Tricolor Border" class="inline-block align-middle mr-2" />
         {{ tenant.content.partners.title }}
       </h2>
     </div>
@@ -314,10 +314,13 @@
 
   <!-- Showcased Courses Section -->
   <section class="pb-16 pt-0 bg-white" *ngIf="tenant.content.showcasedCourses">
-    <div class="container-balanced mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-left text-gray-800 mb-12 tricolr-border whitespace-pre"
-        [innerHTML]="tenant.content.showcasedCourses.title">
-      </h2>
+    <div class="container-balanced mx-auto px-4 sm:px-6 lg:px-8 ">
+      <div class="flex items-center justify-center mb-10">
+        <img src="/assets/images/tricolor-border.svg" alt="Tricolor Border" class="tricolor-img-showCase inline-block align-middle mr-2" />
+        <h2 class="text-3xl font-bold  text-gray-800  whitespace-pre flex items-center justify-center"
+          [innerHTML]="tenant.content.showcasedCourses.title">
+        </h2>
+      </div>
 
       <div class="w-full">
         <!-- <div *ngFor="let course of tenant.content.showcasedCourses.courses"
