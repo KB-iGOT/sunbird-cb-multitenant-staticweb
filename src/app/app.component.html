@@ -47,9 +47,11 @@
         </ng-container>
 
       </nav>
-      <a class="mat-button login-button h-10" [href]="baseURl + '/'+tenant.content.loginButton?.link">
-        {{ tenant.content.loginButton?.text }}
-      </a>
+      <ng-container *ngIf="tenant.content.loginButton && baseURl">
+        <a class="mat-button login-button h-10" [href]="baseURl + '/'+tenant.content.loginButton?.link">
+          {{ tenant.content.loginButton?.text }}
+        </a>
+      </ng-container>
     </div>
     <div class="container-balanced mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid lg:grid-cols-2 gap-12 items-center">

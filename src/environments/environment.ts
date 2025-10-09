@@ -15,12 +15,12 @@ const getEnvValue = (key: string, fallback: any) => {
 export const environment: IEnvironment = {
   name: getEnvValue('name', 'Multi-Tenant Portal'),
   production: getEnvValue('production', false),
-  contentHost: getEnvValue('contentHost', 'https://portal.dev.karmayogibharat.net'),
+  contentHost: getEnvValue('contentHost', ''),
   contentBucket: getEnvValue('contentBucket', 'assets/public'),
-  baseUrl: getEnvValue('baseUrl', 'https://iiidem.dev.karmayogibharat.net'),
-  portalURL: getEnvValue('portalURL', 'https://iiidem-portal.dev.karmayogibharat.net'),
-  learnerPortalURL: getEnvValue('portalURL', 'https://portal.dev.karmayogibharat.net'),
-  telmetryUrl: getEnvValue('telmetryUrl', 'https://iiidem-portal.dev.karmayogibharat.net'),
+  baseUrl: getEnvValue('baseUrl', ''),
+  portalURL: getEnvValue('portalURL', ''),
+  learnerPortalURL: getEnvValue('portalURL', ''),
+  telmetryUrl: getEnvValue('telmetryUrl', ''),
 }
 interface IEnvironment {
   name: string,
