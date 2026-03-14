@@ -3,9 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LayoutsModule } from './layouts/layouts.module';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
 import {
   AnnouncementsModule,
@@ -42,7 +44,9 @@ const appInitializer = (initSvc: InitService) => async () => {
     BrowserAnimationsModule,
     HttpClientModule,
     MatIconModule,
+    MatButtonModule,
     AppRoutingModule,
+    LayoutsModule,  
     AnnouncementsModule,
     CommonStripModule,
     ContentStripWithTabsLibModule,

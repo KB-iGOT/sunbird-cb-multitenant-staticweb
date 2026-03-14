@@ -1,0 +1,455 @@
+// Custom template 1 styles
+.custom-template1-layout {
+    font-family: inherit;
+    background-color: #F9F9F9;
+}
+
+.text-blue {
+    color: rgba(0, 99, 204, 1) !important;
+}
+
+.custom-button {
+    display: inline-flex !important;
+    padding: 8px 16px !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 10px;
+    border-radius: 12px !important;
+    
+    &.blue-button {
+        background: #0063CC !important;
+        color: #fff !important;
+    }
+    
+    &.white-button{
+        background: #FFF !important;
+        color: #0063CC;
+    }
+
+    &.thin-font {
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 27px;
+    }
+
+    &.thick-font {
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 27px;
+    }
+}
+
+.btn-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;           // space between text and icon
+
+  mat-icon {
+    font-size: 18px;  // match your text size
+    width: 18px;
+    height: 18px;
+    line-height: 1;   // kills the extra vertical offset
+  }
+}
+
+
+.title-text {
+    color: #FFF;
+    font-family: Poppins;
+    font-size: 56px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+}
+
+.title-highlight {
+    color: #F7B718 !important;
+    background-image: linear-gradient(90deg, #E44D25 38.94%, #EFA422 100%);
+    color: transparent;
+    background-clip: text;
+}
+
+.colored-border-bottom {
+    border-bottom: 5px solid;
+    border-image: linear-gradient(to right,
+            rgba(208, 28, 31, 1) 0% 25%,
+            rgba(45, 51, 89, 1) 25% 50%,
+            rgba(247, 183, 24, 1) 50% 75%,
+            rgba(0, 134, 88, 1) 75% 100%);
+    border-image-slice: 1;
+}
+
+.black-gradient-bg {
+    background: linear-gradient(225deg, #313C59 0%, #161C2D 100%);
+    background-color: #1B2133;
+}
+
+.translate-z-0 {
+    transform: translateZ(0px);
+}
+
+.translate-z-1 {
+    transform: translateZ(1px);
+}
+
+.nav-link .mat-icon {
+    font-size: 16px;
+    height: 16px;
+    width: 16px;
+}
+
+.nav-link .img-icon {
+    height: 17px;
+    width: 17px;
+}
+
+.text-pill {
+    display: inline-flex;
+    padding: 6px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 38px;
+    backdrop-filter: blur(6px);
+
+    &.red {
+        background: rgba(208, 28, 31, 0.64);
+    }
+
+    &.yellow {
+        background: #F7B718;
+    }
+
+    &.green {
+        background: #008658;
+        color: #fff;
+    }
+}
+
+.stats-section-wrapper{
+    border-radius: 24px;
+    padding: 40px;
+    border: 1px solid #EBEBEB;
+    background: #FFF;
+    box-shadow: 74px 313px 90px 0 rgba(0, 0, 0, 0.00), 47px 200px 82px 0 rgba(0, 0, 0, 0.00), 27px 113px 69px 0 rgba(0, 0, 0, 0.02), 12px 50px 51px 0 rgba(0, 0, 0, 0.03), 3px 13px 28px 0 rgba(0, 0, 0, 0.03);
+}
+
+.stats-wrapper {
+    justify-content: space-around;
+    display: flex;
+
+    .stat-item {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        flex-wrap: nowrap;
+        max-width: 250px;
+        min-width: 180px;
+        margin: 16px 0;
+    }
+}
+
+.platform-section__container {
+    @apply grid grid-cols-1 gap-10 items-center max-w-6xl mx-auto;
+
+    // Two-column layout from md upward
+    @screen md {
+        @apply grid-cols-2 gap-12;
+    }
+
+    @screen lg {
+        @apply gap-16;
+    }
+}
+
+// ── Left: Image cluster ─────────────────────────────────────
+.platform-section__images {
+    @apply relative w-full;
+    // Reserve enough height for the overlapping cluster
+    min-height: 380px;
+
+    @screen md {
+        min-height: 400px;
+    }
+
+    @screen lg {
+        min-height: 440px;
+    }
+}
+
+// Shared image wrapper styles
+.platform-section__img-wrap {
+    @apply absolute overflow-hidden shadow-lg;
+    border: 3px solid #FFF;
+
+    // The images inside fill the wrapper
+    .platform-section__img {
+        @apply w-full h-full object-cover;
+        display: block;
+    }
+}
+
+// ── Image positions (desktop-first, scale down gracefully) ──
+.platform-section__img-wrap {
+    width: 200px;
+    height: 287px;
+    aspect-ratio: 1 / 1.35;
+    // border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+    // z-index: 3;
+    transition: transform 0.35s ease;
+    border-radius: 999px;
+    border: 8px solid #FFF;
+
+    // Top-left oval: official at desk
+    &.wrap--tl {
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+    }
+
+    // Center-top tall oval: handshake
+    &.wrap--ct {
+        top: 0%;
+        left: 30%;
+        z-index: 1;
+    }
+
+    // Bottom-right circle: registration desk
+    &.wrap--br {
+        bottom: 0%;
+        right: 0;
+    }
+
+    &:hover {
+        transform: scale(1.02);
+    }
+}
+
+// ── Responsive tweaks for image cluster ────────────────────
+@media (max-width: 620px) {
+ .platform-section__img {
+    width: 170px;
+    height: 257px;
+}
+
+.platform-section__img-wrap {
+    width: 170px;
+    height: 257px;
+    border: 4px;
+}
+}
+
+
+// ── Responsive tweaks for image cluster ────────────────────
+@media (max-width: 767px) {
+
+    // .wrap--tl {
+    //     width: 38%;
+    //     top: 8%;
+    //     left: 0%;
+    // }
+
+    // .platform-section__img-wrap--ct {
+    //     width: 40%;
+    //     top: 0%;
+    //     left: 28%;
+    // }
+
+    // .platform-section__img-wrap--br {
+    //     width: 36%;
+    //     bottom: 2%;
+    //     right: 0%;
+    // }
+}
+
+// ── Responsive tweaks for image cluster ────────────────────
+@media (max-width: 470px) {
+
+    .platform-section__img {
+        width: 120px;
+        height: 200px;
+    }
+
+    .platform-section__img-wrap {
+        width: 139px;
+        height: 208px;
+    }
+}
+
+.platform-section__content {
+    @apply flex flex-col gap-4;
+}
+
+// benifits section
+
+// Card sizing — drives responsive behaviour
+$card-min:   276px;
+$card-max:   276px;
+$card-gap:   24px;
+
+// ── Scroller shell ────────────────────────────────────────────
+.benefits-scroller {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+// ── Track ─────────────────────────────────────────────────────
+.benefits-track {
+  display: flex;
+  justify-content: space-around;
+  gap: $card-gap;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  // Hide scrollbar across browsers
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar { display: none; }
+
+  // Let cards size themselves, track fills remaining space
+  flex: 1;
+  min-width: 0;
+
+  // Snap to card boundaries
+  scroll-snap-type: x mandatory;
+  padding-bottom: 4px; // prevent shadow clipping
+}
+
+// ── Card ──────────────────────────────────────────────────────
+.benefit-card {
+   // Fluid width: fills container naturally; min/max cap the size
+   flex: 0 0 clamp(#{$card-min}, calc(21% - #{$card-gap}), #{$card-max});
+   scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 24px;
+    padding: 24px 20px;
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
+    cursor: default;
+    border-radius: 24px;
+    border: 1px solid #EBEBEB;
+    background: #FFF;
+    margin-bottom: 24px;
+    box-shadow: 74px 313px 90px 0 rgba(0, 0, 0, 0.00), 47px 200px 82px 0 rgba(0, 0, 0, 0.00), 27px 113px 69px 0 rgba(0, 0, 0, 0.02), 12px 50px 51px 0 rgba(0, 0, 0, 0.03), 3px 13px 28px 0 rgba(0, 0, 0, 0.03);
+
+  &:hover {
+    box-shadow: 0 8px 28px rgba(26, 123, 191, 0.14);
+    transform: translateY(-3px);
+  }
+}
+
+.benefit-card__title {
+  font-family: 'Sora', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: rgba(45, 51, 89, 1);
+  line-height: 1.35;
+  margin: 0 0 20px;
+  min-height: 2.7em; // keeps all cards same title height
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.benefit-card__icon-wrap {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  margin: 0 0 20px;
+
+  img {
+    width: auto;
+    height: auto;
+  }
+}
+
+.benefit-card__desc {
+  font-size: 0.82rem;
+  line-height: 1.65;
+  color: rgba(45, 51, 89, 1);
+  margin: 0;
+  flex: 1;
+}
+
+// ── Arrow buttons ─────────────────────────────────────────────
+.scroll-btn {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1.5px solid #fff;
+  background: #fff;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, border-color 0.2s, opacity 0.2s;
+  box-shadow: 0 2px 8px rgba(26, 123, 191, 0.1);
+  z-index: 2;
+
+  &:hover {
+    background: #000;
+    color: #fff;
+    border-color: #000;
+    box-shadow: 0 4px 14px rgba(26, 123, 191, 0.28);
+  }
+
+  &:active { transform: scale(0.94); }
+
+  // Hidden state — keep in flow but invisible so layout stays stable
+  &.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+// ── Responsive card count ─────────────────────────────────────
+// Mobile (< 640px): 1.5 cards visible (peek effect)
+@media (max-width: 639px) {
+  .benefit-card {
+    flex: 0 0 min(80vw, 260px);
+  }
+}
+
+// Tablet (640–1023px): ~2–3 cards
+@media (min-width: 640px) and (max-width: 1023px) {
+  .benefit-card {
+    flex: 0 0 clamp(200px, calc(31.33% - #{$card-gap}), 260px);
+  }
+}
+
+// Desktop (≥1024px): 4 cards default, scroller kicks in beyond that
+@media (min-width: 1024px) {
+  .benefit-card {
+    flex: 0 0 clamp(200px, calc(21% - #{$card-gap}), 260px);
+  }
+}
+
+// benifits section ends
+
+.explore-wrapper {
+    border-radius: 24px;
+    background: #0063CC;
+
+    img {
+        max-height: 235px;
+        object-fit: contain;
+        height: inherit;
+    }
+}
+
+.footerbg {
+    background: url('/assets/images/custom-template1/footer-bg.svg') no-repeat;
+    background-origin: content-box;
+    background-position: bottom;
+    padding: 0 0 0.5px 0px;
+}

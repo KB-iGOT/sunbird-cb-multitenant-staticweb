@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common'
 import { PipePublicURL } from './pipe-public-URL.pipe'
 
 @NgModule({
-  declarations: [PipePublicURL],
   imports: [
     CommonModule,
+    PipePublicURL,
   ],
   exports: [PipePublicURL],
 })

@@ -98,6 +98,7 @@ export interface TenantContent {
   internationalTraining?: TenantInternationalTraining;
   partners?: TenantPartners;
   showcasedCourses?: any;
+  layoutType?: 'default' | 'custom-template1' | string;
 }
 
 export interface TenantContact {

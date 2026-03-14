@@ -1,0 +1,224 @@
+{
+    "id": "tenant4",
+    "name": "Prime Education Institute",
+    "telemetryConfig": {
+        "pdata": {
+            "id": "sunbird-cb-staticportal",
+            "ver": "3.0.1",
+            "pid": "sunbird-cb-staticportal"
+        },
+        "env": "prod",
+        "channel": "igot",
+        "batchsize": 10,
+        "host": "",
+        "endpoint": "api/data/v1/public/telemetry",
+        "apislug": "",
+        "object": {},
+        "publicEndpoint": "apis/data/v1/public/telemetry",
+        "protectedEndpoint": "apis/protected/v8/user/telemetry"
+    },
+    "theme": {
+        "primaryColor": "#1976d2",
+        "secondaryColor": "#3F51B5",
+        "backgroundColor": "#ffffff",
+        "textColor": "#333333"
+    },
+    "branding": {
+        "logo": "/assets/images/custom-template1/Mauritius-KB-logo.svg",
+        "favicon": "favicon.ico",
+        "companyName": "Prime Education Institute"
+    },
+    "navigation": [
+       
+    ],
+    "content": {
+        "titlePill": "MAURITIUS - INDIA STRATEGIC PARTNERSHIP",
+        "title": "Empowering <span class='title-highlight'>Mauritian \n Civil Servants.</span>",
+        "subtitle": "Prime Education Institute is a leading global training and development organization dedicated to enhancing professional capabilities across sectors. Founded in 2011, our institute delivers comprehensive programs that prepare professionals for leadership roles, combining academic rigor with practical expertise. We serve over 140 countries, supporting organizational transformation through innovative training, research, and knowledge sharing initiatives.",
+        "description": "Prime Education Institute is committed to fostering excellence in professional development through comprehensive training programs, cutting-edge research initiatives, and meaningful international partnerships that drive organizational success.",
+        "loginButton": {
+            "text": "Login",
+            "link": "protected/v8/resources",
+            "icon": "person"
+        },
+        "getStartedBtn": {
+            "text": "Get Started",
+            "link": "protected/v8/resources",
+            "icon": "/assets/images/custom-template1/icons/arrow_circle_right.svg"
+        },
+        "layoutType": "custom-template1",
+        "sliderData": {
+            "styleData": {
+                "bannerMetaClass": "",
+                "bannerMeta": "visible",
+                "bannerMetaAlign": "right",
+                "navigationArrows": "visible",
+                "borderRadius": "12px",
+                "customHeight": "334px",
+                "arrowsPlacement": "",
+                "imageBorderWidth": 3,
+                "imageBorderColor": "#FFFFFF",
+                "imageBorderStyle": "solid",
+                "responsive": {
+                    "bannerMetaClass": "inline-meta",
+                    "customHeight": "232px",
+                    "bannerMetaAlign": "center",
+                    "navigationArrows": "visible",
+                    "dots": "hidden",
+                    "arrowsPlacement": "middle-inline"
+                }
+            },
+            "sliders": [
+                {
+                    "active": true,
+                    "banners": {
+                        "l": "/assets/images/custom-template1/photo1.png",
+                        "m": "/assets/images/custom-template1/photo1.png",
+                        "s": "/assets/images/custom-template1/photo1.png",
+                        "xl": "/assets/images/custom-template1/photo1.png",
+                        "xs": "/assets/images/custom-template1/photo1.png",
+                        "xxl": "/assets/images/custom-template1/photo1.png"
+                    },
+                    "redirectUrl": "",
+                    "queryParams": {},
+                    "title": ""
+                }
+            ]
+        },
+        "platformSection": {
+            "titlePill": "WHAT IS iGOT?",
+            "title": "The Digital Learning Platform for Nation Builders.",
+            "subtitle": "iGOT (Integrated Government Online Training) is a national digital learning platform designed to empower government officials with continuous, role-based learning. Built under the Karmayogi mission, it provides access to courses, competencies, discussions, and knowledge resources that help civil servants enhance their skills, stay updated, and deliver better governance to citizens.",
+            "statistics": {
+                "title": "iGOT in Action",
+                "subtitle": "A snapshot of the numbers behind the iGOT learning platform. Reflecting its scale, adoption, and impact across the ecosystem.",
+                    "stats": [
+                    {
+                        "icon": "/assets/images/custom-template1/icons/group.svg",
+                        "value": "30+ Lakh",
+                        "label": "Total Learners \nOnboarded",
+                        "id": "karmayogiOnboarded"
+                    },
+                    {
+                        "icon": "/assets/images/custom-template1/icons/auto_stories.svg",   
+                        "value": "5995",
+                        "label": "Total Content on \nthe Platform",
+                        "id": "courses"
+                    },
+                    {
+                        "icon": "/assets/images/custom-template1/icons/check_circle.svg",
+                        "value": "3846",
+                        "label": "Total Number of \nCompletions",
+                        "id": "courseProgramCompletionCount"
+                    },
+                    {
+                        "icon": "/assets/images/custom-template1/icons/group.svg",
+                        "value": "1595",
+                        "label": "Monthly Active \nUsers",    
+                        "id": "monthyActiveUsers"
+                    },
+                    {
+                        "icon": "/assets/images/custom-template1/icons/editor_choice.svg",
+                        "value": "1595",
+                        "label": "Certificates Issues \nYesterday",    
+                        "id": "courseProgramCompletionYesterdayCount"
+                    }
+                ],
+                "photoGallery": {
+                    "title": "PRIME EDUCATION INSTITUTE \nPHOTO GALLERY",
+                    "description": "Prime Education Institute brings together professionals from across the globe to collaborate, learn, and grow. Our training programs, seminars, and international partnerships showcase our commitment to delivering transformative learning experiences that prepare professionals for success in their respective fields.",
+                    "ctaText": "See More Photos",
+                    "ctaIcon": ">>>",
+                    "ctaLink": "#",
+                    "images": [
+                        {
+                            "url": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=300&h=200&fit=crop&crop=center",
+                            "alt": "Training Conference",
+                            "caption": "International Training Conference"
+                        },
+                        {
+                            "url": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=300&h=200&fit=crop&crop=center",
+                            "alt": "Group Discussion",
+                            "caption": "Collaborative Learning"
+                        },
+                        {
+                            "url": "https://images.unsplash.com/photo-1540575467063-178f50002c4b?w=300&h=200&fit=crop&crop=center",
+                            "alt": "Graduation Ceremony",
+                            "caption": "Certificate Presentation"
+                        },
+                        {
+                            "url": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=300&h=200&fit=crop&crop=center",
+                            "alt": "Research Team",
+                            "caption": "Research & Development"
+                        },
+                        {
+                            "url": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=300&h=200&fit=crop&crop=center",
+                            "alt": "Technology Training",
+                            "caption": "Professional Development Programs"
+                        }
+                    ]
+                }
+            },
+            "photo1":{
+                "url": "/assets/images/custom-template1/photo1.png",
+                "alt": "Training Conference",
+                "caption": "International Training Conference"
+            },
+            "photo2":{
+                "url": "/assets/images/custom-template1/photo2.png",
+                "alt": "Group Discussion",
+                "caption": "Collaborative Learning"
+            },
+            "photo3":{
+                "url": "/assets/images/custom-template1/photo3.png",
+                "alt": "Registration Desk",
+                "caption": "Registration Desk with Civil Servants"
+            }
+        },
+        "benefitsSection": {
+            "titlePill": "BENEFITS OF USING iGOT PLATFORM",
+            "title": "Your Next Step in Public Service Excellence Starts Here.",
+            "benefits": [
+                {
+                    "title": "Economy and Public Finance",
+                    "icon": "/assets/images/custom-template1/icons/account_balance.svg",
+                    "description": "Understanding economic systems, public finance, and financial decision-making to support sustainable growth and effective public resource management."
+                },
+                {
+                    "title": "Environment and Climate",
+                    "icon": "/assets/images/custom-template1/icons/eco.svg",
+                    "description": "Addressing climate change, sustainability, and environmental challenges through policy, innovation, and resilient development strategies."
+                },
+                {
+                    "title": "Energy and Power",
+                    "icon": "/assets/images/custom-template1/icons/computer.svg",
+                    "description": "Developing innovative solutions for renewable energy, energy efficiency, and sustainable power generation."
+                },
+                {
+                    "title": "Transportation and Logistics",
+                    "icon": "/assets/images/custom-template1/icons/policy.svg",
+                    "description": "Optimizing transportation systems, logistics, and infrastructure for efficient delivery, transport, and supply chain management."
+                }
+            ]
+        },
+        "explorePlatformSection": {
+            "title": "Explore The Platform",
+            "subtitle": "Are you a civil servant in Mauritius? take the next step in your \n professional journey today.",
+            "ctaButton": {
+                "text": "Login",
+                "link": "protected/v8/resources",
+                "icon": "person"
+            },
+            "image": "/assets/images/custom-template1/Ontheway-pana.png"
+        }
+    },
+    "footerSection": {
+        "logo": "/assets/images/custom-template1/mauritius-logo.svg",
+        "text": "© Government of Mauritius 2026. All rights reserved. Designed and Hosted by the Government Online Centre (GOC)."
+    },
+    "contact": {
+        "phone": "+1-650-555-0142",
+        "email": "contact@primeeducation.org",
+        "address": "Mountain View, CA 94043, USA"
+    }
+}

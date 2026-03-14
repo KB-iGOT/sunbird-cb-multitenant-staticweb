@@ -23,7 +23,11 @@
     "title": "TechVision Solutions - Future Forward",
     "subtitle": "Transforming businesses through innovative technology solutions",
     "description": "Leading provider of digital transformation services, helping businesses adapt to the modern digital landscape with cutting-edge solutions.",
-    "ctaButton": "Get Started",
+    "loginButton": {
+            "text": "Login",
+            "link": "protected/v8/eclogin"
+        },
+    "layoutType": "default",
     "heroImage": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop&crop=center",
     "statistics": [
       { "value": "500+", "label": "Projects Completed" },

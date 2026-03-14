@@ -24,6 +24,7 @@
     "subtitle": "Your trusted partner for financial success and wealth management",
     "description": "Premier financial services provider offering comprehensive solutions for individuals and businesses worldwide with over two decades of expertise.",
     "ctaButton": "Consult Now",
+    "layoutType": "custom-template1",
     "heroImage": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop&crop=center",
     "statistics": [
       { "value": "$50B+", "label": "Assets Under Management" },

@@ -18,6 +18,7 @@ export class InitService {
 
   baseUrl!: string
   configDetails: any
+  tenantName: string = 'tenant4'
 
   constructor(
     private http: HttpClient,
@@ -41,6 +42,7 @@ export class InitService {
       this.translate.setDefaultLang('en')
       localStorage.setItem('websiteLanguage', 'en')
     }
+    // Fetch configuration details json and then initialize the widget resolver
     await this.setConfiDetails()
     this.initializeWidgetResolver()
   }
@@ -69,12 +71,13 @@ export class InitService {
     if (configDetails) {
       this.configDetails = configDetails
       this.baseUrl = environment.baseUrl
+      this.tenantName = environment.tenantName
     } else {
       try {
         const requestData: any = {
           'request': {
               'type': 'page',
-              'subType': 'iiidem',
+              'subType': this.tenantName,
               'action': 'page-configuration',
               'component': 'multitenant-portal',
               'rootOrgId': '*',

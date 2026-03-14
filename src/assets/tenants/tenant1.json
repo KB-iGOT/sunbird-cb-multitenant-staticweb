@@ -1,264 +1,337 @@
 {
-  "id": "tenant1",
-  "name": "IIDEM",
-  "telemetryConfig": {
-    "pdata": {
-      "id": "sunbird-cb-staticportal",
-      "ver": "3.0.1",
-      "pid": "sunbird-cb-staticportal"
-    },
-    "env": "prod",
-    "channel": "igot",
-    "batchsize": 10,
-    "host": "",
-    "endpoint": "api/data/v1/public/telemetry",
-    "apislug": "",
-    "object": {},
-    "publicEndpoint": "apis/data/v1/public/telemetry",
-    "protectedEndpoint": "apis/protected/v8/user/telemetry"
-  },
-  "theme": {
-    "primaryColor": "#1976d2",
-    "secondaryColor": "#3F51B5",
-    "backgroundColor": "#ffffff",
-    "textColor": "#333333"
-  },
-  "branding": {
-    "logo": "/assets/images/IIIDEM-logo.png",
-    "favicon": "favicon.ico",
-    "companyName": "Indian International \n Institute of Democracy \n& Election Management"
-  },
-  "navigation": [
-    { "label": "Home", "url": "", "icon":"home" },
-    { "label": "+91-11-25303400", "url": "", "icon":"record_voice_over" },
-    { "label": "Language", "url": "", "icon":"translate" }
-  ],
-  "content": {
-    "title": "Indian International  \nInstitute of Democracy & \n Election Management",
-    "subtitle": "IIIDEM is the dedicated training, academic & resource arm of the Election Commission of India. Established in 2011, the Institute was conceived to train, prepare and equip election officials and other stakeholders for delivery of free, fair, credible and error-free elections cutting across boundaries and ethnicities. IIIDEM is one of the few institutions in the world which is not only involved in the Training & Capacity Building of its Electoral officials, but also catering to the requirements of Election Management Bodies (EMBs) world over.",
-    "description": "IIDEM is committed to enhancing the capacity of election management bodies and promoting democratic governance through comprehensive training programs, research initiatives, and international collaboration.",
-    "loginButton": {"text": "Login", "link": "protected/v8/eclogin"},
-    "sliderData": {
-        "styleData": {
-            "bannerMetaClass": "",
-            "bannerMeta": "visible",
-            "bannerMetaAlign": "right",
-            "navigationArrows": "visible",
-            "borderRadius": "12px",
-            "customHeight": "334px",
-            "arrowsPlacement": "",
-            "imageBorderWidth": 3,
-            "imageBorderColor": "#FFFFFF",
-            "imageBorderStyle": "solid",
-            "responsive": {
-                "bannerMetaClass": "inline-meta",
-                "customHeight": "232px",
-                "bannerMetaAlign": "center",
-                "navigationArrows": "visible",
-                "dots": "hidden",
-                "arrowsPlacement": "middle-inline"
-            }
+    "id": "tenant1",
+    "name": "Prime Education Institute",
+    "telemetryConfig": {
+        "pdata": {
+            "id": "sunbird-cb-staticportal",
+            "ver": "3.0.1",
+            "pid": "sunbird-cb-staticportal"
         },
-        "sliders": [
-            {
-                "active": true,
-                "banners": {
-                    "l": "https://portal.igotkarmayogi.gov.in/content-store/orgStore/0133783095823810560/1733319226555_Image1.png",
-                    "m": "https://portal.igotkarmayogi.gov.in/content-store/orgStore/0133783095823810560/1733319226555_Image1.png",
-                    "s": "https://portal.igotkarmayogi.gov.in/content-store/orgStore/0133783095823810560/1733319226555_Image1.png",
-                    "xl": "https://portal.igotkarmayogi.gov.in/content-store/orgStore/0133783095823810560/1733319226555_Image1.png",
-                    "xs": "https://portal.igotkarmayogi.gov.in/content-store/orgStore/0133783095823810560/1733319226555_Image1.png",
-                    "xxl": "https://portal.igotkarmayogi.gov.in/content-store/orgStore/0133783095823810560/1733319226555_Image1.png"
-                },
-                "redirectUrl": "",
-                "queryParams": {},
-                "title": ""
-            },
-            {
-                "active": true,
-                "banners": {
-                    "l": "https://portal.igotkarmayogi.gov.in/content-store/orgStore/0133783095823810560/1733319282850_Image2.png",
-                    "m": "https://portal.igotkarmayogi.gov.in/content-store/orgStore/0133783095823810560/1733319282850_Image2.png",
-                    "s": "https://portal.igotkarmayogi.gov.in/content-store/orgStore/0133783095823810560/1733319282850_Image2.png",
-                    "xl": "https://portal.igotkarmayogi.gov.in/content-store/orgStore/0133783095823810560/1733319282850_Image2.png",
-                    "xs": "https://portal.igotkarmayogi.gov.in/content-store/orgStore/0133783095823810560/1733319282850_Image2.png",
-                    "xxl": "https://portal.igotkarmayogi.gov.in/content-store/orgStore/0133783095823810560/1733319282850_Image2.png"
-                },
-                "redirectUrl": "",
-                "queryParams": {},
-                "title": ""
-            },
-            {
-                "active": true,
-                "banners": {
-                    "l": "https://portal.igotkarmayogi.gov.in/content-store/orgStore/0133783095823810560/1733319343983_Image3.png",
-                    "m": "https://portal.igotkarmayogi.gov.in/content-store/orgStore/0133783095823810560/1733319343983_Image3.png",
-                    "s": "https://portal.igotkarmayogi.gov.in/content-store/orgStore/0133783095823810560/1733319343983_Image3.png",
-                    "xl": "https://portal.igotkarmayogi.gov.in/content-store/orgStore/0133783095823810560/1733319343983_Image3.png",
-                    "xs": "https://portal.igotkarmayogi.gov.in/content-store/orgStore/0133783095823810560/1733319343983_Image3.png",
-                    "xxl": "https://portal.igotkarmayogi.gov.in/content-store/orgStore/0133783095823810560/1733319343983_Image3.png"
-                },
-                "redirectUrl": "",
-                "queryParams": {},
-                "title": ""
-            }
-        ]
+        "env": "prod",
+        "channel": "igot",
+        "batchsize": 10,
+        "host": "",
+        "endpoint": "api/data/v1/public/telemetry",
+        "apislug": "",
+        "object": {},
+        "publicEndpoint": "apis/data/v1/public/telemetry",
+        "protectedEndpoint": "apis/protected/v8/user/telemetry"
     },
-    "statistics": [
-      { "value": "13+", "label": "Years of Excellence" },
-      { "value": "1700+", "label": "National $ International Programs" },
-      { "value": "1L+", "label": "National & International Participants" },
-      { "value": "141+", "label": "Footprint of Countries" }
+    "theme": {
+        "primaryColor": "#1976d2",
+        "secondaryColor": "#3F51B5",
+        "backgroundColor": "#ffffff",
+        "textColor": "#333333"
+    },
+    "branding": {
+        "logo": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1000&h=400&fit=crop&crop=center",
+        "favicon": "favicon.ico",
+        "companyName": "Prime Education Institute"
+    },
+    "navigation": [
+        {
+            "label": "Home",
+            "url": "",
+            "icon": "home"
+        },
+        {
+            "label": "+1-650-555-0142",
+            "url": "",
+            "icon": "record_voice_over"
+        },
+        {
+            "label": "Language",
+            "url": "",
+            "icon": "translate"
+        }
     ],
-    "photoGallery": {
-      "title": "IIDEM PHOTO & \nVIDEO GALLERY",
-      "description": "IIIDEM is the dedicated training, academic & resource arm of the Election Commission of India. Established in 2011, the Institute was conceived to train, prepare and equip election officials and other stakeholders for delivery of free, fair, credible and error-free elections cutting across boundaries and ethnicities. IIIDEM is one of the few institutions in the world which is not only involved in the Training & Capacity Building of its Electoral officials, but also catering to the requirements of Election Management Bodies (EMBs) world over.",
-       "ctaText":  "Know More",
-        "ctaIcon": ">>>",
-        "ctaLink": "https://iiidem.eci.gov.in/",
-      "images": [
-        {
-          "url": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=300&h=200&fit=crop&crop=center",
-          "alt": "Training Conference",
-          "caption": "International Training Conference"
+    "content": {
+        "title": "Prime Education Institute \nAdvancing Global Learning Excellence",
+        "subtitle": "Prime Education Institute is a leading global training and development organization dedicated to enhancing professional capabilities across sectors. Founded in 2011, our institute delivers comprehensive programs that prepare professionals for leadership roles, combining academic rigor with practical expertise. We serve over 140 countries, supporting organizational transformation through innovative training, research, and knowledge sharing initiatives.",
+        "description": "Prime Education Institute is committed to fostering excellence in professional development through comprehensive training programs, cutting-edge research initiatives, and meaningful international partnerships that drive organizational success.",
+        "loginButton": {
+            "text": "Login",
+            "link": "protected/v8/eclogin"
         },
-        {
-          "url": "https://images.unsplash.com/photo-1560523160-754a9e792b35?w=300&h=200&fit=crop&crop=center",
-          "alt": "Workshop Session",
-          "caption": "Interactive Workshop Session"
+        "sliderData": {
+            "styleData": {
+                "bannerMetaClass": "",
+                "bannerMeta": "visible",
+                "bannerMetaAlign": "right",
+                "navigationArrows": "visible",
+                "borderRadius": "12px",
+                "customHeight": "334px",
+                "arrowsPlacement": "",
+                "imageBorderWidth": 3,
+                "imageBorderColor": "#FFFFFF",
+                "imageBorderStyle": "solid",
+                "responsive": {
+                    "bannerMetaClass": "inline-meta",
+                    "customHeight": "232px",
+                    "bannerMetaAlign": "center",
+                    "navigationArrows": "visible",
+                    "dots": "hidden",
+                    "arrowsPlacement": "middle-inline"
+                }
+            },
+            "sliders": [
+                {
+                    "active": true,
+                    "banners": {
+                        "l": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1000&h=400&fit=crop&crop=center",
+                        "m": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=400&fit=crop&crop=center",
+                        "s": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=300&fit=crop&crop=center",
+                        "xl": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=400&fit=crop&crop=center",
+                        "xs": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=300&fit=crop&crop=center",
+                        "xxl": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1400&h=500&fit=crop&crop=center"
+                    },
+                    "redirectUrl": "",
+                    "queryParams": {},
+                    "title": ""
+                },
+                {
+                    "active": true,
+                    "banners": {
+                        "l": "https://images.unsplash.com/photo-1540575467063-178f50002c4b?w=1000&h=400&fit=crop&crop=center",
+                        "m": "https://images.unsplash.com/photo-1540575467063-178f50002c4b?w=800&h=400&fit=crop&crop=center",
+                        "s": "https://images.unsplash.com/photo-1540575467063-178f50002c4b?w=600&h=300&fit=crop&crop=center",
+                        "xl": "https://images.unsplash.com/photo-1540575467063-178f50002c4b?w=1200&h=400&fit=crop&crop=center",
+                        "xs": "https://images.unsplash.com/photo-1540575467063-178f50002c4b?w=500&h=300&fit=crop&crop=center",
+                        "xxl": "https://images.unsplash.com/photo-1540575467063-178f50002c4b?w=1400&h=500&fit=crop&crop=center"
+                    },
+                    "redirectUrl": "",
+                    "queryParams": {},
+                    "title": ""
+                }
+            ]
         },
-        {
-          "url": "https://images.unsplash.com/photo-1551818255-e6e10975bc17?w=300&h=200&fit=crop&crop=center",
-          "alt": "Group Discussion",
-          "caption": "Collaborative Learning"
+        "statistics": [
+            {
+                "value": "13+",
+                "label": "Years of Excellence"
+            },
+            {
+                "value": "1700+",
+                "label": "National & International Programs"
+            },
+            {
+                "value": "1L+",
+                "label": "National & International Participants"
+            },
+            {
+                "value": "141+",
+                "label": "Footprint of Countries"
+            }
+        ],
+        "photoGallery": {
+            "title": "PRIME EDUCATION INSTITUTE \nPHOTO GALLERY",
+            "description": "Prime Education Institute brings together professionals from across the globe to collaborate, learn, and grow. Our training programs, seminars, and international partnerships showcase our commitment to delivering transformative learning experiences that prepare professionals for success in their respective fields.",
+            "ctaText": "See More Photos",
+            "ctaIcon": ">>>",
+            "ctaLink": "#",
+            "images": [
+                {
+                    "url": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=300&h=200&fit=crop&crop=center",
+                    "alt": "Training Conference",
+                    "caption": "International Training Conference"
+                },
+                {
+                    "url": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=300&h=200&fit=crop&crop=center",
+                    "alt": "Group Discussion",
+                    "caption": "Collaborative Learning"
+                },
+                {
+                    "url": "https://images.unsplash.com/photo-1540575467063-178f50002c4b?w=300&h=200&fit=crop&crop=center",
+                    "alt": "Graduation Ceremony",
+                    "caption": "Certificate Presentation"
+                },
+                {
+                    "url": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=300&h=200&fit=crop&crop=center",
+                    "alt": "Research Team",
+                    "caption": "Research & Development"
+                },
+                {
+                    "url": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=300&h=200&fit=crop&crop=center",
+                    "alt": "Technology Training",
+                    "caption": "Professional Development Programs"
+                }
+            ]
         },
-        {
-          "url": "https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=300&h=200&fit=crop&crop=center",
-          "alt": "Graduation Ceremony",
-          "caption": "Certificate Presentation"
+        "trainingPrograms": {
+            "title": "PRIME EDUCATION INSTITUTE'S TRAINING PROGRAMS AND \nACADEMIC COURSES",
+            "subtitle": "Prime Education Institute offers comprehensive training and capacity building programs designed to meet the evolving needs of organizations and professionals worldwide. Our programs combine theoretical knowledge with practical expertise, delivered by industry leaders and experienced instructors.",
+            "programs": [
+                {
+                    "icon": "/assets/images/default-template/domestic-training-icon.svg",
+                    "title": "Professional Development Programs",
+                    "description": "Comprehensive training programs designed for organizational leaders and professionals seeking to enhance their strategic capabilities, management skills, and industry expertise.",
+                    "features": [],
+                    "ctaText": "Learn More",
+                    "ctaIcon": ">>>",
+                    "ctaLink": "#"
+                },
+                {
+                    "icon": "/assets/images/default-template/internation-training-icon.svg",
+                    "title": "Global Partnership Programs",
+                    "description": "International capacity development initiatives that connect professionals across 140+ countries to share best practices, foster innovation, and build sustainable solutions for organizational challenges.",
+                    "features": [],
+                    "ctaText": "Learn More",
+                    "ctaIcon": ">>>",
+                    "ctaLink": "#"
+                },
+                {
+                    "icon": "/assets/images/default-template/academic-courses-icon.svg",
+                    "title": "Advanced Certification Programs",
+                    "description": "Specialized postgraduate and certification programs developed through partnerships with leading academic institutions to deliver cutting-edge curricula in emerging disciplines and professional practices.",
+                    "features": [],
+                    "ctaText": "Learn More",
+                    "ctaIcon": ">>>",
+                    "ctaLink": "#"
+                }
+            ]
         },
-        {
-          "url": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=300&h=200&fit=crop&crop=center",
-          "alt": "Research Team",
-          "caption": "Research & Development"
+        "internationalTraining": {
+            "title": "PRIME EDUCATION INSTITUTE'S GLOBAL REACH \nFOOTPRINT OF <span class='country-count-gradient'>141 COUNTRIES</span>",
+            "countries": [
+                {
+                    "name": "Oceania",
+                    "count": "9",
+                    "color": "#846FFF"
+                },
+                {
+                    "name": "South America",
+                    "count": "12",
+                    "color": "#F68BB4"
+                },
+                {
+                    "name": "Europe",
+                    "count": "15",
+                    "color": "#EED77A"
+                },
+                {
+                    "name": "North & Central America",
+                    "count": "18",
+                    "color": "#F58121"
+                },
+                {
+                    "name": "Asia",
+                    "count": "41",
+                    "color": "#96FFC2"
+                },
+                {
+                    "name": "Africa",
+                    "count": "46",
+                    "color": "#F7C0B8"
+                }
+            ],
+            "mapImage": "/assets/images/default-template/maps.svg"
         },
-        {
-          "url": "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=300&h=200&fit=crop&crop=center",
-          "alt": "Technology Training",
-          "caption": "Digital Election Systems"
+        "partners": {
+            "title": "COLLABORATION & PARTNERSHIPS WITH SOME INTERNATIONAL \n ORGANIZATIONS & INSTITUTIONS",
+            "logos": [
+                {
+                    "name": "AII",
+                    "logo": "/assets/images/org1.png"
+                },
+                {
+                    "name": "AWEB",
+                    "logo": "/assets/images/org2.png"
+                },
+                {
+                    "name": "BMSTEC",
+                    "logo": "/assets/images/org3.png"
+                },
+                {
+                    "name": "ICIE",
+                    "logo": "/assets/images/org4.png"
+                },
+                {
+                    "name": "Commonwealth",
+                    "logo": "/assets/images/org5.png"
+                },
+                {
+                    "name": "FEMB",
+                    "logo": "/assets/images/org6.png"
+                },
+                {
+                    "name": "IDEA",
+                    "logo": "/assets/images/org7.png"
+                },
+                {
+                    "name": "IFES",
+                    "logo": "/assets/images/org8.png"
+                },
+                {
+                    "name": "ITEC",
+                    "logo": "/assets/images/org9.png"
+                },
+                {
+                    "name": "SAARC",
+                    "logo": "/assets/images/org10.png"
+                },
+                {
+                    "name": "UNDP",
+                    "logo": "/assets/images/org11.png"
+                },
+                {
+                    "name": "AAEA",
+                    "logo": "/assets/images/org12.png"
+                }
+            ]
+        },
+        "showcasedCourses": {
+            "title": "Showcased Courses",
+            "stripWidgetData": {
+                "strips": [
+                    {
+                        "active": true,
+                        "key": "featuredContents",
+                        "logo": "school",
+                        "title": " ",
+                        "type": "learningContent",
+                        "disableTranslate": true,
+                        "stripTitleLink": {
+                            "link": "",
+                            "icon": ""
+                        },
+                        "sliderConfig": {
+                            "showNavs": true,
+                            "showDots": true,
+                            "maxWidgets": 100,
+                            "showNavsSpacing": true,
+                            "justifyCenter": true
+                        },
+                        "stripBackground": "",
+                        "titleDescription": "For you",
+                        "stripConfig": {
+                            "cardSubType": "card-portrait-lib",
+                            "hideShowAll": true
+                        },
+                        "viewMoreUrl": {},
+                        "hideViewMoreUrl": true,
+                        "loader": true,
+                        "loaderConfig": {
+                            "cardSubType": "card-portrait-lib-skeleton"
+                        },
+                        "tabs": [],
+                        "filters": [],
+                        "stripRequestType": "get",
+                        "stripRequestFor": "search",
+                        "onTabClickRequest": false,
+                        "request": {
+                            "apiUrl": "/api/playList/v3/read/01379305664500531251New_FEATURED_COURSES/01379305664500531251",
+                            "playlistRead": {
+                                "type": "ORG_FEATURED_COURSES"
+                            }
+                        }
+                    }
+                ]
+            }
         }
-      ]
     },
-    "trainingPrograms": {
-      "title": "IIDEM'S TRAINING PROGRAMS AND \nACADEMIC COURSES",
-      "subtitle": "IIIDEM is one of the few institutions in the world which is not only involved in the Training & Capacity Building Programs for its Electoral officials, but also catering to the requirements of Election Management Bodies (EMBs) world over.",
-      "programs": [
-        {
-          "icon": "/assets/images/domestic-training-icon.svg",
-          "title": "Domestic Training Programs",
-          "description": "IIIDEM caters to the training needs of the core election personnel who are involved in the conduct of Presidential & Vice-Presidential Elections, Elections to Rajya Sabha Elections & State Legislative Councils & General Elections.",
-          "features": [
-
-          ],
-          "ctaText":  "Know More",
-          "ctaIcon": ">>>",
-          "ctaLink": "https://iiidem.eci.gov.in/"
-        },
-        {
-          "icon": "/assets/images/internation-training-icon.svg",
-          "title": "International Training Programs",
-          "description": "IIDEM conducts Capacity Development Programs for Officers of other Election Management Bodies on various electoral thematic like Election Planning, Election management, Voter Education.",
-          "features": [
-          ],
-         "ctaText":  "Know More",
-          "ctaIcon": ">>>",
-          "ctaLink": "https://iiidem.eci.gov.in/"
-        },
-        {
-          "icon": "/assets/images/academic-courses-icon.svg",
-          "title": "Academic Courses at IIIDEM",
-          "description": "A specialized Master’s Program in International Electoral Management and Practices (MIEMP) has been developed by ECI through IIIDEM in collaboration with Tata Institute of Social Sciences (TISS), Mumbai.",
-          "features": [
-          ],
-          "ctaText":  "Know More",
-          "ctaIcon": ">>>",
-          "ctaLink": "https://iiidem.eci.gov.in/"
-        }
-      ]
-    },
-    "internationalTraining": {
-      "title": "IIDEM'S INTERNATIONAL TRAINING \nFOOTPRINT OF <span class='country-count-gradient'>141 COUNTRIES</span>",
-      "countries": [
-        { "name": "Oceania", "count": "9", "color": "#846FFF" },
-        { "name": "South America", "count": "12", "color": "#F68BB4" },
-        { "name": "Europe", "count": "15", "color": "#EED77A" },
-        { "name": "North & Central America", "count": "18", "color": "#F58121" },
-        { "name": "Asia", "count": "41", "color": "#96FFC2" },
-        { "name": "Africa", "count": "46", "color": "#F7C0B8" }
-      ],
-      "mapImage": "/assets/images/maps.svg"
-    },
-    "partners": {
-      "title": "COLLABORATION & PARTNERSHIPS WITH SOME INTERNATIONAL \nORGANIZATIONS & INSTITUTION",
-      "logos": [
-        { "name": "UN", "logo": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=100&h=60&fit=crop&crop=center" },
-        { "name": "Commonwealth", "logo": "https://images.unsplash.com/photo-1563986768711-ca384817b6f1?w=100&h=60&fit=crop&crop=center" },
-        { "name": "European Union", "logo": "https://images.unsplash.com/photo-1563986768494-4df6bc04d3cb?w=100&h=60&fit=crop&crop=center" },
-        { "name": "USAID", "logo": "https://images.unsplash.com/photo-1563986768284-9c8bccd4b5d8?w=100&h=60&fit=crop&crop=center" },
-        { "name": "UNDP", "logo": "https://images.unsplash.com/photo-1563986768358-4d8bccd4b5ea?w=100&h=60&fit=crop&crop=center" },
-        { "name": "IFES", "logo": "https://images.unsplash.com/photo-1563986768432-9c8bccd4b5fb?w=100&h=60&fit=crop&crop=center" }
-      ]
-    },
-    "showcasedCourses": {
-      "title": "Showcased Courses",
-      "stripWidgetData": {
-        "strips": [{
-  "active": true,
-  "key": "featuredContents",
-  "logo": "school",
-  "title": " ",
-  "type": "learningContent",
-  "disableTranslate": true,
-  "stripTitleLink": {
-    "link": "",
-    "icon": ""
-  },
-  "sliderConfig": {
-    "showNavs": true,
-    "showDots": true,
-    "maxWidgets": 100,
-    "showNavsSpacing": true
-  },
-  "stripBackground": "",
-  "titleDescription": "For you",
-  "stripConfig": {
-    "cardSubType": "card-portrait-lib",
-    "hideShowAll": true
-  },
-  "viewMoreUrl": {},
-  "hideViewMoreUrl": true,
-  "loader": true,
-  "loaderConfig": {
-    "cardSubType": "card-portrait-lib-skeleton"
-  },
-  "tabs": [],
-  "filters": [],
-  "stripRequestType": "get",
-  "stripRequestFor": "search",
-  "onTabClickRequest": false,
-  "request": {
-    "apiUrl": "/api/playList/v2/read/01379305664500531251MDO_GROUP_A_ANDAMAN/01379305664500531251",
-    "playlistRead": {
-      "type": "ORG_FEATURED_COURSES"
+    "contact": {
+        "phone": "+1-650-555-0142",
+        "email": "contact@primeeducation.org",
+        "address": "Mountain View, CA 94043, USA"
     }
-  }
-}]
-      }
-    }
-  },
-  "contact": {
-    "phone": "+91-11-IIDEM-100",
-    "email": "info@iidem.gov.in",
-    "address": "New Delhi, India"
-  }
 }
