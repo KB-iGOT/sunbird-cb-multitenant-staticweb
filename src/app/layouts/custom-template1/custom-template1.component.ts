@@ -100,7 +100,7 @@ export class CustomTemplate1Component implements OnInit, AfterViewInit, OnDestro
     loadStatValueFromAPI(): void {
         this.http.get(`/api/stats`).pipe(
             map((response: any) => {
-                return response.stats || response.data || response;
+                return response?.result?.response || response?.result?.response || {};
             }),
             catchError(error => {
                 console.error('Error loading stats from API:', error);

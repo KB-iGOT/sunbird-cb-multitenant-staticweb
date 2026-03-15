@@ -1,6 +1,6 @@
 {
     "id": "tenant4",
-    "name": "Prime Education Institute",
+    "name": "Mauritius",
     "telemetryConfig": {
         "pdata": {
             "id": "sunbird-cb-staticportal",
@@ -26,7 +26,7 @@
     "branding": {
         "logo": "/assets/images/custom-template1/Mauritius-KB-logo.svg",
         "favicon": "favicon.ico",
-        "companyName": "Prime Education Institute"
+        "companyName": "Mauritius"
     },
     "navigation": [
        
@@ -34,8 +34,8 @@
     "content": {
         "titlePill": "MAURITIUS - INDIA STRATEGIC PARTNERSHIP",
         "title": "Empowering <span class='title-highlight'>Mauritian \n Civil Servants.</span>",
-        "subtitle": "Prime Education Institute is a leading global training and development organization dedicated to enhancing professional capabilities across sectors. Founded in 2011, our institute delivers comprehensive programs that prepare professionals for leadership roles, combining academic rigor with practical expertise. We serve over 140 countries, supporting organizational transformation through innovative training, research, and knowledge sharing initiatives.",
-        "description": "Prime Education Institute is committed to fostering excellence in professional development through comprehensive training programs, cutting-edge research initiatives, and meaningful international partnerships that drive organizational success.",
+        "subtitle": "A world class platform designed to build a future-ready workflow through the iGOT Karmayogi initiative Transforming governance through continuous learning.",
+        "description": "",
         "loginButton": {
             "text": "Login",
             "link": "protected/v8/resources",
@@ -123,41 +123,7 @@
                         "label": "Certificates Issues \nYesterday",    
                         "id": "courseProgramCompletionYesterdayCount"
                     }
-                ],
-                "photoGallery": {
-                    "title": "PRIME EDUCATION INSTITUTE \nPHOTO GALLERY",
-                    "description": "Prime Education Institute brings together professionals from across the globe to collaborate, learn, and grow. Our training programs, seminars, and international partnerships showcase our commitment to delivering transformative learning experiences that prepare professionals for success in their respective fields.",
-                    "ctaText": "See More Photos",
-                    "ctaIcon": ">>>",
-                    "ctaLink": "#",
-                    "images": [
-                        {
-                            "url": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=300&h=200&fit=crop&crop=center",
-                            "alt": "Training Conference",
-                            "caption": "International Training Conference"
-                        },
-                        {
-                            "url": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=300&h=200&fit=crop&crop=center",
-                            "alt": "Group Discussion",
-                            "caption": "Collaborative Learning"
-                        },
-                        {
-                            "url": "https://images.unsplash.com/photo-1540575467063-178f50002c4b?w=300&h=200&fit=crop&crop=center",
-                            "alt": "Graduation Ceremony",
-                            "caption": "Certificate Presentation"
-                        },
-                        {
-                            "url": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=300&h=200&fit=crop&crop=center",
-                            "alt": "Research Team",
-                            "caption": "Research & Development"
-                        },
-                        {
-                            "url": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=300&h=200&fit=crop&crop=center",
-                            "alt": "Technology Training",
-                            "caption": "Professional Development Programs"
-                        }
-                    ]
-                }
+                ]
             },
             "photo1":{
                 "url": "/assets/images/custom-template1/photo1.png",
