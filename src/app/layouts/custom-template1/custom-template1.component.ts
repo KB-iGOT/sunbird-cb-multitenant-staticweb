@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 import { catchError, map } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 export interface BenefitCard {
     title: string;
@@ -30,12 +31,14 @@ export class CustomTemplate1Component implements OnInit, AfterViewInit, OnDestro
     canScrollLeft = false;
     canScrollRight = false;
     stats: any = {};
+    baseURl: string = '';
 
     private resizeObserver!: ResizeObserver;
 
     constructor(private http: HttpClient) { }
 
     ngOnInit(): void {
+        this.baseURl = environment.portalURL;
         this.loadStatsFromJSON();
         // this.loadStatValueFromAPI();
         console.log('Custom Template 1 initialized for tenant:', this.tenant?.branding?.companyName);
