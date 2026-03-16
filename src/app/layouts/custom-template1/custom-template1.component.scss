@@ -86,6 +86,10 @@
     background-color: #1B2133;
 }
 
+.client-bg {
+    background: #2d2d2d
+}
+
 .translate-z-0 {
     transform: translateZ(0px);
 }
@@ -113,6 +117,10 @@
     gap: 10px;
     border-radius: 38px;
     backdrop-filter: blur(6px);
+    font-size: 14px;
+    @screen lg {
+        font-size: 16px;
+    }
 
     &.red {
         background: rgba(208, 28, 31, 0.64);
@@ -154,12 +162,9 @@
 .platform-section__container {
     @apply grid grid-cols-1 gap-10 items-center max-w-6xl mx-auto;
 
-    // Two-column layout from md upward
-    @screen md {
-        @apply grid-cols-2 gap-12;
-    }
-
+    // Two-column layout from lg upward
     @screen lg {
+        @apply grid-cols-2 gap-12;
         @apply gap-16;
     }
 }
@@ -295,6 +300,10 @@ $card-gap:   24px;
   display: flex;
   align-items: center;
   gap: 8px;
+
+  @media (max-width: 639px) {
+    margin: 0 -16px;
+  }
 }
 
 // ── Track ─────────────────────────────────────────────────────
@@ -329,16 +338,17 @@ $card-gap:   24px;
     text-align: center;
     gap: 24px;
     padding: 24px 20px;
-    transition: box-shadow 0.25s ease, transform 0.25s ease;
+    transition: box-shadow 0.5s ease-in-out, transform 0.25s ease;
     cursor: default;
     border-radius: 24px;
     border: 1px solid #EBEBEB;
     background: #FFF;
     margin-bottom: 24px;
-    box-shadow: 74px 313px 90px 0 rgba(0, 0, 0, 0.00), 47px 200px 82px 0 rgba(0, 0, 0, 0.00), 27px 113px 69px 0 rgba(0, 0, 0, 0.02), 12px 50px 51px 0 rgba(0, 0, 0, 0.03), 3px 13px 28px 0 rgba(0, 0, 0, 0.03);
+    // box-shadow: 74px 313px 90px 0 rgba(0, 0, 0, 0.00), 47px 200px 82px 0 rgba(0, 0, 0, 0.00), 27px 113px 69px 0 rgba(0, 0, 0, 0.02), 12px 50px 51px 0 rgba(0, 0, 0, 0.03), 3px 13px 28px 0 rgba(0, 0, 0, 0.03);
+    box-shadow: 3px 17px 20px 0 rgba(0, 0, 0, 0), 47px 200px 12px 0 rgba(0, 0, 0, 0), 3px 3px 9px 0 rgba(0, 0, 0, 0.02), 1px 8px 9px 0 rgba(0, 0, 0, 0.03), 0px 8px 9px 0 rgba(0, 0, 0, 0.03);
 
   &:hover {
-    box-shadow: 0 8px 28px rgba(26, 123, 191, 0.14);
+    box-shadow: 3px 5px 14px rgba(26, 123, 191, 0.14);
     transform: translateY(-3px);
   }
 }
@@ -412,28 +422,6 @@ $card-gap:   24px;
   }
 }
 
-// ── Responsive card count ─────────────────────────────────────
-// Mobile (< 640px): 1.5 cards visible (peek effect)
-@media (max-width: 639px) {
-  .benefit-card {
-    flex: 0 0 min(80vw, 260px);
-  }
-}
-
-// Tablet (640–1023px): ~2–3 cards
-@media (min-width: 640px) and (max-width: 1023px) {
-  .benefit-card {
-    flex: 0 0 clamp(200px, calc(31.33% - #{$card-gap}), 260px);
-  }
-}
-
-// Desktop (≥1024px): 4 cards default, scroller kicks in beyond that
-@media (min-width: 1024px) {
-  .benefit-card {
-    flex: 0 0 clamp(200px, calc(21% - #{$card-gap}), 260px);
-  }
-}
-
 // benifits section ends
 
 .explore-wrapper {
@@ -441,9 +429,9 @@ $card-gap:   24px;
     background: #0063CC;
 
     img {
-        max-height: 235px;
+        // max-height: 235px;
         object-fit: contain;
-        height: inherit;
+        height: 100%;
     }
 }
 
@@ -452,4 +440,68 @@ $card-gap:   24px;
     background-origin: content-box;
     background-position: bottom;
     padding: 0 0 0.5px 0px;
+}
+
+// ── Responsive card count ─────────────────────────────────────
+// Mobile (< 640px): 1.5 cards visible (peek effect)
+@media (max-width: 639px) {
+  .benefit-card {
+    flex: 0 0 min(80vw, 200px);
+    box-shadow: none;
+  }
+  .explore-img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+// Tablet (640–1023px): ~2–3 cards
+// @media (min-width: 640px) and (max-width: 1023px) {
+//   .benefit-card {
+//     flex: 0 0 clamp(200px, calc(44.33% - #{$card-gap}), 260px);
+//   }
+// }
+
+//Small Tablet (640–768px): ~2–3 cards
+@media (min-width: 640px) and (max-width: 768px) {
+  .banner-image-solo {
+    background: #2d2d2d !important;
+    // object-fit: contain;
+    width: 60% !important;
+  } 
+}
+
+// Tablet (640–1180px): ~2–3 cards
+@media (min-width: 640px) and (max-width: 1180px) {
+  .benefit-card {
+    flex: 0 0 clamp(200px, calc(44.33% - #{$card-gap}), 260px);
+  }
+  .explore-img {
+    object-fit: cover;
+    height: 100%;
+    width: 315px;
+  }
+  .platform-section__images {
+    position: relative;
+    width: 75%;
+    min-height: 380px;
+    margin: 0 auto;
+  }
+
+}
+
+@media (min-width: 1024px) and (max-width: 1180px) {
+    .platform-section__images {
+        position: relative;
+        width: 100%;
+        min-height: 380px;
+        margin: 0 auto;
+      }
+}
+
+// Desktop (≥1024px): 4 cards default, scroller kicks in beyond that
+@media (min-width: 1024px) {
+  .benefit-card {
+    flex: 0 0 clamp(200px, calc(21% - #{$card-gap}), 260px);
+  }
 }
