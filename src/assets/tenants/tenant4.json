@@ -25,6 +25,7 @@
     },
     "branding": {
         "logo": "/assets/images/custom-template1/Mauritius-KB-logo.svg",
+        "mSitelogo": "/assets/images/custom-template1/M-site_Logo.svg",
         "favicon": "favicon.ico",
         "companyName": "Mauritius"
     },
@@ -47,6 +48,82 @@
             "icon": "/assets/images/custom-template1/icons/arrow_circle_right.svg"
         },
         "layoutType": "custom-template1",
+        "bgSliderData" : {
+             "styleData": {
+                "bannerMetaClass": "",
+                "bannerMeta": "hidden",
+                "dots": "visible",
+                "bannerMetaAlign": "center",
+                "navigationArrows": "hiddden",
+                "borderRadius": "0px",
+                "arrowsPlacement": "",
+                "responsive": {
+                    "bannerMetaClass": "inline-meta",
+                    "bannerMetaAlign": "center",
+                    "navigationArrows": "hidden",
+                    "dots": "hidden",
+                    "arrowsPlacement": "middle-inline"
+                }
+            },
+            "sliders": [
+                {
+                    "active": true,
+                    "banners": {
+                        "l": "/assets/images/custom-template1/background1.png",
+                        "m": "/assets/images/custom-template1/background1.png",
+                        "s": "/assets/images/custom-template1/background1.png",
+                        "xl": "/assets/images/custom-template1/background1.png",
+                        "xs": "/assets/images/custom-template1/background1.png",
+                        "xxl": "/assets/images/custom-template1/background1.png"
+                    },
+                    "redirectUrl": "",
+                    "queryParams": {},
+                    "title": ""
+                },
+                {
+                    "active": true,
+                    "banners": {
+                        "l": "/assets/images/custom-template1/background2.png",
+                        "m": "/assets/images/custom-template1/background2.png",
+                        "s": "/assets/images/custom-template1/background2.png",
+                        "xl": "/assets/images/custom-template1/background2.png",
+                        "xs": "/assets/images/custom-template1/background2.png",
+                        "xxl": "/assets/images/custom-template1/background2.png"
+                    },
+                    "redirectUrl": "",
+                    "queryParams": {},
+                    "title": ""
+                },
+                {
+                    "active": true,
+                    "banners": {
+                        "l": "/assets/images/custom-template1/background3.png",
+                        "m": "/assets/images/custom-template1/background3.png",
+                        "s": "/assets/images/custom-template1/background3.png",
+                        "xl": "/assets/images/custom-template1/background3.png",
+                        "xs": "/assets/images/custom-template1/background3.png",
+                        "xxl": "/assets/images/custom-template1/background3.png"
+                    },
+                    "redirectUrl": "",
+                    "queryParams": {},
+                    "title": ""
+                },
+                {
+                    "active": true,
+                    "banners": {
+                        "l": "/assets/images/custom-template1/background4.png",
+                        "m": "/assets/images/custom-template1/background4.png",
+                        "s": "/assets/images/custom-template1/background4.png",
+                        "xl": "/assets/images/custom-template1/background4.png",
+                        "xs": "/assets/images/custom-template1/background4.png",
+                        "xxl": "/assets/images/custom-template1/background4.png"
+                    },
+                    "redirectUrl": "",
+                    "queryParams": {},
+                    "title": ""
+                }
+            ]
+        },
         "sliderData": {
             "styleData": {
                 "bannerMetaClass": "",

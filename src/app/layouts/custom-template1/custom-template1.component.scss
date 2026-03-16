@@ -85,6 +85,9 @@
     background: linear-gradient(225deg, #313C59 0%, #161C2D 100%);
     background-color: #1B2133;
 }
+.black-gradient-bg-2 {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.62) 0%, rgba(0, 0, 0, 0.62) 100%);
+}
 
 .client-bg {
     background: #2d2d2d
@@ -96,6 +99,18 @@
 
 .translate-z-1 {
     transform: translateZ(1px);
+}
+
+.bg-slider,
+.content-wrapper{
+    grid-area: 1 / 1;
+}
+
+.content-wrapper{
+    grid-area: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .nav-link .mat-icon {
@@ -504,4 +519,23 @@ $card-gap:   24px;
   .benefit-card {
     flex: 0 0 clamp(200px, calc(21% - #{$card-gap}), 260px);
   }
+}
+
+// slider overrides
+.bgSlider-box {
+     height: 100% !important;
+    .banner-container {
+        padding-bottom: 0 !important;
+    }
+    .banner-meta .dots-container .dot.active{
+        background-color: #fff !important;
+    }
+    
+    .navigation {
+        display: none !important;
+    }
+    
+    .slider .slider-box, sb-uic-sliders, .banner-container {
+        height: 100% !important;
+    }
 }

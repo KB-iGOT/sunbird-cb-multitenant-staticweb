@@ -13,6 +13,7 @@ import {
 import { catchError, map } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { ApisService } from 'src/app/services/apis.service';
 
 export interface BenefitCard {
     title: string;
@@ -35,12 +36,15 @@ export class CustomTemplate1Component implements OnInit, AfterViewInit, OnDestro
 
     private resizeObserver!: ResizeObserver;
 
-    constructor(private http: HttpClient) { }
+    constructor(
+        private http: HttpClient,
+        private apisService: ApisService
+    ) { }
 
     ngOnInit(): void {
         this.baseURl = environment.portalURL;
         this.loadStatsFromJSON();
-        // this.loadStatValueFromAPI();
+        this.loadStatValueFromAPI();
         console.log('Custom Template 1 initialized for tenant:', this.tenant?.branding?.companyName);
     }
 
@@ -101,15 +105,7 @@ export class CustomTemplate1Component implements OnInit, AfterViewInit, OnDestro
     }
 
     loadStatValueFromAPI(): void {
-        this.http.get(`/api/stats`).pipe(
-            map((response: any) => {
-                return response?.result?.response || response?.result?.response || {};
-            }),
-            catchError(error => {
-                console.error('Error loading stats from API:', error);
-                return of({});
-            })
-        ).subscribe((stats: any) => {
+        this.apisService.getConsumtionStatus().subscribe((stats: any) => {
             this.stats = stats || {};
         });
     }
