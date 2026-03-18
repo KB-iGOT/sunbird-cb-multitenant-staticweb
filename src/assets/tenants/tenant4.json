@@ -35,7 +35,7 @@
     "content": {
         "titlePill": "MAURITIUS - INDIA STRATEGIC PARTNERSHIP",
         "title": "Empowering <span class='title-highlight'>Mauritian \n Civil Servants.</span>",
-        "subtitle": "A world class platform designed to build a future-ready workflow through the iGOT Karmayogi initiative Transforming governance through continuous learning.",
+        "subtitle": "A world-class digital learning platform built through the India–Mauritius partnership, enabling continuous capacity building through the iGOT Karmayogi platform - a Digital Public Infrastructure",
         "description": "",
         "loginButton": {
             "text": "Login",
@@ -69,12 +69,12 @@
                 {
                     "active": true,
                     "banners": {
-                        "l": "/assets/images/custom-template1/background1.png",
-                        "m": "/assets/images/custom-template1/background1.png",
-                        "s": "/assets/images/custom-template1/background1.png",
-                        "xl": "/assets/images/custom-template1/background1.png",
-                        "xs": "/assets/images/custom-template1/background1.png",
-                        "xxl": "/assets/images/custom-template1/background1.png"
+                        "l": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453036674775449611/artifact/do_11453036674775449611_1773726639883_background1.png",
+                        "m": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453036674775449611/artifact/do_11453036674775449611_1773726639883_background1.png",
+                        "s": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453036674775449611/artifact/do_11453036674775449611_1773726639883_background1.png",
+                        "xl": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453036674775449611/artifact/do_11453036674775449611_1773726639883_background1.png",
+                        "xs": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453036674775449611/artifact/do_11453036674775449611_1773726639883_background1.png",
+                        "xxl": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453036674775449611/artifact/do_11453036674775449611_1773726639883_background1.png"
                     },
                     "redirectUrl": "",
                     "queryParams": {},
@@ -83,12 +83,12 @@
                 {
                     "active": true,
                     "banners": {
-                        "l": "/assets/images/custom-template1/background2.png",
-                        "m": "/assets/images/custom-template1/background2.png",
-                        "s": "/assets/images/custom-template1/background2.png",
-                        "xl": "/assets/images/custom-template1/background2.png",
-                        "xs": "/assets/images/custom-template1/background2.png",
-                        "xxl": "/assets/images/custom-template1/background2.png"
+                        "l": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453037081789235212/artifact/do_11453037081789235212_1773726921299_background2.png",
+                        "m": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453037081789235212/artifact/do_11453037081789235212_1773726921299_background2.png",
+                        "s": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453037081789235212/artifact/do_11453037081789235212_1773726921299_background2.png",
+                        "xl": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453037081789235212/artifact/do_11453037081789235212_1773726921299_background2.png",
+                        "xs": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453037081789235212/artifact/do_11453037081789235212_1773726921299_background2.png",
+                        "xxl": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453037081789235212/artifact/do_11453037081789235212_1773726921299_background2.png"
                     },
                     "redirectUrl": "",
                     "queryParams": {},
@@ -97,12 +97,12 @@
                 {
                     "active": true,
                     "banners": {
-                        "l": "/assets/images/custom-template1/background3.png",
-                        "m": "/assets/images/custom-template1/background3.png",
-                        "s": "/assets/images/custom-template1/background3.png",
-                        "xl": "/assets/images/custom-template1/background3.png",
-                        "xs": "/assets/images/custom-template1/background3.png",
-                        "xxl": "/assets/images/custom-template1/background3.png"
+                        "l": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453037107175424013/artifact/do_11453037107175424013_1773726948472_background3.png",
+                        "m": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453037107175424013/artifact/do_11453037107175424013_1773726948472_background3.png",
+                        "s": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453037107175424013/artifact/do_11453037107175424013_1773726948472_background3.png",
+                        "xl": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453037107175424013/artifact/do_11453037107175424013_1773726948472_background3.png",
+                        "xs": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453037107175424013/artifact/do_11453037107175424013_1773726948472_background3.png",
+                        "xxl": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453037107175424013/artifact/do_11453037107175424013_1773726948472_background3.png"
                     },
                     "redirectUrl": "",
                     "queryParams": {},
@@ -111,12 +111,12 @@
                 {
                     "active": true,
                     "banners": {
-                        "l": "/assets/images/custom-template1/background4.png",
-                        "m": "/assets/images/custom-template1/background4.png",
-                        "s": "/assets/images/custom-template1/background4.png",
-                        "xl": "/assets/images/custom-template1/background4.png",
-                        "xs": "/assets/images/custom-template1/background4.png",
-                        "xxl": "/assets/images/custom-template1/background4.png"
+                        "l": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453037128821964814/artifact/do_11453037128821964814_1773726977430_background4.png",
+                        "m": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453037128821964814/artifact/do_11453037128821964814_1773726977430_background4.png",
+                        "s": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453037128821964814/artifact/do_11453037128821964814_1773726977430_background4.png",
+                        "xl": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453037128821964814/artifact/do_11453037128821964814_1773726977430_background4.png",
+                        "xs": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453037128821964814/artifact/do_11453037128821964814_1773726977430_background4.png",
+                        "xxl": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453037128821964814/artifact/do_11453037128821964814_1773726977430_background4.png"
                     },
                     "redirectUrl": "",
                     "queryParams": {},
@@ -149,12 +149,12 @@
                 {
                     "active": true,
                     "banners": {
-                        "l": "/assets/images/custom-template1/photo1.png",
-                        "m": "/assets/images/custom-template1/photo1.png",
-                        "s": "/assets/images/custom-template1/photo1.png",
-                        "xl": "/assets/images/custom-template1/photo1.png",
-                        "xs": "/assets/images/custom-template1/photo1.png",
-                        "xxl": "/assets/images/custom-template1/photo1.png"
+                        "l": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453037154739814415/artifact/do_11453037154739814415_1773727008341_photo1.png",
+                        "m": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453037154739814415/artifact/do_11453037154739814415_1773727008341_photo1.png",
+                        "s": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453037154739814415/artifact/do_11453037154739814415_1773727008341_photo1.png",
+                        "xl": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453037154739814415/artifact/do_11453037154739814415_1773727008341_photo1.png",
+                        "xs": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453037154739814415/artifact/do_11453037154739814415_1773727008341_photo1.png",
+                        "xxl": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453037154739814415/artifact/do_11453037154739814415_1773727008341_photo1.png"
                     },
                     "redirectUrl": "",
                     "queryParams": {},
@@ -165,7 +165,7 @@
         "platformSection": {
             "titlePill": "WHAT IS iGOT?",
             "title": "The Digital Learning Platform for Nation Builders.",
-            "subtitle": "iGOT (Integrated Government Online Training) is a national digital learning platform designed to empower government officials with continuous, role-based learning. Built under the Karmayogi mission, it provides access to courses, competencies, discussions, and knowledge resources that help civil servants enhance their skills, stay updated, and deliver better governance to citizens.",
+            "subtitle": "The iGOT Mauritius platform represents a significant step in strengthening the partnership between India and Mauritius through collaboration in digital governance and public service capacity building. Built on India’s iGOT Karmayogi, a Digital Public Infrastructure (DPI), the platform provides Mauritius with a dedicated, scalable digital learning environment designed to support continuous professional development for public officials.",
             "statistics": {
                 "title": "iGOT in Action",
                 "subtitle": "A snapshot of the numbers behind the iGOT learning platform. Reflecting its scale, adoption, and impact across the ecosystem.",
@@ -203,17 +203,17 @@
                 ]
             },
             "photo1":{
-                "url": "/assets/images/custom-template1/photo1.png",
+                "url": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453037154739814415/artifact/do_11453037154739814415_1773727008341_photo1.png",
                 "alt": "Training Conference",
                 "caption": "International Training Conference"
             },
             "photo2":{
-                "url": "/assets/images/custom-template1/photo2.png",
+                "url": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453037400317952016/artifact/do_11453037400317952016_1773727311361_photo2.png",
                 "alt": "Group Discussion",
                 "caption": "Collaborative Learning"
             },
             "photo3":{
-                "url": "/assets/images/custom-template1/photo3.png",
+                "url": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453037434365542417/artifact/do_11453037434365542417_1773727389137_photo3.png",
                 "alt": "Registration Desk",
                 "caption": "Registration Desk with Civil Servants"
             }
@@ -223,24 +223,29 @@
             "title": "Your Next Step in Public Service Excellence Starts Here.",
             "benefits": [
                 {
-                    "title": "Economy and Public Finance",
-                    "icon": "/assets/images/custom-template1/icons/account_balance.svg",
-                    "description": "Understanding economic systems, public finance, and financial decision-making to support sustainable growth and effective public resource management."
+                    "title": "Public Leadership",
+                    "icon": "/assets/images/custom-template1/icons/Public.svg",
+                    "description": "Developing leadership capabilities to guide public institutions, drive reforms, foster collaboration, and deliver responsive governance that strengthens trust and improves outcomes for citizens."
+                },
+                {
+                    "title": "Technology and Data Governance",
+                    "icon": "/assets/images/custom-template1/icons/computer.svg",
+                    "description": "Leveraging digital technologies, data, and AI to strengthen governance, enable evidence-based decisions, and improve service delivery, transparency, and efficiency."
                 },
                 {
                     "title": "Environment and Climate",
                     "icon": "/assets/images/custom-template1/icons/eco.svg",
-                    "description": "Addressing climate change, sustainability, and environmental challenges through policy, innovation, and resilient development strategies."
+                    "description": "Addressing climate and sustainability challenges through informed policies, innovation, and resilient development for long-term ecological and societal well-being."
                 },
                 {
-                    "title": "Energy and Power",
-                    "icon": "/assets/images/custom-template1/icons/computer.svg",
-                    "description": "Developing innovative solutions for renewable energy, energy efficiency, and sustainable power generation."
+                    "title": "Economy and Public Finance",
+                    "icon": "/assets/images/custom-template1/icons/account_balance.svg",
+                    "description": "Understanding economic systems, fiscal management, and public finance frameworks to support sustainable growth, strengthen financial governance, and ensure effective management of public resources."
                 },
                 {
-                    "title": "Transportation and Logistics",
+                    "title": "Governance and Public Policy",
                     "icon": "/assets/images/custom-template1/icons/policy.svg",
-                    "description": "Optimizing transportation systems, logistics, and infrastructure for efficient delivery, transport, and supply chain management."
+                    "description": "Designing, implementing, and evaluating policies and governance frameworks to strengthen institutions, improve regulatory effectiveness, and deliver inclusive and citizen-centric public services."
                 }
             ]
         },
