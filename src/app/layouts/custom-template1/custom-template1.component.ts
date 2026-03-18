@@ -9,6 +9,7 @@ import {
     OnInit,
     Input,
     ViewEncapsulation,
+    ChangeDetectorRef,
 } from '@angular/core';
 import { catchError, map } from 'rxjs/operators';
 import { of } from 'rxjs';
@@ -38,24 +39,31 @@ export class CustomTemplate1Component implements OnInit, AfterViewInit, OnDestro
 
     constructor(
         private http: HttpClient,
-        private apisService: ApisService
+        private apisService: ApisService,
+        private cdr: ChangeDetectorRef
     ) { }
 
     ngOnInit(): void {
         this.baseURl = environment.portalURL;
-        this.loadStatsFromJSON();
-        this.loadStatValueFromAPI();
+        this.initializeStats();
         console.log('Custom Template 1 initialized for tenant:', this.tenant?.branding?.companyName);
     }
 
 
     ngAfterViewInit(): void {
-        this.updateScrollState();
+        // Defer scroll state update to avoid ExpressionChangedAfterItHasBeenCheckedError
+        setTimeout(() => {
+            this.updateScrollState();
+            this.cdr.detectChanges();
+        }, 0);
 
         const el = this.scrollTrack.nativeElement;
         el.addEventListener('scroll', this.onScroll, { passive: true });
 
-        this.resizeObserver = new ResizeObserver(() => this.updateScrollState());
+        this.resizeObserver = new ResizeObserver(() => {
+            this.updateScrollState();
+            this.cdr.detectChanges();
+        });
         this.resizeObserver.observe(el);
     }
 
@@ -101,13 +109,33 @@ export class CustomTemplate1Component implements OnInit, AfterViewInit, OnDestro
             })
         ).subscribe((stats: any) => {
             this.stats = stats || {};
+            console.log('Stats loaded from JSON (fallback):', this.stats);
         });
     }
 
     loadStatValueFromAPI(): void {
-        this.apisService.getConsumtionStatus().subscribe((stats: any) => {
-            this.stats = stats || {};
-        });
+        this.apisService.getConsumtionStatus().subscribe(
+            (stats: any) => {
+                // Validate that we got a valid response with actual data
+                if (stats && Object.keys(stats).length > 0) {
+                    this.stats = stats;
+                    console.log('Stats loaded from API (primary):', this.stats);
+                } else {
+                    // Empty response from API, fallback to JSON
+                    console.warn('API returned empty response, falling back to JSON');
+                    this.loadStatsFromJSON();
+                }
+            },
+            (error) => {
+                console.warn('API call failed, falling back to JSON:', error);
+                this.loadStatsFromJSON();
+            }
+        );
+    }
+
+    private initializeStats(): void {
+        // Try API first, fallback to JSON if API fails
+        this.loadStatValueFromAPI();
     }
 
     getStatValue(statId: string): string {

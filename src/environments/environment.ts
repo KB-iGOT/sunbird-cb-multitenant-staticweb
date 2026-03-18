@@ -22,6 +22,7 @@ export const environment: IEnvironment = {
   learnerPortalURL: getEnvValue('portalURL', ''),
   telmetryUrl: getEnvValue('telmetryUrl', ''),
   tenantName: getEnvValue('tenantName', 'tenant4'),
+  igotUrl: getEnvValue('igotUrl', ''),
 }
 interface IEnvironment {
   name: string,
@@ -32,5 +33,6 @@ interface IEnvironment {
   portalURL: string
   learnerPortalURL: string
   telmetryUrl: string,
-  tenantName: string
+  tenantName: string,
+  igotUrl: string
 }

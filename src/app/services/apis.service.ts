@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 const API_END_POINTS = {
   CONSUMTION_STATUS: `/apis/public/v8/igot/consumption/status`,
@@ -11,14 +12,15 @@ const API_END_POINTS = {
   providedIn: 'root'
 })
 export class ApisService {
-  baseUrl!: string
+  igotUrl!: string
 
   constructor(
     private http: HttpClient,
   ) { }
 
   getConsumtionStatus(): Observable<any> {
-    return this.http.get<any>(API_END_POINTS.CONSUMTION_STATUS).pipe(
+    this.igotUrl = environment.igotUrl
+    return this.http.get<any>(this.igotUrl +API_END_POINTS.CONSUMTION_STATUS).pipe(
       map((response: any) => {
         return response?.result?.response || response?.result?.response || {};
       }),

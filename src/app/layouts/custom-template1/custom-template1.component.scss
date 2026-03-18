@@ -307,7 +307,8 @@
 // Card sizing — drives responsive behaviour
 $card-min:   276px;
 $card-max:   276px;
-$card-gap:   24px;
+$card-gap:   26px;
+$card-gap-largeScreen: 20px;
 
 // ── Scroller shell ────────────────────────────────────────────
 .benefits-scroller {
@@ -486,6 +487,14 @@ $card-gap:   24px;
   } 
 }
 
+@media (min-width: 768px) and (max-width: 1024px) {
+  .banner-image-solo {
+    background: #2d2d2d !important;
+    // object-fit: contain;
+    width: 60% !important;
+  } 
+}
+
 // Tablet (640–1180px): ~2–3 cards
 @media (min-width: 640px) and (max-width: 1180px) {
   .benefit-card {
@@ -517,8 +526,13 @@ $card-gap:   24px;
 // Desktop (≥1024px): 4 cards default, scroller kicks in beyond that
 @media (min-width: 1024px) {
   .benefit-card {
-    flex: 0 0 clamp(200px, calc(21% - #{$card-gap}), 260px);
+    flex: 0 0 clamp(200px, calc(21% - #{$card-gap-largeScreen}), 260px);
   }
+  .banner-image-solo {
+    background: #2d2d2d !important;
+    // object-fit: contain;
+    width: 100% !important;
+  } 
 }
 
 // slider overrides
