@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
     // Apply theme and metadata
     if (this.tenant) {
       this.tenantService.applyTheme(this.tenant.theme);
-      this.tenantService.updateTitle(this.tenant.content.title);
+      this.tenantService.updateTitle(this.tenant.branding.pageTitle);
       this.tenantService.updateFavicon(this.tenant.branding.favicon);
     }
 

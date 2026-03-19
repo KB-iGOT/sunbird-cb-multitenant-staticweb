@@ -9,6 +9,7 @@ export interface TenantBranding {
   logo: string;
   favicon: string;
   companyName: string;
+  pageTitle: string;
 }
 
 export interface TenantNavigation {
