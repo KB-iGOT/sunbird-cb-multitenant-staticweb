@@ -132,14 +132,12 @@
                 "bannerMetaAlign": "right",
                 "navigationArrows": "visible",
                 "borderRadius": "12px",
-                "customHeight": "334px",
                 "arrowsPlacement": "",
                 "imageBorderWidth": 3,
                 "imageBorderColor": "#FFFFFF",
                 "imageBorderStyle": "solid",
                 "responsive": {
                     "bannerMetaClass": "inline-meta",
-                    "customHeight": "232px",
                     "bannerMetaAlign": "center",
                     "navigationArrows": "visible",
                     "dots": "hidden",
@@ -150,12 +148,12 @@
                 {
                     "active": true,
                     "banners": {
-                        "l": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453037154739814415/artifact/do_11453037154739814415_1773727008341_photo1.png",
-                        "m": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453037154739814415/artifact/do_11453037154739814415_1773727008341_photo1.png",
-                        "s": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453037154739814415/artifact/do_11453037154739814415_1773727008341_photo1.png",
-                        "xl": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453037154739814415/artifact/do_11453037154739814415_1773727008341_photo1.png",
-                        "xs": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453037154739814415/artifact/do_11453037154739814415_1773727008341_photo1.png",
-                        "xxl": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453037154739814415/artifact/do_11453037154739814415_1773727008341_photo1.png"
+                        "l": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453977300165427211/artifact/do_11453977300165427211_1774874761059_header-image-1.png",
+                        "m": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453977300165427211/artifact/do_11453977300165427211_1774874761059_header-image-1.png",
+                        "s": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453977300165427211/artifact/do_11453977300165427211_1774874761059_header-image-1.png",
+                        "xl": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453977300165427211/artifact/do_11453977300165427211_1774874761059_header-image-1.png",
+                        "xs": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453977300165427211/artifact/do_11453977300165427211_1774874761059_header-image-1.png",
+                        "xxl": "https://mauritius.karmayogibharat.net/assets/public/content/do_11453977300165427211/artifact/do_11453977300165427211_1774874761059_header-image-1.png"
                     },
                     "redirectUrl": "",
                     "queryParams": {},
