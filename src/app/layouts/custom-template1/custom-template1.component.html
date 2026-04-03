@@ -164,11 +164,12 @@
     <section class="py-16">
         <div class="container-balanced mx-auto ">
             <div class="text-center mb-12">
-                <div class="text-pill green">
-                    {{ tenant.content.benefitsSection.titlePill }}
+                <div class="text-pill green" *ngIf="tenant.content.benefitsSection?.titlePill">
+                    {{ tenant.content.benefitsSection?.titlePill }}
                 </div>
-                <h2 class="text-2xl lg:text-3xl font-bold mb-6" [innerHTML]="tenant.content.benefitsSection.title">
+                <h2 class="text-2xl lg:text-3xl font-bold mb-6" [innerHTML]="tenant.content.benefitsSection?.title">
                 </h2>
+                <h3 *ngIf="tenant.content.benefitsSection?.subTitle">{{ tenant.content.benefitsSection?.subTitle }}</h3>
             </div>
             <div>
                 <!-- Scroller -->
