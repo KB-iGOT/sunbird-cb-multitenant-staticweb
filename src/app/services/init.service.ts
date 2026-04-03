@@ -69,7 +69,7 @@ export class InitService {
 
   private async setConfiDetails(configDetails: any = null): Promise<any> {
     this.baseUrl = environment.baseUrl
-    this.tenantName = environment.tenantName
+    this.tenantName = 'mauritius'
     if (configDetails) {
       this.configDetails = configDetails
     } else {
