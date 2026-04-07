@@ -15,14 +15,14 @@ const getEnvValue = (key: string, fallback: any) => {
 export const environment: IEnvironment = {
   name: getEnvValue('name', 'Multi-Tenant Portal'),
   production: getEnvValue('production', false),
-  contentHost: getEnvValue('contentHost', ''),
+  contentHost: getEnvValue('contentHost', 'https://portal.mauritius.igotkarmayogi.gov.in'),
   contentBucket: getEnvValue('contentBucket', 'assets/public'),
   baseUrl: getEnvValue('baseUrl', ''),
-  portalURL: getEnvValue('portalURL', ''),
-  learnerPortalURL: getEnvValue('portalURL', ''),
-  telmetryUrl: getEnvValue('telmetryUrl', ''),
+  portalURL: getEnvValue('portalURL', 'https://portal.mauritius.igotkarmayogi.gov.in'),
+  learnerPortalURL: getEnvValue('portalURL', 'https://portal.mauritius.igotkarmayogi.gov.in'),
+  telmetryUrl: getEnvValue('telmetryUrl', 'https://mauritius.igotkarmayogi.gov.in'),
   tenantName: getEnvValue('tenantName', 'tenant4'),
-  igotUrl: getEnvValue('igotUrl', ''),
+  igotUrl: getEnvValue('igotUrl', 'https://igotkarmayogi.gov.in'),
 }
 interface IEnvironment {
   name: string,
