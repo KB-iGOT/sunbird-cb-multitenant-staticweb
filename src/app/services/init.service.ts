@@ -65,6 +65,18 @@ export class InitService {
     }
   }
 
+  private getSubTypeFromUrl(): string {
+    const hostname = window.location.hostname
+    const subdomain = hostname.split('.')[0]
+
+    if (subdomain && subdomain !== 'localhost' && subdomain !== 'www') {
+      return subdomain
+    }
+
+    // Fallback for local development where hostname has no tenant subdomain
+    return 'iiidem'
+  }
+
   private async setConfiDetails(configDetails: any = null): Promise<any> {
     if (configDetails) {
       this.configDetails = configDetails
@@ -74,7 +86,7 @@ export class InitService {
         const requestData: any = {
           'request': {
               'type': 'page',
-              'subType': 'iiidem',
+              'subType': this.getSubTypeFromUrl(),
               'action': 'page-configuration',
               'component': 'multitenant-portal',
               'rootOrgId': '*',
