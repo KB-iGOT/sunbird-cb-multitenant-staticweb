@@ -2,7 +2,7 @@
   <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
 </div>
 
-<div *ngIf="!loading && tenant" class="min-h-screen overflow-hidden">
+<div *ngIf="!loading && tenant" class="min-h-screen overflow-hidden" [ngClass]="tenant?.theme?.themeName">
   <!-- Header/Navigation -->
   <header class="bg-white shadow-sm container-balanced">
     <div class=" mx-auto">
@@ -101,11 +101,13 @@
               [innerHTML]="tenant.content.photoGallery.title">
             </h2>
             <p class="mat-body-2 text-gray-600 max-w-3xl">{{ tenant.content.photoGallery.description }}</p>
-            <a [href]="tenant.content.photoGallery.ctaLink" target="_blank"
+            <ng-container *ngIf="tenant?.content?.photoGallery?.ctaLink && tenant?.content?.photoGallery?.activeCTAlink !== false">
+              <a [href]="tenant.content.photoGallery.ctaLink" target="_blank"
                 class="custom-program-btn gallery-btn flex items-center mt-4">
                 <span class="mat-body-2">{{ tenant.content.photoGallery.ctaText }}</span>
                 <mat-icon class="ml-3 mat-icon icon">{{ tenant.content.photoGallery.ctaIcon }}</mat-icon>
               </a>
+            </ng-container>
           </div>
         </div>
         <!-- Gallery visible on screens >= 1200px -->

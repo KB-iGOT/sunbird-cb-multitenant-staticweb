@@ -4,6 +4,59 @@
 @import '/src/assets/themes/theme-mixins';
 
 
+.theme-blue {
+    .blue-gradient {
+        background: linear-gradient(225deg, #2565BF 0.3%, #134B98 39.59%, #3636B2 100%) !important;
+
+        .login-button {
+            background: #F58121 !important;
+            color: #FFFFFF !important;
+        }
+    }
+
+    .black-gradient-bg {
+        background: linear-gradient(225deg, #313C59 0%, #161C2D 100%) !important;
+        background-color: #1B2133;
+    }
+
+    .stat-counter {
+        border-left: 3px solid #F58121 !important;
+    }
+}
+
+.theme-teal {
+    .blue-gradient {
+        background: linear-gradient(225deg, #0C6B78 0.3%, #005461 39.59%, #004752 100%) !important;
+
+        .login-button {
+            background: #C10097 !important;
+            color: #FFFFFF !important;
+        }
+    }
+
+    .black-gradient-bg {
+        background: linear-gradient(225deg, #313C59 0%, #161C2D 100%) !important;
+        background-color: #1B2133 !important;
+    }
+
+    .stat-counter {
+        border-left: 3px solid #fff !important;
+    }
+
+    .custom-program-btn{
+
+    &.training{
+        background: #FFFFFF1F;
+        color: #F58121 !important;
+    }
+    &.gallery-btn{
+        background: #00546114 !important;
+        color: #005461 !important;
+    }
+}
+}
+
+
 .blue-gradient {
     background: linear-gradient(225deg, #2565BF 0.3%, #134B98 39.59%, #3636B2 100%);
 }
@@ -74,10 +127,6 @@
     width: 17px;
 }
 
-.login-button {
-    background: #F58121 !important;
-    color: #FFFFFF !important;
-}
 
 .maxw-percent {
     max-width: 235px;
