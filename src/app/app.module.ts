@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
 import {
   AnnouncementsModule,
@@ -36,6 +37,7 @@ const appInitializer = (initSvc: InitService) => async () => {
 @NgModule({
   declarations: [
     AppComponent,
+    LandingPageComponent,
   ],
   imports: [
     BrowserModule,
