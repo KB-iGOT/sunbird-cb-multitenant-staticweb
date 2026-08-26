@@ -210,79 +210,79 @@
   </section>
 
   <ng-container *ngIf="tenant.content.trainingPrograms || tenant.content.internationalTraining">
-  <div class="black-gradient-bg">
-    <!-- Training Programs Section -->
-    <section class="relative py-16 training-programs-section" *ngIf="tenant.content.trainingPrograms">
-      <div class="absolute top-0 left-0 right-0">
-        <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="72" viewBox="0 0 1600 72" fill="none">
-          <path fill-rule="evenodd" clip-rule="evenodd"
-            d="M-0.0938805 9.55236C-0.0938805 9.55236 249.67 33.9201 378.601 29.7663C507.532 25.6126 539.642 24.437 608.461 29.7663C677.281 35.0957 1005.84 75.7437 1158.71 70.8153C1311.57 65.8869 1561.45 36.8349 1620 61.2117V0H-1L-0.0938805 9.55236Z"
-            fill="#FDFDFF" />
-        </svg>
-      </div>
-      <div class="container-balanced mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-left mb-12">
-          <h2 class="text-3xl text-white font-bold mb-4 section-title-white tricolr-border whitespace-pre"
-            [innerHTML]="tenant.content.trainingPrograms.title"></h2>
-          <p class="section-subtitle-light mat-body-2" style="color: #cbd5e1;">{{
-            tenant.content.trainingPrograms.subtitle }}</p>
+    <div class="black-gradient-bg">
+      <!-- Training Programs Section -->
+      <section class="relative py-16 training-programs-section" *ngIf="tenant.content.trainingPrograms">
+        <div class="absolute top-0 left-0 right-0">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="72" viewBox="0 0 1600 72" fill="none">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M-0.0938805 9.55236C-0.0938805 9.55236 249.67 33.9201 378.601 29.7663C507.532 25.6126 539.642 24.437 608.461 29.7663C677.281 35.0957 1005.84 75.7437 1158.71 70.8153C1311.57 65.8869 1561.45 36.8349 1620 61.2117V0H-1L-0.0938805 9.55236Z"
+              fill="#FDFDFF" />
+          </svg>
         </div>
+        <div class="container-balanced mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-left mb-12">
+            <h2 class="text-3xl text-white font-bold mb-4 section-title-white tricolr-border whitespace-pre"
+              [innerHTML]="tenant.content.trainingPrograms.title"></h2>
+            <p class="section-subtitle-light mat-body-2" style="color: #cbd5e1;">{{
+              tenant.content.trainingPrograms.subtitle }}</p>
+          </div>
 
-        <div class="grid md:grid-cols-3 gap-8">
-          <div *ngFor="let program of tenant.content.trainingPrograms.programs"
-            class="program-card program-card p-5 flex gap-3">
-            <div class="text-4xl mb-4">
-              <img [src]="program.icon" [alt]="program.title + ' Icon'" class="mt-4 program-card-img" />
+          <div class="grid md:grid-cols-3 gap-8">
+            <div *ngFor="let program of tenant.content.trainingPrograms.programs"
+              class="program-card program-card p-5 flex gap-3">
+              <div class="text-4xl mb-4">
+                <img [src]="program.icon" [alt]="program.title + ' Icon'" class="mt-4 program-card-img" />
+              </div>
+              <div class="flex flex-col">
+                <h3 class="text-xl text-white font-semibold mb-3">{{ program.title }}</h3>
+                <p class="mb-6 mat-body-1 text-white text-opacity-60 flex-1">{{ program.description }}</p>
+                <ul class="text-sm" *ngIf="program.features && program.features.length > 0">
+                  <li *ngFor="let feature of program.features" class="mb-1">• {{ feature }}</li>
+                </ul>
+                <a [href]="program.ctaLink" target="_blank"
+                  class="custom-program-btn training flex items-center mt-4">
+                  <span class="mat-body-2">{{ program.ctaText }}</span>
+                  <mat-icon class="ml-3 mat-icon icon">{{ program.ctaIcon }}</mat-icon>
+                </a>
+              </div>
             </div>
-            <div class="flex flex-col">
-              <h3 class="text-xl text-white font-semibold mb-3">{{ program.title }}</h3>
-              <p class="mb-6 mat-body-1 text-white text-opacity-60 flex-1">{{ program.description }}</p>
-              <ul class="text-sm" *ngIf="program.features && program.features.length > 0">
-                <li *ngFor="let feature of program.features" class="mb-1">• {{ feature }}</li>
+          </div>
+        </div>
+      </section>
+
+      <div class="mx-auto divider-small"></div>
+      <!-- International Training Section -->
+      <section class="py-16 international-training-section" *ngIf="tenant.content.internationalTraining">
+        <div class="container-balanced mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 class="text-3xl text-white font-bold text-left mb-12 section-title-white tricolr-border whitespace-pre"
+            [innerHTML]="tenant.content.internationalTraining.title"></h2>
+
+          <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <ul class="space-y-6 p-0">
+                <li *ngFor="let country of tenant.content.internationalTraining.countries" class="block">
+                  <div class="flex items-center mb-2">
+                    <mat-icon class="mr-2" [ngStyle]="{ color: country.color }">layers</mat-icon>
+                    <span class="font-medium text-white mr-2">{{ country.name }}</span>
+                    <span class="text-white">({{ country.count }})</span>
+                  </div>
+                  <!-- Progress bar -->
+                  <div class="w-ful rounded-full h-2 ml-7">
+                    <div class="h-2 rounded-full transition-all duration-500" [style.background-color]="country.color"
+                      [style.width.%]="getCountryPercentage(country.count)"></div>
+                  </div>
+                </li>
               </ul>
-              <a [href]="program.ctaLink" target="_blank"
-                class="custom-program-btn training flex items-center mt-4">
-                <span class="mat-body-2">{{ program.ctaText }}</span>
-                <mat-icon class="ml-3 mat-icon icon">{{ program.ctaIcon }}</mat-icon>
-              </a>
+            </div>
+
+            <div class="relative">
+              <img [src]="tenant.content.internationalTraining.mapImage" alt="World Map" class="w-full" />
             </div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <div class="mx-auto divider-small"></div>
-    <!-- International Training Section -->
-    <section class="py-16 international-training-section" *ngIf="tenant.content.internationalTraining">
-      <div class="container-balanced mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl text-white font-bold text-left mb-12 section-title-white tricolr-border whitespace-pre"
-          [innerHTML]="tenant.content.internationalTraining.title"></h2>
-
-        <div class="grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <ul class="space-y-6 p-0">
-              <li *ngFor="let country of tenant.content.internationalTraining.countries" class="block">
-                <div class="flex items-center mb-2">
-                  <mat-icon class="mr-2" [ngStyle]="{ color: country.color }">layers</mat-icon>
-                  <span class="font-medium text-white mr-2">{{ country.name }}</span>
-                  <span class="text-white">({{ country.count }})</span>
-                </div>
-                <!-- Progress bar -->
-                <div class="w-ful rounded-full h-2 ml-7">
-                  <div class="h-2 rounded-full transition-all duration-500" [style.background-color]="country.color"
-                    [style.width.%]="getCountryPercentage(country.count)"></div>
-                </div>
-              </li>
-            </ul>
-          </div>
-
-          <div class="relative">
-            <img [src]="tenant.content.internationalTraining.mapImage" alt="World Map" class="w-full" />
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
+      </section>
+    </div>
   </ng-container>
 
   <!-- Partners Section -->
