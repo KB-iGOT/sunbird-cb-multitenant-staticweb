@@ -6,6 +6,7 @@ import { TenantService } from './tenant.service'
 import { SbUiResolverService } from '@sunbird-cb/resolver-v2'
 import { environment } from 'src/environments/environment'
 import { TranslateService } from '@ngx-translate/core'
+import { TenantAppConfig } from '../models/tenant.interface'
 
 const API_END_POINTS = {
   FORM_READ: `/apis/v1/form/read`,
@@ -18,6 +19,16 @@ export class InitService {
 
   baseUrl!: string
   configDetails: any
+  private appConfigDetails: TenantAppConfig = InitService.resolveAppConfig(null)
+
+  /**
+   * App level urls/buckets for the current tenant.
+   * Values come from the `appConfig` block of the form configuration,
+   * falling back to the environment (assets/env.json) when not configured.
+   */
+  get appConfig(): TenantAppConfig {
+    return this.appConfigDetails
+  }
 
   constructor(
     private http: HttpClient,
@@ -30,6 +41,24 @@ export class InitService {
 
   formReadData(request: any): Observable<any> {
     return this.http.post<any>(API_END_POINTS.FORM_READ, request)
+  }
+
+  private static resolveAppConfig(configDetails: any): TenantAppConfig {
+    const appConfig = (configDetails && configDetails.appConfig) || {}
+    return {
+      contentBucket: appConfig.contentBucket || environment.contentBucket || '',
+      contentHost: appConfig.contentHost || environment.contentHost || '',
+      baseUrl: appConfig.baseUrl || environment.baseUrl || '',
+      portalURL: appConfig.portalURL || environment.portalURL || '',
+      learnerPortalURL: appConfig.learnerPortalURL || appConfig.portalURL || environment.learnerPortalURL || '',
+      telmetryUrl: appConfig.telmetryUrl || environment.telmetryUrl || '',
+    }
+  }
+
+  private applyConfigDetails(configDetails: any) {
+    this.configDetails = configDetails || {}
+    this.appConfigDetails = InitService.resolveAppConfig(configDetails)
+    this.baseUrl = this.appConfigDetails.baseUrl
   }
 
   async init() {
@@ -83,8 +112,7 @@ export class InitService {
 
   private async setConfiDetails(configDetails: any = null): Promise<any> {
     if (configDetails) {
-      this.configDetails = configDetails
-      this.baseUrl = environment.baseUrl
+      this.applyConfigDetails(configDetails)
     } else {
       try {
         const requestData: any = {
@@ -100,16 +128,14 @@ export class InitService {
         const result = await this.formReadData(requestData).pipe(
           map((rData: any) => {
             const finalData = rData && rData.result.form.data
-            this.configDetails = finalData || {}
-            this.baseUrl = environment.baseUrl || '';
+            this.applyConfigDetails(finalData)
             return finalData
           }),
           catchError((_error: any) => {
             const tenantId = this.tenantService.getTenantFromUrl();
             return this.tenantService.loadTenant(tenantId).pipe(
               map(tenant => {
-                this.configDetails = tenant;
-                this.baseUrl = environment.baseUrl || '';
+                this.applyConfigDetails(tenant)
                 return tenant;
               }),
               catchError((err: any) => {

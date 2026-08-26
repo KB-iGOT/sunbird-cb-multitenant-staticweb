@@ -3,7 +3,6 @@ import { TenantService } from '../services/tenant.service';
 import { TenantConfig } from '../models/tenant.interface';
 import { InitService } from '../services/init.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
 import { WsEvents } from '../services/events';
 import { EventService } from '../services/event.service';
 import { LANGUAGES } from '../constant/app.constant';
@@ -41,7 +40,7 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.tenant = this.initService.configDetails;
-    this.baseURl = environment.portalURL;
+    this.baseURl = this.initService.appConfig.portalURL;
     if(this.tenant && this.tenant.content &&
       this.tenant.content.showcasedCourses &&
       this.tenant.content.showcasedCourses.stripWidgetData && this.tenant.content.showcasedCourses.stripWidgetData.strips &&
@@ -81,7 +80,7 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   languageChange(event: any) {
-    const telemetryURL = environment.telmetryUrl || ''
+    const telemetryURL = this.initService.appConfig.telmetryUrl || ''
     this.currentLanguage = event.target.value;
     let currentURL = window.location.href;
     console.log('currentURL', currentURL)

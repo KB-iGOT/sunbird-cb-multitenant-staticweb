@@ -1,16 +1,17 @@
 import { Pipe, PipeTransform } from '@angular/core'
-import { environment } from 'src/environments/environment'
+import { InitService } from '../../services/init.service'
 @Pipe({
   name: 'pipePublicURL',
   standalone: true,
 })
 export class PipePublicURL implements PipeTransform {
-  constructor( ) {
+  constructor(private initSvc: InitService) {
 
   }
   transform(value: string): any {
     const mainUrl = value && value.split('/content').pop() || ''
-    const finalURL = `${environment.portalURL}/${environment.contentBucket}/content${mainUrl}`
+    const { portalURL, contentBucket } = this.initSvc.appConfig
+    const finalURL = `${portalURL}/${contentBucket}/content${mainUrl}`
     return value ? finalURL : ''
   }
 

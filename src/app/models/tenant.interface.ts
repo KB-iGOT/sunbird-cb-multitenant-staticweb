@@ -1,3 +1,12 @@
+export interface TenantAppConfig {
+  contentBucket: string;
+  contentHost: string;
+  baseUrl: string;
+  portalURL: string;
+  learnerPortalURL: string;
+  telmetryUrl: string;
+}
+
 export interface TenantTheme {
   primaryColor: string;
   secondaryColor: string;
@@ -109,6 +118,7 @@ export interface TenantContact {
 export interface TenantConfig {
   id: string;
   name: string;
+  appConfig?: Partial<TenantAppConfig>;
   theme: TenantTheme;
   branding: TenantBranding;
   navigation: TenantNavigation[];

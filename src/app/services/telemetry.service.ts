@@ -4,7 +4,6 @@ import { environment } from 'src/environments/environment'
 import { Router, NavigationStart } from '@angular/router'
 import { WsEvents } from './events'
 import { EventService } from './event.service'
-import { Observable } from 'rxjs';
 import { InitService } from './init.service'
 
 declare var $t: any
@@ -31,23 +30,27 @@ export class TelemetryService {
     private router: Router,
     private initSvc: InitService,
   ) {
-    this.getConfigDetails().subscribe((response: any) => {
-      this.configDetails = response
-      this.telConfig = response.telemetryConfig
-      this.telConfig.endpoint = response.telmetryUrl + this.telConfig.endpoint
-      this.telConfig.publicEndpoint = response.telmetryUrl + this.telConfig.publicEndpoint
-      this.telConfig.protectedEndpoint = response.telmetryUrl + this.telConfig.protectedEndpoint
+    this.configDetails = this.getConfigDetails()
+    this.telConfig = this.configDetails.telemetryConfig
+    if (this.telConfig) {
+      const telemetryUrl = this.initSvc.appConfig.telmetryUrl
+      this.telConfig.endpoint = this.joinUrl(telemetryUrl, this.telConfig.endpoint)
+      this.telConfig.publicEndpoint = this.joinUrl(telemetryUrl, this.telConfig.publicEndpoint)
+      this.telConfig.protectedEndpoint = this.joinUrl(telemetryUrl, this.telConfig.protectedEndpoint)
       this.instanceConfig = this.telConfig
       this.navigationStart()
       this.initializeConfig(this.instanceConfig)
       this.addCustomListener()
       this.addCustomImpressionListener()
-   
-    })
+    }
   }
 
-  getConfigDetails(): Observable<any> {
+  getConfigDetails(): any {
     return this.initSvc.configDetails || {}
+  }
+
+  private joinUrl(host: string, path: string): string {
+    return `${(host || '').replace(/\/+$/, '')}/${(path || '').replace(/^\/+/, '')}`
   }
 
   private navigationStart() {
