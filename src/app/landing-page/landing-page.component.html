@@ -209,6 +209,7 @@
     </div>
   </section>
 
+  <ng-container *ngIf="tenant.content.trainingPrograms || tenant.content.internationalTraining">
   <div class="black-gradient-bg">
     <!-- Training Programs Section -->
     <section class="relative py-16 training-programs-section" *ngIf="tenant.content.trainingPrograms">
@@ -282,6 +283,7 @@
       </div>
     </section>
   </div>
+  </ng-container>
 
   <!-- Partners Section -->
   <section class="py-16 bg-white" *ngIf="tenant.content.partners">
