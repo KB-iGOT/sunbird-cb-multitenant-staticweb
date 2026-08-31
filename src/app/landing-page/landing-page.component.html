@@ -10,7 +10,7 @@
         <div class="flex items-center">
           <!-- <img [src]="tenant.branding.logo" [alt]="tenant.branding.companyName + ' Logo'" class="h-12 w-auto mr-4" />
           <h1 class="text-xl font-bold text-gray-800">{{ tenant.branding.companyName }}</h1> -->
-          <img src="/assets/images/IIIDEM-logo.png" [alt]="tenant.branding.companyName + ' Logo'"
+          <img src="{{tenant?.branding?.logo}}" [alt]="tenant.branding.companyName + ' Logo'"
             class="h-12 w-auto mr-4" />
         </div>
       </div>
@@ -114,11 +114,11 @@
         <div class="gallery col-span-8 mx-auto px-4 sm:px-6 lg:px-8 hidden xl:block">
           <div class="base relative"
             *ngIf="tenant.content.photoGallery.images && tenant.content.photoGallery.images.length >= 5">
-            <img *ngIf="tenant.content.photoGallery.images[0]" [src]="tenant.content.photoGallery.images[0].url | pipePublicURL"
+            <img *ngIf="tenant.content.photoGallery.images[0]" [src]="tenant.content.photoGallery.images[0].url"
               [alt]="tenant.content.photoGallery.images[0].alt" class="base object-cover rounded-lg shadow-md" />
 
             <div class="pic1 absolute" *ngIf="tenant.content.photoGallery.images[1]">
-              <img [src]="tenant.content.photoGallery.images[1].url | pipePublicURL" [alt]="tenant.content.photoGallery.images[1].alt"
+              <img [src]="tenant.content.photoGallery.images[1].url " [alt]="tenant.content.photoGallery.images[1].alt"
                 class=" object-cover rounded-lg shadow-md" />
             </div>
             <div class="pic-svg absolute">
@@ -126,15 +126,15 @@
               <img src="/assets/images/gallery-dots.svg" alt="Dotted pattern SVG" class="w-full h-full" />
             </div>
             <div class="pic2 absolute" *ngIf="tenant.content.photoGallery.images[2]">
-              <img [src]="tenant.content.photoGallery.images[2].url | pipePublicURL" [alt]="tenant.content.photoGallery.images[2].alt"
+              <img [src]="tenant.content.photoGallery.images[2].url " [alt]="tenant.content.photoGallery.images[2].alt"
                 class=" object-cover rounded-lg shadow-md" />
             </div>
             <div class="pic3 absolute" *ngIf="tenant.content.photoGallery.images[3]">
-              <img [src]="tenant.content.photoGallery.images[3].url | pipePublicURL" [alt]="tenant.content.photoGallery.images[3].alt"
+              <img [src]="tenant.content.photoGallery.images[3].url " [alt]="tenant.content.photoGallery.images[3].alt"
                 class=" object-cover rounded-lg shadow-md" />
             </div>
             <div class="pic4 absolute" *ngIf="tenant.content.photoGallery.images[4]">
-              <img [src]="tenant.content.photoGallery.images[4].url | pipePublicURL" [alt]="tenant.content.photoGallery.images[4].alt"
+              <img [src]="tenant.content.photoGallery.images[4].url " [alt]="tenant.content.photoGallery.images[4].alt"
                 class=" object-cover rounded-lg shadow-md" />
             </div>
             <div class="pic-circle absolute">
