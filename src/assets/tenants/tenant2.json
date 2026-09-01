@@ -20,6 +20,12 @@
     { "label": "Contact", "url": "#" }
   ],
   "content": {
+    "titleAccent": {
+      "active": true,
+      "image": "/assets/images/tricolor-border.svg",
+      "position": "left",
+      "rotate": false
+    },
     "title": "TechVision Solutions - Future Forward",
     "subtitle": "Transforming businesses through innovative technology solutions",
     "description": "Leading provider of digital transformation services, helping businesses adapt to the modern digital landscape with cutting-edge solutions.",
@@ -32,6 +38,12 @@
       { "value": "24/7", "label": "Support Available" }
     ],
     "photoGallery": {
+      "decoration": {
+      "active": true,
+      "patternImage": "/assets/images/gallery-dots.svg",
+      "circleColor": "#039349",
+      "circleOpacity": 0.0994
+      },
       "title": "TECHVISION INNOVATION GALLERY",
       "description": "Discover our latest technological innovations and successful project implementations across various industries and domains.",
       "images": [
@@ -162,5 +174,13 @@
     "phone": "+1-555-TECH",
     "email": "hello@techvision.com",
     "address": "456 Innovation Drive, Tech Park, TP 67890"
+  },
+  "footer": {
+    "active": true,
+    "image": "",
+    "alt": "Footer",
+    "height": 12,
+    "fit": "fill",
+    "align": "center"
   }
 }

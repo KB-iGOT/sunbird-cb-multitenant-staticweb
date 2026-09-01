@@ -9,8 +9,8 @@
         background: linear-gradient(225deg, #2565BF 0.3%, #134B98 39.59%, #3636B2 100%) !important;
 
         .login-button {
-            background: #F58121 !important;
-            color: #FFFFFF !important;
+            background: var(--login-btn-bg, #F58121) !important;
+            color: var(--login-btn-color, #FFFFFF) !important;
         }
     }
 
@@ -29,8 +29,8 @@
         background: linear-gradient(225deg, #0C6B78 0.3%, #005461 39.59%, #004752 100%) !important;
 
         .login-button {
-            background: #C10097 !important;
-            color: #FFFFFF !important;
+            background: var(--login-btn-bg, #C10097) !important;
+            color: var(--login-btn-color, #FFFFFF) !important;
         }
     }
 
@@ -69,15 +69,72 @@
     bottom: -5px;
 }
 
-.tricolr-border{
-    background: url('/assets/images/tricolor-border.svg') no-repeat;
-    padding-left: 24px;
-}
+/**
+ * Section title accent (tricolor bar by default).
+ * Image and placement come from the form configuration -> `content.titleAccent`
+ * (or the section level `titleAccent`), resolved in the component.
+ */
+.section-title-accent {
+    display: flex;
 
-.tricolor-img-showCase{
-    height: 60px;
-    width: 12px;
-    object-fit: cover;
+    &.accent-left {
+        flex-direction: row;
+        /* keeps the bar centred against the title height */
+        align-items: center;
+        gap: 12px;
+    }
+
+    &.accent-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+
+        /* the title sits right under the bar, so the flex gap is the only
+           spacing wanted - drop any top margin the heading carries */
+        > h2 {
+            margin-top: 0;
+        }
+    }
+
+    &.accent-centered {
+        align-items: center;
+
+        &.accent-top {
+            text-align: center;
+        }
+    }
+
+    /* Box size (and the image size inside it) is set inline by the component
+       from `titleAccent.length` / `titleAccent.thickness`. */
+    .title-accent-bar {
+        flex: 0 0 auto;
+        display: block;
+        position: relative;
+        overflow: hidden;
+
+        > img {
+            display: block;
+            object-fit: fill;
+            /* the rotated image is wider than its box - beat the global img reset */
+            max-width: none;
+        }
+
+        &.accent-rotate > img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+        }
+    }
+
+    /* Rotate so the start of the image (its top/left edge) stays at the start of
+       the title: a left bar reads top-to-bottom, a top bar reads left-to-right. */
+    &.accent-left .title-accent-bar.accent-rotate > img {
+        transform: translate(-50%, -50%) rotate(-90deg);
+    }
+
+    &.accent-top .title-accent-bar.accent-rotate > img {
+        transform: translate(-50%, -50%) rotate(90deg);
+    }
 }
 
 .translate-z-0 {
@@ -385,6 +442,18 @@
                 object-fit: cover;
             }
         }
+    }
+}
+
+/* Footer image from the form configuration -> content.footer */
+.footer-section {
+    display: block;
+    line-height: 0;
+
+    .footer-image {
+        display: block;
+        width: 100%;
+        height: auto;
     }
 }
 

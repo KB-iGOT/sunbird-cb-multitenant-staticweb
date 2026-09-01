@@ -20,6 +20,12 @@
     { "label": "Contact", "url": "#" }
   ],
   "content": {
+    "titleAccent": {
+      "active": true,
+      "image": "/assets/images/tricolor-border.svg",
+      "position": "left",
+      "rotate": false
+    },
     "title": "Global Finance Group",
     "subtitle": "Your trusted partner for financial success and wealth management",
     "description": "Premier financial services provider offering comprehensive solutions for individuals and businesses worldwide with over two decades of expertise.",
@@ -32,6 +38,12 @@
       { "value": "50+", "label": "Global Markets" }
     ],
     "photoGallery": {
+      "decoration": {
+      "active": true,
+      "patternImage": "/assets/images/gallery-dots.svg",
+      "circleColor": "#039349",
+      "circleOpacity": 0.0994
+      },
       "title": "GLOBAL FINANCE PORTFOLIO GALLERY",
       "description": "Explore our comprehensive financial services portfolio and successful client partnerships across diverse investment sectors and global markets.",
       "images": [
@@ -162,5 +174,13 @@
     "phone": "+1-555-FINANCE",
     "email": "info@globalfinance.com",
     "address": "789 Financial Plaza, Capital City, CC 54321"
+  },
+  "footer": {
+    "active": true,
+    "image": "",
+    "alt": "Footer",
+    "height": 12,
+    "fit": "fill",
+    "align": "center"
   }
 }

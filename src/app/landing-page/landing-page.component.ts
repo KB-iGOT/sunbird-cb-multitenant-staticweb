@@ -1,6 +1,13 @@
 import { Component, OnInit, ViewEncapsulation, AfterViewInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import { TenantService } from '../services/tenant.service';
-import { TenantConfig } from '../models/tenant.interface';
+import {
+  ResolvedGalleryDecoration,
+  ResolvedTitleAccent,
+  TenantConfig,
+  TenantFooter,
+  TenantGalleryDecoration,
+  TenantLoginButton,
+} from '../models/tenant.interface';
 import { InitService } from '../services/init.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WsEvents } from '../services/events';
@@ -14,7 +21,44 @@ import { LANGUAGES } from '../constant/app.constant';
   encapsulation: ViewEncapsulation.None,
 })
 export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
+  /** Sections that render an accent image along with their title */
+  private static readonly ACCENT_SECTIONS = [
+    'photoGallery',
+    'trainingPrograms',
+    'internationalTraining',
+    'partners',
+    'showcasedCourses',
+  ];
+  /** Used when the form configuration does not provide an accent image */
+  private static readonly DEFAULT_ACCENT_IMAGE = {
+    vertical: '/assets/images/tricolor-border.svg',
+    horizontal: '/assets/images/tricolor-border-horizontal.svg',
+  };
+  /** Used when the form configuration does not describe the gallery decoration */
+  private static readonly DEFAULT_GALLERY_DECORATION = {
+    patternImage: '/assets/images/gallery-dots.svg',
+    circleColor: '#039349',
+    circleOpacity: 0.0994,
+  };
+  private static readonly FOOTER_ALIGN: { [align: string]: string } = {
+    left: 'left center',
+    center: 'center center',
+    right: 'right center',
+  };
+  private static readonly DEFAULT_ACCENT_LENGTH = 96;
+  private static readonly DEFAULT_ACCENT_THICKNESS = 12;
+
   tenant: TenantConfig | null = null;
+  /** Resolved accent (image + position + rotation) per section, driven by the form configuration */
+  titleAccents: { [section: string]: ResolvedTitleAccent } = {};
+  /** Footer image from the form configuration, null when disabled or not configured */
+  footer: TenantFooter | null = null;
+  /** Inline size for the footer image, empty when the config does not set a height */
+  footerImageStyle: { [key: string]: string } = {};
+  /** Dotted pattern and circle behind the photo gallery, driven by the form configuration */
+  galleryDecoration!: ResolvedGalleryDecoration;
+  /** Login button colours, empty when the form configuration leaves them to the theme */
+  loginButtonStyle: { [key: string]: string } = {};
   loading = true;
   private carouselInterval: any;
   private currentIndex = 0;
@@ -54,12 +98,144 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       };
     }
+    this.resolveTitleAccents();
+    this.resolveGalleryDecoration();
+    this.resolveLoginButton();
+    this.resolveFooter();
     this.loading = false;
     if (this.tenant) {
       this.tenantService.applyTheme(this.tenant.theme);
       this.tenantService.updateTitle(this.tenant.content.title);
       this.tenantService.updateFavicon(this.tenant.branding.favicon);
     }
+  }
+
+  /**
+   * Builds the accent config for every section from the form configuration.
+   * Precedence: section level `titleAccent` > content level `titleAccent` > defaults.
+   */
+  private resolveTitleAccents(): void {
+    const content: any = (this.tenant && this.tenant.content) || {};
+    LandingPageComponent.ACCENT_SECTIONS.forEach(section => {
+      const sectionConfig = content[section];
+      this.titleAccents[section] = this.buildTitleAccent(
+        content.titleAccent,
+        sectionConfig && sectionConfig.titleAccent
+      );
+    });
+  }
+
+  private buildTitleAccent(globalAccent: any, sectionAccent: any): ResolvedTitleAccent {
+    const pick = (key: string): any => {
+      const configs = [sectionAccent, globalAccent];
+      for (const config of configs) {
+        const value = config && config[key];
+        if (value !== undefined && value !== null && value !== '') {
+          return value;
+        }
+      }
+      return undefined;
+    };
+    const size = (key: string, fallback: number): number => {
+      const value = Number(pick(key));
+      return value > 0 ? value : fallback;
+    };
+
+    const position: 'left' | 'top' = pick('position') === 'top' ? 'top' : 'left';
+    const rotate = pick('rotate') === true || pick('rotate') === 'true';
+    const length = size('length', LandingPageComponent.DEFAULT_ACCENT_LENGTH);
+    const thickness = size('thickness', LandingPageComponent.DEFAULT_ACCENT_THICKNESS);
+
+    // The box runs along the title: tall & thin for 'left', wide & thin for 'top'.
+    const barWidth = position === 'top' ? length : thickness;
+    const barHeight = position === 'top' ? thickness : length;
+    // A rotated image is drawn with its axes swapped, then turned 90deg by css.
+    const imageWidth = rotate ? barHeight : barWidth;
+    const imageHeight = rotate ? barWidth : barHeight;
+    // Rotation flips the orientation, so a top bar needs a vertical source and vice versa.
+    const wantsHorizontalImage = (position === 'top') !== rotate;
+
+    return {
+      position,
+      rotate,
+      active: pick('active') !== false,
+      image: pick('image') || (wantsHorizontalImage
+        ? LandingPageComponent.DEFAULT_ACCENT_IMAGE.horizontal
+        : LandingPageComponent.DEFAULT_ACCENT_IMAGE.vertical),
+      barStyle: { width: `${barWidth}px`, height: `${barHeight}px` },
+      imageStyle: { width: `${imageWidth}px`, height: `${imageHeight}px` },
+    };
+  }
+
+  /**
+   * Login button colours come from the form configuration. They are applied both
+   * directly and as custom properties, because the theme paints the button with
+   * `!important` declarations that read those properties.
+   */
+  private resolveLoginButton(): void {
+    const content: any = (this.tenant && this.tenant.content) || {};
+    const loginButton: TenantLoginButton = content.loginButton || {};
+    const style: { [key: string]: string } = {};
+
+    if (loginButton.backgroundColor) {
+      style['--login-btn-bg'] = loginButton.backgroundColor;
+      style['background-color'] = loginButton.backgroundColor;
+    }
+    if (loginButton.textColor) {
+      style['--login-btn-color'] = loginButton.textColor;
+      style.color = loginButton.textColor;
+    }
+    this.loginButtonStyle = style;
+  }
+
+  /** Dotted pattern image and circle colour of the photo gallery come from the form configuration. */
+  private resolveGalleryDecoration(): void {
+    const content: any = (this.tenant && this.tenant.content) || {};
+    const photoGallery: any = content.photoGallery || {};
+    const decoration: TenantGalleryDecoration = photoGallery.decoration || {};
+    const defaults = LandingPageComponent.DEFAULT_GALLERY_DECORATION;
+    const opacity = Number(decoration.circleOpacity);
+
+    this.galleryDecoration = {
+      active: decoration.active !== false,
+      patternImage: decoration.patternImage !== undefined && decoration.patternImage !== null
+        ? decoration.patternImage
+        : defaults.patternImage,
+      circleStyle: {
+        'background-color': decoration.circleColor || defaults.circleColor,
+        opacity: `${opacity >= 0 && opacity <= 1 ? opacity : defaults.circleOpacity}`,
+      },
+    };
+  }
+
+  /** Footer is rendered only when enabled in the form configuration and an image is set. */
+  private resolveFooter(): void {
+    const tenant: any = this.tenant || {};
+    const content: any = tenant.content || {};
+    // The form stores `footer` at the root of the page configuration; older
+    // configurations keep it under `content`.
+    const footer: TenantFooter = tenant.footer || content.footer || {};
+    this.footer = footer.active !== false && footer.image ? footer : null;
+    this.footerImageStyle = this.footer ? LandingPageComponent.buildFooterImageStyle(footer) : {};
+  }
+
+  /**
+   * A footer without a configured height keeps the image aspect ratio, so a thin
+   * strip ends up as tall as the page is wide. `height` caps it, and `fit`/`align`
+   * decide how the image sits in that box.
+   */
+  private static buildFooterImageStyle(footer: TenantFooter): { [key: string]: string } {
+    const height = Number(footer.height);
+    if (!(height > 0)) {
+      return {};
+    }
+    const align = LandingPageComponent.FOOTER_ALIGN[footer.align || 'center']
+      || LandingPageComponent.FOOTER_ALIGN.center;
+    return {
+      height: `${height}px`,
+      'object-fit': footer.fit || 'contain',
+      'object-position': align,
+    };
   }
 
   getCountryPercentage(count: string): number {

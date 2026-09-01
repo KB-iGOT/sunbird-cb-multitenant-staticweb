@@ -47,7 +47,8 @@
         </ng-container>
 
       </nav>
-      <a class="mat-button login-button h-10" [href]="baseURl + '/'+tenant.content.loginButton?.link">
+      <a class="mat-button login-button h-10" [ngStyle]="loginButtonStyle"
+        [href]="baseURl + '/'+tenant.content.loginButton?.link">
         {{ tenant.content.loginButton?.text }}
       </a>
     </div>
@@ -97,9 +98,15 @@
       <div class="grid grid-cols-12 gap-8">
         <div class="col-span-10 col-start-2 md:col-span-4 md:col-start-1">
           <div class="mb-12">
-            <h2 class="text-3xl font-bold text-gray-800 mb-4 flex items-center tricolr-border whitespace-pre"
-              [innerHTML]="tenant.content.photoGallery.title">
-            </h2>
+            <div class="section-title-accent mb-4" [ngClass]="'accent-' + titleAccents.photoGallery.position">
+              <span *ngIf="titleAccents.photoGallery.active" class="title-accent-bar"
+                [class.accent-rotate]="titleAccents.photoGallery.rotate" [ngStyle]="titleAccents.photoGallery.barStyle">
+                <img [src]="titleAccents.photoGallery.image" [ngStyle]="titleAccents.photoGallery.imageStyle" alt="" />
+              </span>
+              <h2 class="text-3xl font-bold text-gray-800 whitespace-pre"
+                [innerHTML]="tenant.content.photoGallery.title">
+              </h2>
+            </div>
             <p class="mat-body-2 text-gray-600 max-w-3xl">{{ tenant.content.photoGallery.description }}</p>
             <ng-container *ngIf="tenant?.content?.photoGallery?.ctaLink && tenant?.content?.photoGallery?.activeCTAlink !== false">
               <a [href]="tenant.content.photoGallery.ctaLink" target="_blank"
@@ -121,9 +128,9 @@
               <img [src]="tenant.content.photoGallery.images[1].url " [alt]="tenant.content.photoGallery.images[1].alt"
                 class=" object-cover rounded-lg shadow-md" />
             </div>
-            <div class="pic-svg absolute">
-              <!-- SVG remains unchanged -->
-              <img src="/assets/images/gallery-dots.svg" alt="Dotted pattern SVG" class="w-full h-full" />
+            <div class="pic-svg absolute" *ngIf="galleryDecoration.active && galleryDecoration.patternImage">
+              <!-- pattern image comes from the form configuration -> photoGallery.decoration -->
+              <img [src]="galleryDecoration.patternImage" alt="Dotted pattern SVG" class="w-full h-full" />
             </div>
             <div class="pic2 absolute" *ngIf="tenant.content.photoGallery.images[2]">
               <img [src]="tenant.content.photoGallery.images[2].url " [alt]="tenant.content.photoGallery.images[2].alt"
@@ -137,8 +144,9 @@
               <img [src]="tenant.content.photoGallery.images[4].url " [alt]="tenant.content.photoGallery.images[4].alt"
                 class=" object-cover rounded-lg shadow-md" />
             </div>
-            <div class="pic-circle absolute">
-
+            <!-- circle colour/opacity come from the form configuration -> photoGallery.decoration -->
+            <div class="pic-circle absolute" *ngIf="galleryDecoration.active"
+              [ngStyle]="galleryDecoration.circleStyle">
             </div>
           </div>
         </div>
@@ -222,8 +230,14 @@
         </div>
         <div class="container-balanced mx-auto px-4 sm:px-6 lg:px-8">
           <div class="text-left mb-12">
-            <h2 class="text-3xl text-white font-bold mb-4 section-title-white tricolr-border whitespace-pre"
-              [innerHTML]="tenant.content.trainingPrograms.title"></h2>
+            <div class="section-title-accent mb-4" [ngClass]="'accent-' + titleAccents.trainingPrograms.position">
+              <span *ngIf="titleAccents.trainingPrograms.active" class="title-accent-bar"
+                [class.accent-rotate]="titleAccents.trainingPrograms.rotate" [ngStyle]="titleAccents.trainingPrograms.barStyle">
+                <img [src]="titleAccents.trainingPrograms.image" [ngStyle]="titleAccents.trainingPrograms.imageStyle" alt="" />
+              </span>
+              <h2 class="text-3xl text-white font-bold section-title-white whitespace-pre"
+                [innerHTML]="tenant.content.trainingPrograms.title"></h2>
+            </div>
             <p class="section-subtitle-light mat-body-2" style="color: #cbd5e1;">{{
               tenant.content.trainingPrograms.subtitle }}</p>
           </div>
@@ -255,8 +269,14 @@
       <!-- International Training Section -->
       <section class="py-16 international-training-section" *ngIf="tenant.content.internationalTraining">
         <div class="container-balanced mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 class="text-3xl text-white font-bold text-left mb-12 section-title-white tricolr-border whitespace-pre"
-            [innerHTML]="tenant.content.internationalTraining.title"></h2>
+          <div class="section-title-accent mb-12" [ngClass]="'accent-' + titleAccents.internationalTraining.position">
+            <span *ngIf="titleAccents.internationalTraining.active" class="title-accent-bar"
+              [class.accent-rotate]="titleAccents.internationalTraining.rotate" [ngStyle]="titleAccents.internationalTraining.barStyle">
+              <img [src]="titleAccents.internationalTraining.image" [ngStyle]="titleAccents.internationalTraining.imageStyle" alt="" />
+            </span>
+            <h2 class="text-3xl text-white font-bold text-left section-title-white whitespace-pre"
+              [innerHTML]="tenant.content.internationalTraining.title"></h2>
+          </div>
 
           <div class="grid lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -288,11 +308,16 @@
   <!-- Partners Section -->
   <section class="py-16 bg-white" *ngIf="tenant.content.partners">
     <div class="container-balanced mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center">
-      <h2 class="text-2xl font-bold text-left text-gray-800 mb-12 
-        lg:whitespace-pre flex items-center justify-center">
-        <img src="/assets/images/tricolor-border.svg" alt="Tricolor Border" class="inline-block align-middle mr-2" />
-        {{ tenant.content.partners.title }}
-      </h2>
+      <div class="section-title-accent accent-centered mb-12"
+        [ngClass]="'accent-' + titleAccents.partners.position">
+        <span *ngIf="titleAccents.partners.active" class="title-accent-bar"
+          [class.accent-rotate]="titleAccents.partners.rotate" [ngStyle]="titleAccents.partners.barStyle">
+          <img [src]="titleAccents.partners.image" [ngStyle]="titleAccents.partners.imageStyle" alt="" />
+        </span>
+        <h2 class="text-2xl font-bold text-left text-gray-800 lg:whitespace-pre">
+          {{ tenant.content.partners.title }}
+        </h2>
+      </div>
     </div>
     <div class="divider-thin w-full mb-8"></div>
     <!-- <div class="grid grid-cols-2 md:grid-cols-6 gap-8 items-center">
@@ -320,10 +345,16 @@
   <section class="pb-16 pt-0 bg-white" *ngIf="tenant.content.showcasedCourses">
     <div class="container-balanced mx-auto px-4 sm:px-6 lg:px-8 ">
       <div class="flex items-center justify-center mb-10">
-        <img src="/assets/images/tricolor-border.svg" alt="Tricolor Border" class="tricolor-img-showCase inline-block align-middle mr-2" />
-        <h2 class="text-3xl font-bold  text-gray-800  whitespace-pre flex items-center justify-center"
-          [innerHTML]="tenant.content.showcasedCourses.title">
-        </h2>
+        <div class="section-title-accent accent-centered"
+          [ngClass]="'accent-' + titleAccents.showcasedCourses.position">
+          <span *ngIf="titleAccents.showcasedCourses.active" class="title-accent-bar"
+            [class.accent-rotate]="titleAccents.showcasedCourses.rotate" [ngStyle]="titleAccents.showcasedCourses.barStyle">
+            <img [src]="titleAccents.showcasedCourses.image" [ngStyle]="titleAccents.showcasedCourses.imageStyle" alt="" />
+          </span>
+          <h2 class="text-3xl font-bold text-gray-800 whitespace-pre"
+            [innerHTML]="tenant.content.showcasedCourses.title">
+          </h2>
+        </div>
       </div>
 
       <div class="w-full">
@@ -342,6 +373,12 @@
       </div>
     </div>
   </section>
+
+  <!-- Footer image, enabled/disabled from the form configuration -> content.footer -->
+  <footer class="footer-section" *ngIf="footer">
+    <img [src]="footer.image" [alt]="footer.alt || tenant.branding.companyName" class="footer-image"
+      [ngStyle]="footerImageStyle" />
+  </footer>
 
   <!-- Footer -->
   <footer class="bg-gray-800 text-white py-12 hidden">

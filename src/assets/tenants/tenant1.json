@@ -34,10 +34,23 @@
     { "label": "Language", "url": "", "icon":"translate" }
   ],
   "content": {
+    "titleAccent": {
+      "active": true,
+      "image": "/assets/images/tricolor-border-horizontal.svg",
+      "position": "top",
+      "rotate": false,
+      "length": 96,
+      "thickness": 12
+    },
     "title": "Indian International  \nInstitute of Democracy & \n Election Management",
     "subtitle": "IIIDEM is the dedicated training, academic & resource arm of the Election Commission of India. Established in 2011, the Institute was conceived to train, prepare and equip election officials and other stakeholders for delivery of free, fair, credible and error-free elections cutting across boundaries and ethnicities. IIIDEM is one of the few institutions in the world which is not only involved in the Training & Capacity Building of its Electoral officials, but also catering to the requirements of Election Management Bodies (EMBs) world over.",
     "description": "IIDEM is committed to enhancing the capacity of election management bodies and promoting democratic governance through comprehensive training programs, research initiatives, and international collaboration.",
-    "loginButton": {"text": "Login", "link": "protected/v8/eclogin"},
+    "loginButton": {
+      "text": "Login",
+      "link": "protected/v8/eclogin",
+      "backgroundColor": "",
+      "textColor": ""
+    },
     "sliderData": {
         "styleData": {
             "bannerMetaClass": "",
@@ -111,6 +124,12 @@
       { "value": "141+", "label": "Footprint of Countries" }
     ],
     "photoGallery": {
+      "decoration": {
+      "active": true,
+      "patternImage": "/assets/images/gallery-dots.svg",
+      "circleColor": "#039349",
+      "circleOpacity": 0.0994
+      },
       "title": "IIDEM PHOTO & \nVIDEO GALLERY",
       "description": "IIIDEM is the dedicated training, academic & resource arm of the Election Commission of India. Established in 2011, the Institute was conceived to train, prepare and equip election officials and other stakeholders for delivery of free, fair, credible and error-free elections cutting across boundaries and ethnicities. IIIDEM is one of the few institutions in the world which is not only involved in the Training & Capacity Building of its Electoral officials, but also catering to the requirements of Election Management Bodies (EMBs) world over.",
        "ctaText":  "Know More",
@@ -260,5 +279,13 @@
     "phone": "+91-11-IIDEM-100",
     "email": "info@iidem.gov.in",
     "address": "New Delhi, India"
+  },
+  "footer": {
+    "active": true,
+    "image": "",
+    "alt": "Footer",
+    "height": 12,
+    "fit": "fill",
+    "align": "center"
   }
 }
