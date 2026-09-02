@@ -1524,3 +1524,17 @@ ngx-guided-tour {
 .theme-igot.day-mode .mat-card:not([class*=mat-elevation-z]){
   box-shadow: 0 2px 1px -1px #0003, 0 1px 1px #00000024, 0 1px 3px #0000001f;
 }
+
+// Override @sunbird-cb/consumption sliders widget: its banner images use
+// `object-fit: cover`, which crops them on small screens. This is a global
+// stylesheet, so `::ng-deep` must NOT be used here - it is only shimmed away in
+// component styles; in a global file the browser treats it as an unknown
+// pseudo-element and drops the whole rule. Plain selectors + !important are
+// enough to beat the library's non-important declaration.
+// Breakpoint matches the widget's own `isMobile` (Breakpoints.XSmall + Small).
+@media only screen and (max-width: 959.98px) {
+  .banner .bannerimage-mdo,   // multi-banner slider
+  .banner-container-solo .banner-image-solo {  // single-banner variant
+    object-fit: unset !important;
+  }
+}
