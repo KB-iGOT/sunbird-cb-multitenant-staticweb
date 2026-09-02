@@ -20,9 +20,58 @@ export interface TenantBranding {
   companyName: string;
 }
 
+/**
+ * What a navigation item does when it is clicked:
+ * - 'link'     opens `url`, in a new tab unless `newTab` is false
+ * - 'scroll'   smooth scrolls to the section named by `sectionId`
+ * - 'copy'     copies `copyText` (or the label) to the clipboard
+ * - 'language' renders the language picker instead of a link
+ */
+export type TenantNavigationType = 'link' | 'scroll' | 'copy' | 'language';
+
 export interface TenantNavigation {
   label: string;
+  /** Material icon name shown before the label. */
+  icon?: string;
+  /**
+   * Show/hide the item. Defaults to true. The form configuration has used
+   * `active`, `enable` and `enabled` for this flag, all three are honoured.
+   */
+  active?: boolean;
+  enable?: boolean;
+  enabled?: boolean;
+  /** Defaults to 'language' for a "Language" label and to 'link' otherwise. */
+  type?: TenantNavigationType;
+  /**
+   * 'link': url to open. For the other types it is the fallback of the field
+   * they use, so a configuration that only carries a url keeps working.
+   */
+  url?: string;
+  /** 'link' only: open the url in a new tab. Defaults to true. */
+  newTab?: boolean;
+  /**
+   * 'scroll' only: id of the section to scroll to, with or without a leading '#'.
+   * Falls back to `url`. The landing page exposes 'hero', 'photoGallery',
+   * 'trainingPrograms', 'internationalTraining', 'partners', 'showcasedCourses'
+   * and 'footer'.
+   */
+  sectionId?: string;
+  /** 'copy' only: text put on the clipboard. Falls back to the label, then to `url`. */
+  copyText?: string;
+  /** 'copy' only: label shown for a moment after copying. Defaults to 'Copied!'. */
+  copiedLabel?: string;
+}
+
+/** `TenantNavigation` after defaults are applied, ready for the template. */
+export interface ResolvedNavItem {
+  label: string;
+  icon: string;
+  type: TenantNavigationType;
   url: string;
+  newTab: boolean;
+  sectionId: string;
+  copyText: string;
+  copiedLabel: string;
 }
 
 export interface TenantFeature {

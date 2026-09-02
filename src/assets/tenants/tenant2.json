@@ -13,11 +13,11 @@
     "companyName": "TechVision Solutions"
   },
   "navigation": [
-    { "label": "Home", "url": "#" },
-    { "label": "Services", "url": "#" },
-    { "label": "Solutions", "url": "#" },
-    { "label": "About", "url": "#" },
-    { "label": "Contact", "url": "#" }
+    { "label": "Home", "url": "", "active": true, "type": "scroll", "sectionId": "hero" },
+    { "label": "Gallery", "url": "", "active": true, "type": "scroll", "sectionId": "photoGallery" },
+    { "label": "Programs", "url": "", "active": true, "type": "scroll", "sectionId": "trainingPrograms" },
+    { "label": "About", "url": "https://example.com/about", "active": true, "type": "link", "newTab": true },
+    { "label": "Contact", "url": "", "active": true, "type": "copy", "copyText": "contact@techvision.com", "copiedLabel": "Copied!" }
   ],
   "content": {
     "titleAccent": {

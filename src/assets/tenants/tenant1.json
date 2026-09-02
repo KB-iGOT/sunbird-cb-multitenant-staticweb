@@ -29,9 +29,30 @@
     "companyName": "Indian International \n Institute of Democracy \n& Election Management"
   },
   "navigation": [
-    { "label": "Home", "url": "", "icon":"home" },
-    { "label": "+91-11-25303400", "url": "", "icon":"record_voice_over" },
-    { "label": "Language", "url": "", "icon":"translate" }
+    {
+      "label": "Home",
+      "url": "",
+      "icon": "home",
+      "active": true,
+      "type": "scroll",
+      "sectionId": "hero"
+    },
+    {
+      "label": "+91-11-25303400",
+      "url": "https://adiprasaran.tribal.gov.in/adikarmayogi/ContactUs.aspx",
+      "icon": "record_voice_over",
+      "active": true,
+      "type": "copy",
+      "copyText": "+91-11-25303400",
+      "copiedLabel": "Copied!"
+    },
+    {
+      "label": "Language",
+      "url": "",
+      "icon": "translate",
+      "active": true,
+      "type": "language"
+    }
   ],
   "content": {
     "titleAccent": {

@@ -2,11 +2,14 @@ import { Component, OnInit, ViewEncapsulation, AfterViewInit, ElementRef, ViewCh
 import { TenantService } from '../services/tenant.service';
 import {
   ResolvedGalleryDecoration,
+  ResolvedNavItem,
   ResolvedTitleAccent,
   TenantConfig,
   TenantFooter,
   TenantGalleryDecoration,
   TenantLoginButton,
+  TenantNavigation,
+  TenantNavigationType,
 } from '../models/tenant.interface';
 import { InitService } from '../services/init.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -47,6 +50,10 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
   };
   private static readonly DEFAULT_ACCENT_LENGTH = 96;
   private static readonly DEFAULT_ACCENT_THICKNESS = 12;
+  private static readonly NAV_TYPES: TenantNavigationType[] = ['link', 'scroll', 'copy', 'language'];
+  private static readonly DEFAULT_COPIED_LABEL = 'Copied!';
+  /** How long the 'Copied!' label replaces the nav label */
+  private static readonly COPIED_FEEDBACK_MS = 2000;
 
   tenant: TenantConfig | null = null;
   /** Resolved accent (image + position + rotation) per section, driven by the form configuration */
@@ -59,6 +66,11 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
   galleryDecoration!: ResolvedGalleryDecoration;
   /** Login button colours, empty when the form configuration leaves them to the theme */
   loginButtonStyle: { [key: string]: string } = {};
+  /** Enabled navigation items from the form configuration, with their behaviour resolved */
+  navItems: ResolvedNavItem[] = [];
+  /** Item whose text was just copied, so the template can confirm it */
+  copiedNav: ResolvedNavItem | null = null;
+  private copiedTimeout: any;
   loading = true;
   private carouselInterval: any;
   private currentIndex = 0;
@@ -98,6 +110,7 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       };
     }
+    this.resolveNavigation();
     this.resolveTitleAccents();
     this.resolveGalleryDecoration();
     this.resolveLoginButton();
@@ -108,6 +121,107 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
       this.tenantService.updateTitle(this.tenant.content.title);
       this.tenantService.updateFavicon(this.tenant.branding.favicon);
     }
+  }
+
+  /** Keeps the enabled navigation items and resolves what each of them does on click. */
+  private resolveNavigation(): void {
+    const navigation: TenantNavigation[] = (this.tenant && this.tenant.navigation) || [];
+    this.navItems = navigation
+      .filter(nav => nav && LandingPageComponent.isNavEnabled(nav))
+      .map(nav => LandingPageComponent.buildNavItem(nav));
+  }
+
+  /** The form configuration has used `active`, `enable` and `enabled` for the same flag. */
+  private static isNavEnabled(nav: TenantNavigation): boolean {
+    return nav.active !== false && nav.enable !== false && nav.enabled !== false;
+  }
+
+  private static buildNavItem(nav: TenantNavigation): ResolvedNavItem {
+    const url = nav.url || '';
+    return {
+      label: nav.label || '',
+      icon: nav.icon || '',
+      type: LandingPageComponent.resolveNavType(nav),
+      url,
+      newTab: nav.newTab !== false,
+      // `url` is the fallback so an item that only carries the url still scrolls;
+      // both '#section' and 'section' are accepted
+      sectionId: (nav.sectionId || url).replace(/^#/, ''),
+      copyText: nav.copyText || nav.label || url,
+      copiedLabel: nav.copiedLabel || LandingPageComponent.DEFAULT_COPIED_LABEL,
+    };
+  }
+
+  /** Older configurations only carry a label and a url, they keep behaving as links. */
+  private static resolveNavType(nav: TenantNavigation): TenantNavigationType {
+    const type = String(nav.type || '').toLowerCase() as TenantNavigationType;
+    if (LandingPageComponent.NAV_TYPES.indexOf(type) > -1) {
+      return type;
+    }
+    return nav.label === 'Language' ? 'language' : 'link';
+  }
+
+  /** Scroll and copy items act on the page, links are left to the browser. */
+  onNavClick(item: ResolvedNavItem, event: Event): void {
+    if (item.type === 'scroll') {
+      event.preventDefault();
+      LandingPageComponent.scrollToSection(item.sectionId);
+    } else if (item.type === 'copy') {
+      event.preventDefault();
+      this.copyNavText(item);
+    } else if (!item.url) {
+      // an anchor without a url would reload the page
+      event.preventDefault();
+    }
+  }
+
+  private static scrollToSection(sectionId: string): void {
+    const section = sectionId ? document.getElementById(sectionId) : null;
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  private copyNavText(item: ResolvedNavItem): void {
+    if (!item.copyText) {
+      return;
+    }
+    LandingPageComponent.writeToClipboard(item.copyText)
+      .then(() => {
+        this.copiedNav = item;
+        clearTimeout(this.copiedTimeout);
+        this.copiedTimeout = setTimeout(() => {
+          this.copiedNav = null;
+        }, LandingPageComponent.COPIED_FEEDBACK_MS);
+      })
+      .catch(() => {
+        // nothing to confirm when the browser refuses the clipboard
+      });
+  }
+
+  /** The async clipboard api is missing on http origins and older browsers. */
+  private static writeToClipboard(text: string): Promise<void> {
+    const clipboard = navigator.clipboard;
+    if (clipboard && clipboard.writeText) {
+      return clipboard.writeText(text);
+    }
+    return new Promise<void>((resolve, reject) => {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.top = '-1000px';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      const copied = document.execCommand('copy');
+      document.body.removeChild(textarea);
+      if (copied) {
+        resolve();
+      } else {
+        reject();
+      }
+    });
   }
 
   /**
@@ -252,6 +366,9 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy() {
     if (this.carouselInterval) {
       clearInterval(this.carouselInterval);
+    }
+    if (this.copiedTimeout) {
+      clearTimeout(this.copiedTimeout);
     }
   }
 

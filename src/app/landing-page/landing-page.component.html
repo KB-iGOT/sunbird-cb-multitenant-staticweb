@@ -18,7 +18,7 @@
   </header>
 
   <!-- Hero Section with Blue Gradient -->
-  <section class="relative blue-gradient text-white pt-5 pb-40">
+  <section id="hero" class="relative blue-gradient text-white pt-5 pb-40">
     <div class="disc1 absolute top-0 left-0 translate-z-0">
       <img src="/assets/images/oval-disc1.svg" alt="Decorative Disc 1" class="w-40 h-40" />
     </div>
@@ -26,24 +26,41 @@
       <img src="/assets/images/oval-disc2.svg" alt="Decorative Disc 1" class="w-80 h-80" />
     </div>
     <div class="navs flex justify-end items-center px-4 pb-6 gap-8 translate-z-1">
+      <!-- navigation items come from the form configuration -> navigation -->
       <nav class=" space-x-8 flex">
-        <ng-container *ngFor="let nav of tenant.navigation">
-          <ng-container *ngIf="nav.label !== 'Language'"> 
-            <a  href="#"
-              class="mat-body-2 nav-link flex items-center cursor-pointer hover:opacity-80 transition-colors">
-              <mat-icon class="mr-2 mat-icon" *ngIf="nav.icon">{{ nav.icon }}</mat-icon>
-              {{ nav.label
-              }}
-            </a>
-          </ng-container>
-          <ng-container *ngIf="nav.label === 'Language'">
-            <div class="language flex items-center justify-center nav-link">
-              <img src="./assets/images/translate.svg" alt="language-icon" class="mr-2 img-icon">
-              <select name="language" class="custom-select" [(ngModel)]="currentLanguage" (change)="languageChange($event)" disabled>
-                <option [value]="item.key" *ngFor="let item of languages">{{item.value}}</option>
-              </select>
-            </div>
-          </ng-container>
+        <ng-container *ngFor="let nav of navItems">
+          <!-- type 'link': opens the configured url, in a new tab unless the config says otherwise -->
+          <a *ngIf="nav.type === 'link'" [href]="nav.url || '#'"
+            [attr.target]="nav.url && nav.newTab ? '_blank' : null"
+            [attr.rel]="nav.url && nav.newTab ? 'noopener noreferrer' : null"
+            (click)="onNavClick(nav, $event)"
+            class="mat-body-2 nav-link flex items-center cursor-pointer hover:opacity-80 transition-colors">
+            <mat-icon class="mr-2 mat-icon" *ngIf="nav.icon">{{ nav.icon }}</mat-icon>
+            {{ nav.label }}
+          </a>
+
+          <!-- type 'scroll': scrolls to the section named by sectionId -->
+          <a *ngIf="nav.type === 'scroll'" [href]="'#' + nav.sectionId" (click)="onNavClick(nav, $event)"
+            class="mat-body-2 nav-link flex items-center cursor-pointer hover:opacity-80 transition-colors">
+            <mat-icon class="mr-2 mat-icon" *ngIf="nav.icon">{{ nav.icon }}</mat-icon>
+            {{ nav.label }}
+          </a>
+
+          <!-- type 'copy': puts copyText on the clipboard and confirms it on the label -->
+          <button *ngIf="nav.type === 'copy'" type="button" (click)="onNavClick(nav, $event)"
+            [attr.aria-label]="'Copy ' + nav.label" [attr.title]="nav.copyText"
+            class="mat-body-2 nav-link nav-copy flex items-center cursor-pointer hover:opacity-80 transition-colors">
+            <mat-icon class="mr-2 mat-icon" *ngIf="nav.icon">{{ nav.icon }}</mat-icon>
+            {{ copiedNav === nav ? nav.copiedLabel : nav.label }}
+          </button>
+
+          <!-- type 'language': language picker -->
+          <div *ngIf="nav.type === 'language'" class="language flex items-center justify-center nav-link">
+            <img src="./assets/images/translate.svg" alt="language-icon" class="mr-2 img-icon">
+            <select name="language" class="custom-select" [(ngModel)]="currentLanguage" (change)="languageChange($event)" disabled>
+              <option [value]="item.key" *ngFor="let item of languages">{{item.value}}</option>
+            </select>
+          </div>
         </ng-container>
 
       </nav>
@@ -72,7 +89,7 @@
         </div>
       </div>
       <!-- Statistics -->
-      <div class="grid grid-cols-4 lg:grid-cols-6  mt-12">
+      <div class="grid grid-cols-2 lg:grid-cols-6  mt-12 gap-4">
         <div *ngFor="let stat of tenant.content.statistics; let i = index"
           class="text-left stat-counter pl-4 mr-5 md:mr-15 lg:mr-15"
           [ngClass]="{'border-l-2 border-white border-opacity-30': i > 0, 'lg:col-start-2': i === 0}">
@@ -93,7 +110,7 @@
   </section>
 
   <!-- Photo Gallery Section -->
-  <section class="py-16 bg-white" *ngIf="tenant.content.photoGallery">
+  <section id="photoGallery" class="py-16 bg-white" *ngIf="tenant.content.photoGallery">
     <div class="container-balanced mx-auto ">
       <div class="grid grid-cols-12 gap-8">
         <div class="col-span-10 col-start-2 md:col-span-4 md:col-start-1">
@@ -220,7 +237,7 @@
   <ng-container *ngIf="tenant.content.trainingPrograms || tenant.content.internationalTraining">
     <div class="black-gradient-bg">
       <!-- Training Programs Section -->
-      <section class="relative py-16 training-programs-section" *ngIf="tenant.content.trainingPrograms">
+      <section id="trainingPrograms" class="relative py-16 training-programs-section" *ngIf="tenant.content.trainingPrograms">
         <div class="absolute top-0 left-0 right-0">
           <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="72" viewBox="0 0 1600 72" fill="none">
             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -267,7 +284,7 @@
 
       <div class="mx-auto divider-small"></div>
       <!-- International Training Section -->
-      <section class="py-16 international-training-section" *ngIf="tenant.content.internationalTraining">
+      <section id="internationalTraining" class="py-16 international-training-section" *ngIf="tenant.content.internationalTraining">
         <div class="container-balanced mx-auto px-4 sm:px-6 lg:px-8">
           <div class="section-title-accent mb-12" [ngClass]="'accent-' + titleAccents.internationalTraining.position">
             <span *ngIf="titleAccents.internationalTraining.active" class="title-accent-bar"
@@ -306,7 +323,7 @@
   </ng-container>
 
   <!-- Partners Section -->
-  <section class="py-16 bg-white" *ngIf="tenant.content.partners">
+  <section id="partners" class="py-16 bg-white" *ngIf="tenant.content.partners">
     <div class="container-balanced mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center">
       <div class="section-title-accent accent-centered mb-12"
         [ngClass]="'accent-' + titleAccents.partners.position">
@@ -342,7 +359,7 @@
   </section>
 
   <!-- Showcased Courses Section -->
-  <section class="pb-16 pt-0 bg-white" *ngIf="tenant.content.showcasedCourses">
+  <section id="showcasedCourses" class="pb-16 pt-0 bg-white" *ngIf="tenant.content.showcasedCourses">
     <div class="container-balanced mx-auto px-4 sm:px-6 lg:px-8 ">
       <div class="flex items-center justify-center mb-10">
         <div class="section-title-accent accent-centered"
@@ -351,7 +368,7 @@
             [class.accent-rotate]="titleAccents.showcasedCourses.rotate" [ngStyle]="titleAccents.showcasedCourses.barStyle">
             <img [src]="titleAccents.showcasedCourses.image" [ngStyle]="titleAccents.showcasedCourses.imageStyle" alt="" />
           </span>
-          <h2 class="text-3xl font-bold text-gray-800 whitespace-pre"
+          <h2 class="text-3xl font-bold text-gray-800 "
             [innerHTML]="tenant.content.showcasedCourses.title">
           </h2>
         </div>
@@ -375,7 +392,7 @@
   </section>
 
   <!-- Footer image, enabled/disabled from the form configuration -> content.footer -->
-  <footer class="footer-section" *ngIf="footer">
+  <footer id="footer" class="footer-section" *ngIf="footer">
     <img [src]="footer.image" [alt]="footer.alt || tenant.branding.companyName" class="footer-image"
       [ngStyle]="footerImageStyle" />
   </footer>

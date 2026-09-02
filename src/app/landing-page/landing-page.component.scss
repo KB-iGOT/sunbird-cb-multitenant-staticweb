@@ -184,6 +184,17 @@
     width: 17px;
 }
 
+/* the 'copy' nav type is a button, it has to read like the neighbouring links */
+.nav-copy {
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    letter-spacing: inherit;
+    white-space: nowrap;
+}
+
 
 .maxw-percent {
     max-width: 235px;
