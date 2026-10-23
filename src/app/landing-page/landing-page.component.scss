@@ -26,7 +26,7 @@
 
 .theme-teal {
     .blue-gradient {
-        background: linear-gradient(225deg, #0C6B78 0.3%, #005461 39.59%, #004752 100%) !important;
+        background: linear-gradient(225deg, var(--secondary-color, #0C6B78) 0.3%, var(--primary-color, #005461) 39.59%, var(--primary-color, #004752) 100%) !important;
 
         .login-button {
             background: var(--login-btn-bg, #C10097) !important;
