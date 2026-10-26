@@ -89,12 +89,18 @@
         </div>
       </div>
       <!-- Statistics -->
-      <div class="grid grid-cols-2 lg:grid-cols-6  mt-12 gap-4">
-        <div *ngFor="let stat of tenant.content.statistics; let i = index"
-          class="text-left stat-counter pl-4 mr-5 md:mr-15 lg:mr-15"
-          [ngClass]="{'border-l-2 border-white border-opacity-30': i > 0, 'lg:col-start-2': i === 0}">
-          <div class="text-3xl font-bold mb-2">{{ stat.value }}</div>
-          <div class="text-blue-200 leading-tight maxw-percent text-sm">{{ stat.label }}</div>
+      <div class="flex mt-12" [style.justify-content]="tenant.content.volunteer_strip_alignment">
+        <div class="grid grid-cols-2 lg:grid-cols-3 w-full lg:w-1/2 gap-4">
+          <div *ngFor="let stat of tenant.content.statistics; let i = index"
+            class="stat-counter pl-4 mr-5 md:mr-15 lg:mr-15"
+            [ngClass]="{'border-l-2 border-white border-opacity-30': i > 0}">
+            <div class="font-bold mb-2"
+              [ngStyle]="{'font-size': tenant.content.volunteeer_strip_title?.fontSize, 'color': tenant.content.volunteeer_strip_title?.textColor, 'text-align': tenant.content.volunteeer_strip_title?.alignment}">
+              {{ stat.value }}</div>
+            <div class="leading-tight maxw-percent"
+              [ngStyle]="{'font-size': tenant.content.volunteer_strip_text?.fontSize, 'color': tenant.content.volunteer_strip_text?.textColor, 'text-align': tenant.content.volunteer_strip_text?.alignment}">
+              {{ stat.label }}</div>
+          </div>
         </div>
       </div>
     </div>
