@@ -85,6 +85,14 @@ export interface TenantStatistic {
   label: string;
 }
 
+export interface TenantStatisticTextStyle {
+  fontSize?: string;
+  textColor?: string;
+  alignment?: 'left' | 'center' | 'right';
+}
+
+export type TenantStatisticStripAlignment = 'left' | 'center' | 'right';
+
 export interface TenantTitleAccent {
   /** Show/hide the accent image next to the section title. Defaults to true. */
   active?: boolean;
@@ -236,6 +244,12 @@ export interface TenantContent {
   ctaButton: string;
   features: TenantFeature[];
   statistics: TenantStatistic[];
+  /** Style of the statistic value/title. The API field name is kept as configured. */
+  volunteeer_strip_title?: TenantStatisticTextStyle;
+  /** Style of the statistic label/text. */
+  volunteer_strip_text?: TenantStatisticTextStyle;
+  /** Horizontal position of the complete statistics strip. Defaults to center. */
+  volunteer_strip_alignment?: TenantStatisticStripAlignment;
   loginButton?: TenantLoginButton;
   /** Default accent for every section title, overridable per section. */
   titleAccent?: TenantTitleAccent;
