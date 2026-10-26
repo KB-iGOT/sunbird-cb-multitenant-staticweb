@@ -96,6 +96,7 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.tenant = this.initService.configDetails;
+    this.normalizeSliderBanners();
     this.baseURl = this.initService.appConfig.portalURL;
     if(this.tenant && this.tenant.content &&
       this.tenant.content.showcasedCourses &&
@@ -121,6 +122,20 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
       this.tenantService.updateTitle(this.tenant.content.title);
       this.tenantService.updateFavicon(this.tenant.branding.favicon);
     }
+  }
+
+  private normalizeSliderBanners(): void {
+    const sliders = (this.tenant?.content as any)?.sliderData?.sliders;
+    if (!Array.isArray(sliders)) return;
+
+    sliders.forEach((slide: any) => {
+      const banners = slide?.banners;
+      const fallback = banners?.xl || banners?.l || banners?.m || banners?.s || banners?.xs || banners?.xxl;
+      if (!fallback) return;
+      ['xs', 's', 'm', 'l', 'xl', 'xxl'].forEach(size => {
+        banners[size] = banners[size] || fallback;
+      });
+    });
   }
 
   /** Keeps the enabled navigation items and resolves what each of them does on click. */
