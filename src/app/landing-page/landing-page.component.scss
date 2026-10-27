@@ -69,6 +69,110 @@
     bottom: -5px;
 }
 
+@media (max-width: 768px) {
+    .navs {
+        gap: 1rem;
+    }
+
+    .landing-page-nav {
+        flex-wrap: nowrap;
+        gap: 1rem;
+
+        // Replace Tailwind's sibling margin so every nav gap matches the login gap.
+        > :not([hidden]) ~ :not([hidden]) {
+            margin-left: 0;
+        }
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .photo-gallery-copy,
+    .photo-gallery-title-accent {
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    .photo-gallery-title-accent > h2.photo-gallery-heading.whitespace-pre {
+        flex: 1 1 auto;
+        max-width: 100%;
+        min-width: 0;
+        white-space: normal !important;
+        overflow-wrap: anywhere;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .landing-page-header {
+        width: 100%;
+        max-width: none;
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+    }
+
+    .landing-page-logo-wrapper {
+        width: 100%;
+        min-width: 0;
+        margin-left: 6px;
+    }
+
+    .landing-page-logo {
+        display: block;
+        width: calc(100% - 10px);
+        max-width: calc(100% - 10px);
+        height: auto;
+        max-height: 3rem;
+        margin-right: auto;
+        margin-left: auto;
+        object-fit: contain;
+    }
+
+    .photo-gallery-title-accent {
+        max-width: 100%;
+        min-width: 0;
+
+        > .photo-gallery-heading {
+            flex: 1 1 auto;
+            max-width: 100%;
+            min-width: 0;
+            font-size: clamp(1.25rem, 7vw, 1.875rem);
+            line-height: 1.2;
+            white-space: normal;
+            overflow-wrap: break-word;
+        }
+    }
+
+    .photo-gallery-copy {
+        grid-column: 1 / -1;
+        min-width: 0;
+        padding-right: 1rem;
+        padding-left: 1rem;
+    }
+
+    .gallery-resonsive {
+        grid-column: 1 / -1;
+        width: calc(100% - 2rem);
+        max-width: 100%;
+        min-width: 0;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .photo-gallery-description {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        white-space: normal;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+    }
+}
+
+@media (max-width: 425px) {
+    .photo-gallery-grid {
+        gap: 1rem 0;
+    }
+}
+
 /**
  * Section title accent (tricolor bar by default).
  * Image and placement come from the form configuration -> `content.titleAccent`

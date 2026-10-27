@@ -4,14 +4,14 @@
 
 <div *ngIf="!loading && tenant" class="min-h-screen overflow-hidden" [ngClass]="tenant?.theme?.themeName">
   <!-- Header/Navigation -->
-  <header class="bg-white shadow-sm container-balanced">
+  <header class="landing-page-header bg-white shadow-sm container-balanced">
     <div class=" mx-auto">
       <div class="flex justify-between items-center py-4">
-        <div class="flex items-center">
+        <div class="landing-page-logo-wrapper flex items-center">
           <!-- <img [src]="tenant.branding.logo" [alt]="tenant.branding.companyName + ' Logo'" class="h-12 w-auto mr-4" />
           <h1 class="text-xl font-bold text-gray-800">{{ tenant.branding.companyName }}</h1> -->
           <img src="{{tenant?.branding?.logo}}" [alt]="tenant.branding.companyName + ' Logo'"
-            class="h-12 w-auto mr-4" />
+            class="landing-page-logo h-12 w-auto" />
         </div>
       </div>
     </div>
@@ -27,7 +27,7 @@
     </div>
     <div class="navs flex justify-end items-center px-4 pb-6 gap-8 translate-z-1">
       <!-- navigation items come from the form configuration -> navigation -->
-      <nav class=" space-x-8 flex">
+      <nav class="landing-page-nav flex space-x-8">
         <ng-container *ngFor="let nav of navItems">
           <!-- type 'link': opens the configured url, in a new tab unless the config says otherwise -->
           <a *ngIf="nav.type === 'link'" [href]="nav.url || '#'"
@@ -120,19 +120,22 @@
   <!-- Photo Gallery Section -->
   <section id="photoGallery" class="py-16 bg-white" *ngIf="tenant.content.photoGallery">
     <div class="container-balanced mx-auto ">
-      <div class="grid grid-cols-12 gap-8">
-        <div class="col-span-10 col-start-2 md:col-span-4 md:col-start-1">
+      <div class="photo-gallery-grid grid grid-cols-12 gap-8">
+        <div class="photo-gallery-copy col-span-10 col-start-2 md:col-span-4 md:col-start-1">
           <div class="mb-12">
-            <div class="section-title-accent mb-4" [ngClass]="'accent-' + titleAccents.photoGallery.position">
+            <div class="photo-gallery-title-accent section-title-accent mb-4"
+              [ngClass]="'accent-' + titleAccents.photoGallery.position">
               <span *ngIf="titleAccents.photoGallery.active" class="title-accent-bar"
                 [class.accent-rotate]="titleAccents.photoGallery.rotate" [ngStyle]="titleAccents.photoGallery.barStyle">
                 <img [src]="titleAccents.photoGallery.image" [ngStyle]="titleAccents.photoGallery.imageStyle" alt="" />
               </span>
-              <h2 class="text-3xl font-bold text-gray-800 whitespace-pre"
+              <h2 class="photo-gallery-heading text-3xl font-bold text-gray-800 whitespace-pre"
                 [innerHTML]="tenant.content.photoGallery.title">
               </h2>
             </div>
-            <p class="mat-body-2 text-gray-600 max-w-3xl">{{ tenant.content.photoGallery.description }}</p>
+            <p class="photo-gallery-description mat-body-2 text-gray-600 max-w-3xl">
+              {{ tenant.content.photoGallery.description }}
+            </p>
             <ng-container *ngIf="tenant?.content?.photoGallery?.ctaLink && tenant?.content?.photoGallery?.activeCTAlink !== false">
               <a [href]="tenant.content.photoGallery.ctaLink" target="_blank"
                 class="custom-program-btn gallery-btn flex items-center mt-4">
@@ -369,7 +372,7 @@
   <!-- Showcased Courses Section -->
   <section id="showcasedCourses" class="pb-16 pt-0 bg-white" *ngIf="tenant.content.showcasedCourses">
     <div class="container-balanced mx-auto px-4 sm:px-6 lg:px-8 ">
-      <div class="flex items-center justify-center mb-10">
+      <div class="flex items-center justify-center">
         <div class="section-title-accent accent-centered"
           [ngClass]="'accent-' + titleAccents.showcasedCourses.position">
           <span *ngIf="titleAccents.showcasedCourses.active" class="title-accent-bar"
