@@ -123,4 +123,21 @@ describe('LandingPageComponent statistics', () => {
     expect(label.style.color).toBe('rgb(101, 67, 33)');
     expect(label.style.textAlign).toBe('right');
   });
+
+  it('wraps extra statistics within the responsive strip', () => {
+    const statistics = Array.from({ length: 8 }, (_, index) => ({
+      value: `${index + 1}+`,
+      label: `Statistic ${index + 1}`,
+    }));
+    const element = render({ statistics });
+    const strip = element.querySelector('.statistics-strip') as HTMLElement;
+    const counters = element.querySelectorAll('.stat-counter');
+
+    expect(strip.classList).toContain('lg:flex');
+    expect(strip.classList).toContain('lg:flex-wrap');
+    expect(strip.classList).toContain('w-full');
+    expect(counters).toHaveLength(8);
+    expect(counters[0].classList).toContain('lg:flex-none');
+    expect(counters[0].classList).toContain('lg:w-36');
+  });
 });
