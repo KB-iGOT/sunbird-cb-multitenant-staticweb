@@ -154,6 +154,13 @@
     max-width: 270px;
 }
 
+@media (min-width: 1024px) {
+    .statistics-strip {
+        width: 90vw !important;
+        flex-shrink: 0;
+    }
+}
+
 .divider-small{
     opacity: 10%;
     height: 1px;
