@@ -3,6 +3,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { readFileSync } from 'fs';
 import { EventService } from '../services/event.service';
 import { InitService } from '../services/init.service';
 import { TenantService } from '../services/tenant.service';
@@ -139,5 +140,40 @@ describe('LandingPageComponent statistics', () => {
     expect(counters).toHaveLength(8);
     expect(counters[0].classList).toContain('lg:flex-none');
     expect(counters[0].classList).toContain('lg:w-36');
+  });
+
+  it('renders the hooks used by the responsive photo gallery styles', () => {
+    const images = Array.from({ length: 5 }, (_, index) => ({
+      url: `/gallery-${index + 1}.jpg`,
+      alt: `Gallery image ${index + 1}`,
+      caption: `Gallery caption ${index + 1}`,
+    }));
+    const element = render({
+      photoGallery: {
+        title: 'Learn. Build.\nEnhance capabilities.',
+        description: 'Responsive gallery description',
+        images,
+      },
+    });
+
+    expect(element.querySelector('.photo-gallery-grid')).not.toBeNull();
+    expect(element.querySelector('.photo-gallery-copy')).not.toBeNull();
+    expect(element.querySelector('.photo-gallery-title-accent > .photo-gallery-heading')).not.toBeNull();
+    expect(element.querySelector('.photo-gallery-grid > .gallery-resonsive')).not.toBeNull();
+  });
+
+  it('keeps the photo gallery centered across the complete mobile breakpoint', () => {
+    const stylesheet = readFileSync(`${__dirname}/landing-page.component.scss`, 'utf8');
+    const mobileStart = stylesheet.indexOf('@media (max-width: 767.98px)');
+    const mobileEnd = stylesheet.indexOf('/**', mobileStart);
+    const mobileStyles = stylesheet.slice(mobileStart, mobileEnd);
+
+    expect(mobileStart).toBeGreaterThan(-1);
+    expect(mobileStyles).toMatch(
+      /\.photo-gallery-grid\s*{\s*row-gap:\s*1rem;\s*column-gap:\s*0;\s*}/
+    );
+    expect(mobileStyles).toMatch(
+      /\.gallery-resonsive\s*{[\s\S]*?grid-column:\s*1\s*\/\s*-1;[\s\S]*?width:\s*calc\(100%\s*-\s*2rem\);[\s\S]*?margin-right:\s*auto;[\s\S]*?margin-left:\s*auto;/
+    );
   });
 });

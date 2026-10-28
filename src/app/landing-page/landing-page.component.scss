@@ -102,6 +102,11 @@
 }
 
 @media (max-width: 767.98px) {
+    .photo-gallery-grid {
+        row-gap: 1rem;
+        column-gap: 0;
+    }
+
     .landing-page-header {
         width: 100%;
         max-width: none;
@@ -164,12 +169,6 @@
         white-space: normal;
         word-break: break-word;
         overflow-wrap: anywhere;
-    }
-}
-
-@media (max-width: 425px) {
-    .photo-gallery-grid {
-        gap: 1rem 0;
     }
 }
 
