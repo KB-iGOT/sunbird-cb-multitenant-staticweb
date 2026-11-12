@@ -56,6 +56,8 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
   private static readonly COPIED_FEEDBACK_MS = 2000;
 
   tenant: TenantConfig | null = null;
+  logoHeight: string | null = null;
+  logoWidth: string | null = null;
   /** Resolved accent (image + position + rotation) per section, driven by the form configuration */
   titleAccents: { [section: string]: ResolvedTitleAccent } = {};
   /** Footer image from the form configuration, null when disabled or not configured */
@@ -96,6 +98,8 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.tenant = this.initService.configDetails;
+    this.logoHeight = this.normalizeLogoDimension(this.tenant?.branding?.height, 'height');
+    this.logoWidth = this.normalizeLogoDimension(this.tenant?.branding?.width, 'width');
     this.normalizeSliderBanners();
     this.baseURl = this.initService.appConfig.portalURL;
     if(this.tenant && this.tenant.content &&
@@ -122,6 +126,17 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
       this.tenantService.updateTitle(this.tenant.content.title);
       this.tenantService.updateFavicon(this.tenant.branding.favicon);
     }
+  }
+
+  private normalizeLogoDimension(value: unknown, property: 'height' | 'width'): string | null {
+    if (typeof value !== 'string') return null;
+
+    const normalized = value.trim().replace(/;+$/, '').trim();
+    if (!normalized) return null;
+
+    const style = document.createElement('div').style;
+    style.setProperty(property, normalized);
+    return style.getPropertyValue(property) ? normalized : null;
   }
 
   private normalizeSliderBanners(): void {
