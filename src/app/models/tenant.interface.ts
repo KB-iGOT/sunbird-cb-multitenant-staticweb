@@ -18,6 +18,8 @@ export interface TenantBranding {
   logo: string;
   favicon: string;
   companyName: string;
+  height?: string;
+  width?: string;
 }
 
 /**

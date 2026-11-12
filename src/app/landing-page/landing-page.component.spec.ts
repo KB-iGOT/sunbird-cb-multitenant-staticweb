@@ -142,6 +142,32 @@ describe('LandingPageComponent statistics', () => {
     expect(counters[0].classList).toContain('lg:w-36');
   });
 
+  it('applies normalized logo dimensions from branding', () => {
+    const config = tenant();
+    Object.assign(config.branding, { height: '50px;', width: '200px;' });
+    initService.configDetails = config;
+    fixture = TestBed.createComponent(LandingPageComponent);
+    fixture.detectChanges();
+
+    const logo = fixture.nativeElement.querySelector('.landing-page-logo') as HTMLElement;
+    expect(logo.style.height).toBe('50px');
+    expect(logo.style.width).toBe('200px');
+  });
+
+  it('falls back independently for missing or invalid logo dimensions', () => {
+    const config = tenant();
+    Object.assign(config.branding, { height: 'invalid', width: '200px' });
+    initService.configDetails = config;
+    fixture = TestBed.createComponent(LandingPageComponent);
+    fixture.detectChanges();
+
+    const logo = fixture.nativeElement.querySelector('.landing-page-logo') as HTMLElement;
+    expect(logo.style.height).toBe('');
+    expect(logo.classList).toContain('h-12');
+    expect(logo.style.width).toBe('200px');
+    expect(logo.classList).toContain('w-auto');
+  });
+
   it('renders the hooks used by the responsive photo gallery styles', () => {
     const images = Array.from({ length: 5 }, (_, index) => ({
       url: `/gallery-${index + 1}.jpg`,
