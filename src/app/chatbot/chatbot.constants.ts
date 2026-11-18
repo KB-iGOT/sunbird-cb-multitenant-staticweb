@@ -54,5 +54,10 @@ export const CHATBOT_SUGGESTIONS = [
   'FRA Claims Process',
 ]
 
+export const CHATBOT_TELEMETRY = {
+  name: 'Jago',
+  openId: 'chatbot-open',
+}
+
 export const CHATBOT_ERROR_MESSAGE =
   'Sorry, I\'m unable to connect to the Ministry of Tribal Affairs AI server at the moment. Please try again later.'

@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ChatbotService, ChatHistoryMessage } from './chatbot.service';
+import { AppTelemetryService } from '../services/telemetry.service';
 import {
   CHATBOT_ERROR_MESSAGE,
   CHATBOT_LANGUAGES,
   CHATBOT_PLACEHOLDERS,
   CHATBOT_SUGGESTIONS,
+  CHATBOT_TELEMETRY,
   CHATBOT_VOICE_LOCALES,
   ChatbotLanguage,
 } from './chatbot.constants';
@@ -59,7 +61,11 @@ export class ChatbotComponent implements OnDestroy {
   private recognition: any
   private destroyed = false
 
-  constructor(private chatbotSvc: ChatbotService, private ngZone: NgZone) {}
+  constructor(
+    private chatbotSvc: ChatbotService,
+    private ngZone: NgZone,
+    private telemetrySvc: AppTelemetryService,
+  ) {}
 
   get placeholder(): string {
     return CHATBOT_PLACEHOLDERS[this.selectedLanguage.code] || CHATBOT_PLACEHOLDERS['eng']
@@ -68,7 +74,10 @@ export class ChatbotComponent implements OnDestroy {
   /* --- Panel --- */
 
   open() {
+    if (this.isOpen) return
     this.isOpen = true
+    this.telemetrySvc.raiseInteract({ type: 'click', subtype: CHATBOT_TELEMETRY.name, id: CHATBOT_TELEMETRY.openId })
+    this.telemetrySvc.raiseImpression({ subtype: CHATBOT_TELEMETRY.openId })
     this.defer(() => this.chatInput?.nativeElement.focus())
   }
 

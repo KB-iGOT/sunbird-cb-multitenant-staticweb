@@ -3,17 +3,23 @@ import { of, throwError } from 'rxjs';
 import { ChatbotComponent } from './chatbot.component';
 import { ChatbotService } from './chatbot.service';
 import { CHATBOT_ERROR_MESSAGE } from './chatbot.constants';
+import { AppTelemetryService } from '../services/telemetry.service';
 
 describe('ChatbotComponent', () => {
   let fixture: ComponentFixture<ChatbotComponent>
   let component: ChatbotComponent
   let chatbotSvc: { sendMessage: jest.Mock }
+  let telemetrySvc: { raiseInteract: jest.Mock, raiseImpression: jest.Mock }
 
   beforeEach(() => {
     chatbotSvc = { sendMessage: jest.fn() }
+    telemetrySvc = { raiseInteract: jest.fn(), raiseImpression: jest.fn() }
     TestBed.configureTestingModule({
       imports: [ChatbotComponent],
-      providers: [{ provide: ChatbotService, useValue: chatbotSvc }],
+      providers: [
+        { provide: ChatbotService, useValue: chatbotSvc },
+        { provide: AppTelemetryService, useValue: telemetrySvc },
+      ],
     })
     fixture = TestBed.createComponent(ChatbotComponent)
     component = fixture.componentInstance
@@ -31,6 +37,21 @@ describe('ChatbotComponent', () => {
     component.close()
     fixture.detectChanges()
     expect(host.querySelector('.chatbot-panel')!.classList).not.toContain('open')
+  })
+
+  it('raises the chatbot-open interact and impression once per open', () => {
+    component.open()
+    component.open()
+
+    expect(telemetrySvc.raiseInteract).toHaveBeenCalledTimes(1)
+    expect(telemetrySvc.raiseInteract).toHaveBeenCalledWith({ type: 'click', subtype: 'Jago', id: 'chatbot-open' })
+    expect(telemetrySvc.raiseImpression).toHaveBeenCalledTimes(1)
+    expect(telemetrySvc.raiseImpression).toHaveBeenCalledWith({ subtype: 'chatbot-open' })
+
+    component.close()
+    component.open()
+    expect(telemetrySvc.raiseInteract).toHaveBeenCalledTimes(2)
+    expect(telemetrySvc.raiseImpression).toHaveBeenCalledTimes(2)
   })
 
   it('sends the query with history and language, then types out the formatted answer', fakeAsync(() => {

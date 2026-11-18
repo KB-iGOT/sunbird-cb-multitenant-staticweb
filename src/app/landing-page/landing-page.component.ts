@@ -15,6 +15,7 @@ import { InitService } from '../services/init.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WsEvents } from '../services/events';
 import { EventService } from '../services/event.service';
+import { AppTelemetryService } from '../services/telemetry.service';
 import { LANGUAGES } from '../constant/app.constant';
 
 @Component({
@@ -88,7 +89,8 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
     private initService: InitService,
     private router: Router,
     private route: ActivatedRoute,
-    private eventSvc: EventService
+    private eventSvc: EventService,
+    private telemetrySvc: AppTelemetryService,
   ) {
     const lang = localStorage.getItem('lang');
     if (lang) this.currentLanguage = lang;
@@ -126,6 +128,7 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
       this.tenantService.updateTitle(this.tenant.content.title);
       this.tenantService.updateFavicon(this.tenant.branding.favicon);
     }
+     this.telemetrySvc.raiseImpression();
   }
 
   private normalizeLogoDimension(value: unknown, property: 'height' | 'width'): string | null {

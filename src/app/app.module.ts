@@ -18,21 +18,24 @@ import {
   SlidersLibModule,
   WIDGET_REGISTRATION_LIB_CONFIG,
 } from '@sunbird-cb/consumption'
-import { LoggerService } from '@sunbird-cb/utils-v2'
+import { LoggerService, NPSGridService } from '@sunbird-cb/utils-v2'
 import { InitService } from './services/init.service';
 import { environment } from '../environments/environment';
 import { SbUiResolverModule, SbUiResolverService } from '@sunbird-cb/resolver-v2';
 import { PipePublicURL } from './pipes/pipe-public-URL/pipe-public-URL.pipe';
 import { ChatbotComponent } from './chatbot/chatbot.component';
+import { AppTelemetryService } from './services/telemetry.service';
 
 export const ENVIRONMENT = new InjectionToken<any>('environment');
 
-const appInitializer = (initSvc: InitService) => async () => {
+const appInitializer = (initSvc: InitService, telemetrySvc: AppTelemetryService) => async () => {
   try {
     await initSvc.init()
   } catch (error) {
     console.error('ERROR DURING APP INITIALIZATION >', error)
   }
+  // Telemetry needs the tenant configuration loaded by init().
+  telemetrySvc.initialize()
 }
 
 @NgModule({
@@ -66,6 +69,8 @@ const appInitializer = (initSvc: InitService) => async () => {
   providers: [
     CommonMethodsService,
     LoggerService,
+    // Required by the utils-v2 TelemetryService and not provided in root by the library.
+    NPSGridService,
     SbUiResolverService,
     {
       provide: ENVIRONMENT,
@@ -76,7 +81,7 @@ const appInitializer = (initSvc: InitService) => async () => {
       useValue: environment
     },
     {
-      deps: [InitService],
+      deps: [InitService, AppTelemetryService],
       multi: true,
       provide: APP_INITIALIZER,
       useFactory: appInitializer,

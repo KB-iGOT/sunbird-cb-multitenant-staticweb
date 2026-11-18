@@ -38,6 +38,7 @@
               "node_modules/material-icons/iconfont/material-icons.scss",
               "src/styles/mat-typography.scss",
               "src/styles/styles.scss",
+              "src/styles/chatbot.scss",
               "node_modules/shepherd.js/dist/css/shepherd.css",
               {
                 "inject":true,
@@ -121,5 +122,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "b149ec02-5340-4096-b770-14bec07d93ef"
   }
 }

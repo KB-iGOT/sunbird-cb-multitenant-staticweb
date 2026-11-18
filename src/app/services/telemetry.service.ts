@@ -1,343 +1,257 @@
-import { Injectable } from '@angular/core'
-import { filter } from 'rxjs/operators'
-import { environment } from 'src/environments/environment'
-import { Router, NavigationStart } from '@angular/router'
-import { WsEvents } from './events'
-import { EventService } from './event.service'
+import { Injectable, Injector } from '@angular/core'
+import {
+  ConfigurationsService,
+  EventService as LibEventService,
+  TelemetryService as LibTelemetryService,
+  WsEvents,
+} from '@sunbird-cb/utils-v2'
 import { InitService } from './init.service'
 
 declare var $t: any
 
+/** Page context for events raised on the public (non-logged-in) landing page. */
+export const NON_LOGGEDIN_PAGE_CONTEXT: WsEvents.ITelemetryPageContext = {
+  pageId: '/',
+  module: 'Non-loggedin Page',
+}
+
+export interface ITelemetryInteractData {
+  type: string
+  subtype?: string
+  id: string
+}
+
+export interface ITelemetryImpressionData {
+  subtype?: string
+}
+
+const TELEMETRY_SESSION_ID_KEY = 'telemetrySessionId'
+/** How long to wait for the SDK's device fingerprint before falling back to a generated device id. */
+const DEVICE_ID_TIMEOUT_MS = 5000
+const SESSION_EDATA = { type: WsEvents.WsTimeSpentType.Page, mode: WsEvents.WsTimeSpentMode.View }
+
+/**
+ * Connects this app to the telemetry service in `@sunbird-cb/utils-v2` and adds what the
+ * anonymous landing page needs on top of it:
+ * - the library's instance config, pointed at the public telemetry endpoint,
+ * - a telemetry session id (`sid`) per browser session,
+ * - every event wrapped in its own START and END, so the SDK uploads it immediately.
+ */
 @Injectable({
   providedIn: 'root',
 })
+export class AppTelemetryService {
+  private telemetry: LibTelemetryService | null = null
+  private libEvents: LibEventService | null = null
+  private deviceIdReady = false
+  private pendingEvents: (() => void)[] = []
 
-export class TelemetryService {
-  previousUrl: string | null = null
-  telemetryConfig: any = null
-  pData: any = null
-  contextCdata = []
-  isAnonymousTelemetry = true
-  telArray: any = []
-  externalApps: any = {
-    RBCP: 'rbcp-web-ui',
-  }
-  instanceConfig: any
-  configDetails: any
-  telConfig: any
-  constructor(
-    private eventsSvc: EventService,
-    private router: Router,
-    private initSvc: InitService,
-  ) {
-    this.configDetails = this.getConfigDetails()
-    this.telConfig = this.configDetails.telemetryConfig
-    if (this.telConfig) {
-      const telemetryUrl = this.initSvc.appConfig.telmetryUrl
-      this.telConfig.endpoint = this.joinUrl(telemetryUrl, this.telConfig.endpoint)
-      this.telConfig.publicEndpoint = this.joinUrl(telemetryUrl, this.telConfig.publicEndpoint)
-      this.telConfig.protectedEndpoint = this.joinUrl(telemetryUrl, this.telConfig.protectedEndpoint)
-      this.instanceConfig = this.telConfig
-      this.navigationStart()
-      this.initializeConfig(this.instanceConfig)
-      this.addCustomListener()
-      this.addCustomImpressionListener()
+  constructor(private injector: Injector, private initSvc: InitService) {}
+
+  /** Call once, after the tenant configuration has loaded. */
+  initialize() {
+    if (this.telemetry || typeof $t === 'undefined') {
+      return
     }
+    const telemetryConfig = this.buildTelemetryConfig()
+    if (!telemetryConfig) {
+      return
+    }
+    this.ensureTelemetrySessionId()
+    // The library reads its configuration (and the session id) once, when it is first created.
+    const configSvc = this.injector.get(ConfigurationsService)
+    configSvc.instanceConfig = { ...(configSvc.instanceConfig || {}), telemetryConfig } as any
+    this.telemetry = this.injector.get(LibTelemetryService)
+    this.libEvents = this.injector.get(LibEventService)
+    this.resolveDeviceId()
   }
 
-  getConfigDetails(): any {
-    return this.initSvc.configDetails || {}
-  }
-
-  private joinUrl(host: string, path: string): string {
-    return `${(host || '').replace(/\/+$/, '')}/${(path || '').replace(/^\/+/, '')}`
-  }
-
-  private navigationStart() {
-    this.router.events.subscribe((event: any) => {
-      if (event instanceof NavigationStart) {
-        if (event.url.includes('/public/') || event.url.includes('&preview=true') || event.url.includes('/certs')) {
-          this.isAnonymousTelemetry = true
-          this.updateTelemetryConfig()
-          this.initializeConfig(this.instanceConfig)
-        }
-      }
+  /** Raises an INTERACT event (through the library's interact listener), wrapped in START and END. */
+  raiseInteract(edata: ITelemetryInteractData, pageContext = NON_LOGGEDIN_PAGE_CONTEXT) {
+    this.sendWithinSession(pageContext, () => {
+      this.libEvents!.dispatchEvent<WsEvents.IWsEventTelemetryInteract>({
+        eventType: WsEvents.WsEventType.Telemetry,
+        eventLogLevel: WsEvents.WsEventLogLevel.Info,
+        data: {
+          edata: { type: edata.type, subType: edata.subtype, id: edata.id },
+          object: {},
+          pageContext,
+          eventSubType: WsEvents.EnumTelemetrySubType.Interact,
+        },
+        from: '',
+        to: 'Telemetry',
+        pageContext,
+      })
     })
   }
 
-  get isAnonymousTelemetryRequired(): boolean {
-    return this.isAnonymousTelemetry
-  }
-
-  private updateTelemetryConfig() {
-    if (this.instanceConfig) {
-      if (this.isAnonymousTelemetryRequired) {
-        this.instanceConfig.endpoint = this.instanceConfig.publicEndpoint
-      } else {
-        this.instanceConfig.endpoint = this.instanceConfig.protectedEndpoint
+  /**
+   * Raises an IMPRESSION event wrapped in START and END. A plain page impression uses the
+   * library's `impression()`; the library cannot set `edata.subtype`, so an impression with a
+   * subtype is sent with the same context the library uses.
+   */
+  raiseImpression(edata: ITelemetryImpressionData = {}, pageContext = NON_LOGGEDIN_PAGE_CONTEXT) {
+    this.sendWithinSession(pageContext, () => {
+      const telemetry = this.telemetry!
+      if (!edata.subtype) {
+        telemetry.impression({ pageContext, object: {} })
+        return
       }
-    }
-  }
-
-  private initializeConfig(instanceConfig: any | null) {
-    if (instanceConfig) {
-      this.telemetryConfig = instanceConfig
-      this.telemetryConfig = {
-        ...this.telemetryConfig,
-        pdata: {
-          ...this.telemetryConfig.pdata,
-          // pid: navigator.userAgent,
-          id: `${environment.name}.${this.telemetryConfig.pdata.id}`,
-        },
-        uid: 'anonymous',
-        channel: this.telemetryConfig.channel,
-        sid: this.getTelemetrySessionId,
-      }
-      this.pData = this.telemetryConfig.pdata
-    }
-  }
-
-  get getTelemetrySessionId(): string {
-    return localStorage.getItem('telemetrySessionId') || ''
-  }
-
-  start(edata: any, data: any, pageContext?: WsEvents.ITelemetryPageContext) {
-    try {
-      if (this.telemetryConfig) {
-        $t.start(
-          this.telemetryConfig,
-          (pageContext && pageContext.pageId) ?
-            pageContext.pageId
-            : '',
-          '1.0',
-          {
-            // id,
-            type: edata.type,
-            mode: edata.mode,
-            pageid: (pageContext && pageContext.pageId) ?
-              pageContext.pageId
-              : '',
-            duration: 1,
-          },
-          {
-            context: {
-              pdata: {
-                ...this.pData,
-                id: this.pData.id,
-              },
-              ...(pageContext && pageContext.module ? { env: pageContext.module } : null),
-            },
-            object: {
-              ...(data || {}),
-            },
-            actor: {id: 'non-loggedin', type: "AnonymousUser"}
-          },
-        )
-      } else {
-        //this.logger.error('Error Initializing Telemetry. Config missing.')
-      }
-    } catch (e) {
-      // tslint:disable-next-line: no-console
-      console.log('Error in telemetry start', e)
-    }
-  }
-
-  end(edata: any, data: any, pageContext?: WsEvents.ITelemetryPageContext) {
-    try {
-      $t.end(
+      $t.impression(
         {
-          type: edata.type,
-          mode: edata.mode,
-          pageid: (pageContext && pageContext.pageId) ?
-            pageContext.pageId
-            : '',
+          type: 'page',
+          subtype: edata.subtype,
+          pageid: pageContext.pageId || '',
+          uri: window.location.pathname,
         },
         {
           context: {
-            pdata: {
-              ...this.pData,
-              id: this.pData.id,
-            },
-            ...(pageContext && pageContext.module ? { env: pageContext.module } : null),
+            pdata: { ...telemetry.pData },
+            ...(pageContext.module ? { env: pageContext.module } : null),
           },
-          object: {
-            ...(data || {}),
-          },
-          actor: {id: 'non-loggedin', type: "AnonymousUser"}
+          object: {},
         },
       )
-    } catch (e) {
-      // tslint:disable-next-line: no-console
-      console.log('Error in telemetry end', e)
+    })
+  }
+
+  /**
+   * Sends an event between its own START and END. The SDK uploads its buffer as soon as it
+   * receives an END, so the event is sent right away instead of waiting for a full batch.
+   */
+  private sendWithinSession(pageContext: WsEvents.ITelemetryPageContext, raise: () => void) {
+    if (!this.telemetry) {
+      return
+    }
+    // START/END get the module only: the library would otherwise pass the page id as a content
+    // id, which the SDK then keeps as `object.id` on every later event.
+    const sessionContext: WsEvents.ITelemetryPageContext = { module: pageContext.module }
+    const send = () => {
+      const telemetry = this.telemetry!
+      telemetry.start(SESSION_EDATA, {}, sessionContext)
+      try {
+        raise()
+      } catch (e) {
+        // tslint:disable-next-line: no-console
+        console.log('Error in telemetry event', e)
+      }
+      telemetry.end(SESSION_EDATA, {}, sessionContext)
+    }
+    if (this.deviceIdReady) {
+      send()
+    } else {
+      this.pendingEvents.push(send)
     }
   }
 
-  addCustomListener() {
-
-    this.eventsSvc.chatbotEvents$
-      .pipe(
-        filter(
-          event =>
-            event &&
-            event.eventType === WsEvents.WsEventType.Telemetry &&
-            event.data.eventSubType ===  WsEvents.EnumTelemetrySubType.cardContent || event.data.eventSubType  === WsEvents.EnumTelemetrySubType.Chatbot &&
-            event.data.mode &&
-            event.data,
-        ),
-      )
-      .subscribe(event => {
-        console.log("Event from telemetry ", event)
-        if (event.data.state === WsEvents.EnumTelemetrySubType.Loaded) {
-          this.start(
-            {
-              type: event.data.type || WsEvents.WsTimeSpentType.Player,
-              mode: event.data.mode || WsEvents.WsTimeSpentMode.Play,
-            },
-            event.data && event.data.object || {},
-            event.pageContext
-          )
-        }
-        if (
-          event.data.state === WsEvents.EnumTelemetrySubType.Unloaded
-        ) {
-          this.end({
-            type: event.data.type || WsEvents.WsTimeSpentType.Player,
-            mode: event.data.mode || WsEvents.WsTimeSpentMode.Play,
-          },
-          event.data && event.data.object || {},
-                   event.pageContext
-          )
-        }
-        if (
-          event.data.state === WsEvents.EnumTelemetrySubType.Interact
-        ) {
-          $t.interact(
-            {
-              type: event.data.edata.type,
-              subtype: event.data.edata.subType,
-              id: (event.data.edata && event.data.edata.id) ?
-                event.data.edata.id
-                : '',
-              pageid: event.pageContext && event.pageContext.pageId || '',
-            },
-            {
-              context: {
-                pdata: {
-                  ...this.pData,
-                  id: this.pData.id,
-                },
-                ...(event.pageContext && event.pageContext.module ? { env: event.pageContext.module } : null),
-              },
-              object: {
-                ...event.data.object,
-              },
-              actor: {id: 'non-loggedin', type: "AnonymousUser"}
-            },
-          )
-        }
-
-      })
-  }
-
-  addCustomImpressionListener() {
-    this.eventsSvc.events$
-      .pipe(
-        filter(
-          (event: WsEvents.WsEventTelemetryImpression) =>
-            event &&
-            event.data &&
-            event.eventType === WsEvents.WsEventType.Telemetry &&
-            event.data.eventSubType === WsEvents.EnumTelemetrySubType.Impression,
-        ),
-      )
-      .subscribe(event => {
-        try {
-          // console.log('event.data::', event.data)
-          this.impression(event.data)
-        } catch (e) {
-          // tslint:disable-next-line: no-console
-          console.log('Error in telemetry impression', e)
-        }
-      })
-  }
-
-  impression(data?: any) {
-    try {
-      const page = this.getPageDetails()
-      if (data && data.pageContext) {
-        page.pageid = data.pageContext.pageId
-        page.module = data.pageContext.module
-      }
-      const edata = {
-        pageid: page.pageid, // Required. Unique page id
-        type: page.pageUrlParts[0], // Required. Impression type (list, detail, view, edit, workflow, search)
-        uri: page.pageUrl,
-      }
-      if (page.objectId) {
-        const config = {
-          context: {
-            pdata: {
-              ...this.pData,
-              id: this.pData.id,
-            },
-            env: page.module || (this.telemetryConfig && this.telemetryConfig.env),
-          },
-          object: {
-            id: page.objectId,
-            // This will override above id if the data has object in it.
-            ...((data) ? data.object : {}),
-          },
-        }
-        $t.impression(edata, config)
-      } else {
-        $t.impression(edata, {
-          context: {
-            pdata: {
-              ...this.pData,
-              id: this.pData.id,
-            },
-            env: page.module || '',
-          },
-          object: {
-            ...((data) ? data.object : {}),
-          },
-        })
-      }
-      this.previousUrl = page.pageUrl
-    } catch (e) {
-      // tslint:disable-next-line: no-console
-      console.log('Error in telemetry impression', e)
-    }
-  }
-  getPageDetails() {
-    const path = window.location.pathname.replace('/', '')
-    const url = path + window.location.search
-    return {
-      pageid: path,
-      pageUrl: url,
-      pageUrlParts: path.split('/'),
-      refferUrl: this.previousUrl,
-      objectId: this.extractContentIdFromUrlParts(path.split('/')),
-      module: '',
-    }
-  }
-  extractContentIdFromUrlParts(urlParts: string[]) {
-    // TODO: pick toc and viewer url from some configuration
-    const tocIdx = urlParts.indexOf('toc')
-    const viewerIdx = urlParts.indexOf('viewer')
-
-    if (tocIdx === -1 && viewerIdx === -1) {
+  /**
+   * Tenant telemetry config posting to the anonymous endpoint on this site's own origin.
+   * Cross-origin posts are blocked: the telemetry API's CORS policy does not allow the
+   * x-app-id / x-device-id / x-channel-id / dataType headers the SDK always sends.
+   */
+  private buildTelemetryConfig(): any {
+    const tenantConfig = this.initSvc.configDetails && this.initSvc.configDetails.telemetryConfig
+    if (!tenantConfig || !tenantConfig.pdata || !tenantConfig.endpoint) {
       return null
     }
-
-    if (tocIdx !== -1 && tocIdx < urlParts.length - 1) {
-      return urlParts[tocIdx + 1] // e.g. url /app/toc/<content_id>
+    const endpoint = toSitePath(tenantConfig.endpoint)
+    return {
+      ...tenantConfig,
+      // The SDK posts to host + apislug + endpoint, and defaults apislug to '/action' when unset.
+      host: '',
+      apislug: '',
+      endpoint,
+      // The library switches to publicEndpoint on some routes; keep it on the same working endpoint.
+      publicEndpoint: endpoint,
     }
-
-    if (viewerIdx !== -1 && viewerIdx < urlParts.length - 2) {
-      return urlParts[viewerIdx + 2] // e.g. url /app/viewer/<content_type>/<content_id>
-    }
-
-    return null
   }
+
+  /**
+   * The library reads the session id from localStorage. Create one per browser session
+   * (tracked in sessionStorage) and mirror it there.
+   */
+  private ensureTelemetrySessionId() {
+    let sid = readStorage(() => sessionStorage, TELEMETRY_SESSION_ID_KEY)
+    if (!sid) {
+      sid = generateUuid()
+      writeStorage(() => sessionStorage, TELEMETRY_SESSION_ID_KEY, sid)
+    }
+    writeStorage(() => localStorage, TELEMETRY_SESSION_ID_KEY, sid)
+  }
+
+  /**
+   * The SDK builds every event in one shared envelope object. Until it knows the device id it
+   * dispatches asynchronously, so a START, event and END raised together would all go out as
+   * the last one. Resolve the device id first, and hold events until it is known.
+   */
+  private resolveDeviceId() {
+    setTimeout(() => this.onDeviceIdResolved(generateUuid()), DEVICE_ID_TIMEOUT_MS)
+    try {
+      $t.getFingerPrint((did: string) => this.onDeviceIdResolved(did))
+    } catch (e) {
+      // tslint:disable-next-line: no-console
+      console.log('Error in telemetry device id', e)
+      this.onDeviceIdResolved(generateUuid())
+    }
+  }
+
+  private onDeviceIdResolved(did: string) {
+    if (this.deviceIdReady) {
+      return
+    }
+    this.deviceIdReady = true
+    try {
+      // The SDK reads this cache when dispatching; with it set, dispatch is synchronous.
+      $t.fingerPrintId = did
+      if (!$t.isInitialized()) {
+        $t.initialize({ ...this.telemetry!.telemetryConfig, did })
+      }
+    } catch (e) {
+      // tslint:disable-next-line: no-console
+      console.log('Error in telemetry initialize', e)
+    }
+    this.pendingEvents.splice(0).forEach(send => send())
+  }
+}
+
+/** Root-relative path on the current site, e.g. 'api/data/v1/public/telemetry' -> '/api/data/v1/public/telemetry'. */
+function toSitePath(path: string): string {
+  return `/${path.replace(/^\/+/, '')}`
+}
+
+/** Storage access can throw (private mode, blocked site data), so treat any failure as "not stored". */
+function readStorage(storage: () => Storage, key: string): string {
+  try {
+    return storage().getItem(key) || ''
+  } catch {
+    return ''
+  }
+}
+
+function writeStorage(storage: () => Storage, key: string, value: string): boolean {
+  try {
+    storage().setItem(key, value)
+    return true
+  } catch {
+    return false
+  }
+}
+
+function generateUuid(): string {
+  const cryptoApi: Crypto | undefined = typeof crypto !== 'undefined' ? crypto : undefined
+  if (cryptoApi && typeof cryptoApi.randomUUID === 'function') {
+    return cryptoApi.randomUUID()
+  }
+  const bytes = new Uint8Array(16)
+  if (cryptoApi && typeof cryptoApi.getRandomValues === 'function') {
+    cryptoApi.getRandomValues(bytes)
+  } else {
+    for (let i = 0; i < bytes.length; i++) {
+      bytes[i] = Math.floor(Math.random() * 256)
+    }
+  }
+  bytes[6] = (bytes[6] & 0x0f) | 0x40
+  bytes[8] = (bytes[8] & 0x3f) | 0x80
+  const hex = Array.from(bytes, b => b.toString(16).padStart(2, '0')).join('')
+  return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`
 }
