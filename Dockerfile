@@ -1,4 +1,4 @@
-FROM node:22.6.0
+FROM node:22.23.4
 RUN groupadd -r appuser && useradd -r -g appuser appuser
 WORKDIR /app
 COPY package.json ./
