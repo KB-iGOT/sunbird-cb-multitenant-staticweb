@@ -17,6 +17,7 @@ import { WsEvents } from '../services/events';
 import { EventService } from '../services/event.service';
 import { AppTelemetryService } from '../services/telemetry.service';
 import { LANGUAGES } from '../constant/app.constant';
+import { resolveJagoChatbot } from '../chatbot/chatbot.config';
 
 @Component({
   selector: 'app-landing-page',
@@ -74,6 +75,8 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
   /** Item whose text was just copied, so the template can confirm it */
   copiedNav: ResolvedNavItem | null = null;
   private copiedTimeout: any;
+  /** Jago chatbot is rendered only when `jagochatbot.enabled` is true in the form configuration */
+  showChatbot = false;
   loading = true;
   private carouselInterval: any;
   private currentIndex = 0;
@@ -122,6 +125,7 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
     this.resolveGalleryDecoration();
     this.resolveLoginButton();
     this.resolveFooter();
+    this.showChatbot = resolveJagoChatbot(this.tenant).enabled;
     this.loading = false;
     if (this.tenant) {
       this.tenantService.applyTheme(this.tenant.theme);

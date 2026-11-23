@@ -25,6 +25,11 @@ export interface ITelemetryImpressionData {
   subtype?: string
 }
 
+/** One event for `raiseEvents`. */
+export type ITelemetryEvent =
+  | { eid: 'INTERACT', edata: ITelemetryInteractData }
+  | { eid: 'IMPRESSION', edata?: ITelemetryImpressionData }
+
 const TELEMETRY_SESSION_ID_KEY = 'telemetrySessionId'
 /** How long to wait for the SDK's device fingerprint before falling back to a generated device id. */
 const DEVICE_ID_TIMEOUT_MS = 5000
@@ -35,7 +40,8 @@ const SESSION_EDATA = { type: WsEvents.WsTimeSpentType.Page, mode: WsEvents.WsTi
  * anonymous landing page needs on top of it:
  * - the library's instance config, pointed at the public telemetry endpoint,
  * - a telemetry session id (`sid`) per browser session,
- * - every event wrapped in its own START and END, so the SDK uploads it immediately.
+ * - every event (or every group of events from one user action) wrapped in a START and END,
+ *   so the SDK uploads it immediately.
  */
 @Injectable({
   providedIn: 'root',
@@ -66,60 +72,83 @@ export class AppTelemetryService {
     this.resolveDeviceId()
   }
 
-  /** Raises an INTERACT event (through the library's interact listener), wrapped in START and END. */
+  /** Raises an INTERACT event, wrapped in its own START and END. */
   raiseInteract(edata: ITelemetryInteractData, pageContext = NON_LOGGEDIN_PAGE_CONTEXT) {
-    this.sendWithinSession(pageContext, () => {
-      this.libEvents!.dispatchEvent<WsEvents.IWsEventTelemetryInteract>({
-        eventType: WsEvents.WsEventType.Telemetry,
-        eventLogLevel: WsEvents.WsEventLogLevel.Info,
-        data: {
-          edata: { type: edata.type, subType: edata.subtype, id: edata.id },
-          object: {},
-          pageContext,
-          eventSubType: WsEvents.EnumTelemetrySubType.Interact,
-        },
-        from: '',
-        to: 'Telemetry',
-        pageContext,
-      })
-    })
+    this.raiseEvents([{ eid: 'INTERACT', edata }], pageContext)
   }
 
-  /**
-   * Raises an IMPRESSION event wrapped in START and END. A plain page impression uses the
-   * library's `impression()`; the library cannot set `edata.subtype`, so an impression with a
-   * subtype is sent with the same context the library uses.
-   */
+  /** Raises an IMPRESSION event, wrapped in its own START and END. */
   raiseImpression(edata: ITelemetryImpressionData = {}, pageContext = NON_LOGGEDIN_PAGE_CONTEXT) {
-    this.sendWithinSession(pageContext, () => {
-      const telemetry = this.telemetry!
-      if (!edata.subtype) {
-        telemetry.impression({ pageContext, object: {} })
-        return
+    this.raiseEvents([{ eid: 'IMPRESSION', edata }], pageContext)
+  }
+
+  /**
+   * Raises several events, in the order given, between one START and one END: for a user
+   * action that produces more than one event, e.g. opening the chatbot (its click and its impression).
+   */
+  raiseEvents(events: ITelemetryEvent[], pageContext = NON_LOGGEDIN_PAGE_CONTEXT) {
+    if (!events.length) {
+      return
+    }
+    this.sendWithinSession(pageContext, events.map(event => () => {
+      if (event.eid === 'INTERACT') {
+        this.interact(event.edata, pageContext)
+      } else {
+        this.impression(event.edata || {}, pageContext)
       }
-      $t.impression(
-        {
-          type: 'page',
-          subtype: edata.subtype,
-          pageid: pageContext.pageId || '',
-          uri: window.location.pathname,
-        },
-        {
-          context: {
-            pdata: { ...telemetry.pData },
-            ...(pageContext.module ? { env: pageContext.module } : null),
-          },
-          object: {},
-        },
-      )
+    }))
+  }
+
+  /** Sends an INTERACT through the library's interact listener. */
+  private interact(edata: ITelemetryInteractData, pageContext: WsEvents.ITelemetryPageContext) {
+    this.libEvents!.dispatchEvent<WsEvents.IWsEventTelemetryInteract>({
+      eventType: WsEvents.WsEventType.Telemetry,
+      eventLogLevel: WsEvents.WsEventLogLevel.Info,
+      data: {
+        edata: { type: edata.type, subType: edata.subtype, id: edata.id },
+        object: {},
+        pageContext,
+        eventSubType: WsEvents.EnumTelemetrySubType.Interact,
+      },
+      from: '',
+      to: 'Telemetry',
+      pageContext,
     })
   }
 
   /**
-   * Sends an event between its own START and END. The SDK uploads its buffer as soon as it
-   * receives an END, so the event is sent right away instead of waiting for a full batch.
+   * Sends an IMPRESSION. A plain page impression uses the library's `impression()`; the library
+   * cannot set `edata.subtype`, so an impression with a subtype is sent with the same context the
+   * library uses.
    */
-  private sendWithinSession(pageContext: WsEvents.ITelemetryPageContext, raise: () => void) {
+  private impression(edata: ITelemetryImpressionData, pageContext: WsEvents.ITelemetryPageContext) {
+    const telemetry = this.telemetry!
+    if (!edata.subtype) {
+      telemetry.impression({ pageContext, object: {} })
+      return
+    }
+    $t.impression(
+      {
+        type: 'page',
+        subtype: edata.subtype,
+        pageid: pageContext.pageId || '',
+        uri: window.location.pathname,
+      },
+      {
+        context: {
+          pdata: { ...telemetry.pData },
+          ...(pageContext.module ? { env: pageContext.module } : null),
+        },
+        object: {},
+      },
+    )
+  }
+
+  /**
+   * Sends events between one START and one END. The SDK uploads its buffer as soon as it
+   * receives an END, so the events are sent right away instead of waiting for a full batch.
+   */
+  private sendWithinSession(pageContext: WsEvents.ITelemetryPageContext, raises: (() => void)[]) {
     if (!this.telemetry) {
       return
     }
@@ -129,12 +158,15 @@ export class AppTelemetryService {
     const send = () => {
       const telemetry = this.telemetry!
       telemetry.start(SESSION_EDATA, {}, sessionContext)
-      try {
-        raise()
-      } catch (e) {
-        // tslint:disable-next-line: no-console
-        console.log('Error in telemetry event', e)
-      }
+      // Each event on its own, so one failing does not drop the others or the END.
+      raises.forEach(raise => {
+        try {
+          raise()
+        } catch (e) {
+          // tslint:disable-next-line: no-console
+          console.log('Error in telemetry event', e)
+        }
+      })
       telemetry.end(SESSION_EDATA, {}, sessionContext)
     }
     if (this.deviceIdReady) {

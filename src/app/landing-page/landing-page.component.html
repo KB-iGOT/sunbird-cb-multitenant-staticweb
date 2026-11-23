@@ -445,7 +445,7 @@
   </footer>
 </div>
 
-<app-chatbot *ngIf="!loading && tenant"></app-chatbot>
+<app-chatbot *ngIf="!loading && tenant && showChatbot"></app-chatbot>
 
 <div *ngIf="!loading && !tenant" class="flex justify-center items-center min-h-screen">
   <div class="text-center">

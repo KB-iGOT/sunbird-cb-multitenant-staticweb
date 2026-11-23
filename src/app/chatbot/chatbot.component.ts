@@ -76,8 +76,11 @@ export class ChatbotComponent implements OnDestroy {
   open() {
     if (this.isOpen) return
     this.isOpen = true
-    this.telemetrySvc.raiseInteract({ type: 'click', subtype: CHATBOT_TELEMETRY.name, id: CHATBOT_TELEMETRY.openId })
-    this.telemetrySvc.raiseImpression({ subtype: CHATBOT_TELEMETRY.openId })
+    // The launcher click and the chatbot impression go out under one START/END pair.
+    this.telemetrySvc.raiseEvents([
+      { eid: 'INTERACT', edata: { type: 'click', subtype: CHATBOT_TELEMETRY.name, id: CHATBOT_TELEMETRY.openId } },
+      { eid: 'IMPRESSION', edata: { subtype: CHATBOT_TELEMETRY.openId } },
+    ])
     this.defer(() => this.chatInput?.nativeElement.focus())
   }
 
@@ -95,11 +98,19 @@ export class ChatbotComponent implements OnDestroy {
   toggleLangMenu(event: Event) {
     event.stopPropagation()
     this.isLangMenuOpen = !this.isLangMenuOpen
+    if (this.isLangMenuOpen) {
+      this.telemetrySvc.raiseInteract({
+        type: 'click',
+        subtype: this.selectedLanguage.name,
+        id: CHATBOT_TELEMETRY.languageExistingId,
+      })
+    }
   }
 
   selectLanguage(lang: ChatbotLanguage) {
     this.selectedLanguage = lang
     this.isLangMenuOpen = false
+    this.telemetrySvc.raiseInteract({ type: 'click', subtype: lang.name, id: CHATBOT_TELEMETRY.languageTargetId })
   }
 
   @HostListener('document:click', ['$event'])

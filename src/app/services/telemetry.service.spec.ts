@@ -154,6 +154,60 @@ describe('AppTelemetryService', () => {
     expect(sdk.calls[1].options.object).toEqual({})
   })
 
+  it('sends grouped events in order between a single START and END', () => {
+    const service = createService()
+    sdk.resolveFingerPrint('device-1')
+
+    service.raiseEvents([
+      { eid: 'INTERACT', edata: { type: 'click', subtype: 'Jago', id: 'chatbot-open' } },
+      { eid: 'IMPRESSION', edata: { subtype: 'chatbot-open' } },
+    ])
+
+    expect(eids()).toEqual(['START', 'INTERACT', 'IMPRESSION', 'END'])
+    expect(sdk.calls[1].edata).toEqual({ type: 'click', subtype: 'Jago', id: 'chatbot-open', pageid: '/' })
+    expect(sdk.calls[2].edata).toEqual({ type: 'page', subtype: 'chatbot-open', pageid: '/', uri: window.location.pathname })
+    expect(sdk.calls[1].options.context.env).toBe('Non-loggedin Page')
+    expect(sdk.calls[2].options.context.env).toBe('Non-loggedin Page')
+  })
+
+  it('still sends the other grouped events and the END when one event fails', () => {
+    const service = createService()
+    sdk.resolveFingerPrint('device-1')
+    const log = jest.spyOn(console, 'log').mockImplementation(() => {})
+    sdk.interact.mockImplementationOnce(() => { throw new Error('boom') })
+
+    service.raiseEvents([
+      { eid: 'INTERACT', edata: { type: 'click', id: 'chatbot-open' } },
+      { eid: 'IMPRESSION', edata: { subtype: 'chatbot-open' } },
+    ])
+
+    expect(eids()).toEqual(['START', 'IMPRESSION', 'END'])
+    log.mockRestore()
+  })
+
+  it('holds grouped events until the device id is known, keeping them in one START and END', () => {
+    const service = createService()
+
+    service.raiseEvents([
+      { eid: 'INTERACT', edata: { type: 'click', id: 'chatbot-open' } },
+      { eid: 'IMPRESSION', edata: { subtype: 'chatbot-open' } },
+    ])
+    expect(sdk.calls).toEqual([])
+
+    sdk.resolveFingerPrint('device-1')
+
+    expect(eids()).toEqual(['START', 'INTERACT', 'IMPRESSION', 'END'])
+  })
+
+  it('sends nothing for an empty group', () => {
+    const service = createService()
+    sdk.resolveFingerPrint('device-1')
+
+    service.raiseEvents([])
+
+    expect(sdk.calls).toEqual([])
+  })
+
   it('starts sessions as an anonymous user without a content id', () => {
     const service = createService()
     sdk.resolveFingerPrint('device-1')
