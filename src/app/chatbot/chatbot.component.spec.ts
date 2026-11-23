@@ -9,11 +9,11 @@ describe('ChatbotComponent', () => {
   let fixture: ComponentFixture<ChatbotComponent>
   let component: ChatbotComponent
   let chatbotSvc: { sendMessage: jest.Mock }
-  let telemetrySvc: { raiseInteract: jest.Mock, raiseImpression: jest.Mock }
+  let telemetrySvc: { raiseInteract: jest.Mock, raiseImpression: jest.Mock, raiseEvents: jest.Mock }
 
   beforeEach(() => {
     chatbotSvc = { sendMessage: jest.fn() }
-    telemetrySvc = { raiseInteract: jest.fn(), raiseImpression: jest.fn() }
+    telemetrySvc = { raiseInteract: jest.fn(), raiseImpression: jest.fn(), raiseEvents: jest.fn() }
     TestBed.configureTestingModule({
       imports: [ChatbotComponent],
       providers: [
@@ -39,19 +39,73 @@ describe('ChatbotComponent', () => {
     expect(host.querySelector('.chatbot-panel')!.classList).not.toContain('open')
   })
 
-  it('raises the chatbot-open interact and impression once per open', () => {
+  it('raises the chatbot-open interact and impression together, once per open', () => {
     component.open()
     component.open()
 
-    expect(telemetrySvc.raiseInteract).toHaveBeenCalledTimes(1)
-    expect(telemetrySvc.raiseInteract).toHaveBeenCalledWith({ type: 'click', subtype: 'Jago', id: 'chatbot-open' })
-    expect(telemetrySvc.raiseImpression).toHaveBeenCalledTimes(1)
-    expect(telemetrySvc.raiseImpression).toHaveBeenCalledWith({ subtype: 'chatbot-open' })
+    // One call, so both events share a single START/END pair.
+    expect(telemetrySvc.raiseEvents).toHaveBeenCalledTimes(1)
+    expect(telemetrySvc.raiseEvents).toHaveBeenCalledWith([
+      { eid: 'INTERACT', edata: { type: 'click', subtype: 'Jago', id: 'chatbot-open' } },
+      { eid: 'IMPRESSION', edata: { subtype: 'chatbot-open' } },
+    ])
+    expect(telemetrySvc.raiseInteract).not.toHaveBeenCalled()
+    expect(telemetrySvc.raiseImpression).not.toHaveBeenCalled()
 
     component.close()
     component.open()
-    expect(telemetrySvc.raiseInteract).toHaveBeenCalledTimes(2)
-    expect(telemetrySvc.raiseImpression).toHaveBeenCalledTimes(2)
+    expect(telemetrySvc.raiseEvents).toHaveBeenCalledTimes(2)
+  })
+
+  it('raises language-change-existing with the current language when the language menu opens', () => {
+    const host: HTMLElement = fixture.nativeElement
+    component.open()
+    fixture.detectChanges()
+    telemetrySvc.raiseInteract.mockClear()
+
+    host.querySelector<HTMLButtonElement>('.lang-pill-btn')!.click()
+    fixture.detectChanges()
+
+    expect(component.isLangMenuOpen).toBe(true)
+    expect(telemetrySvc.raiseInteract).toHaveBeenCalledTimes(1)
+    expect(telemetrySvc.raiseInteract).toHaveBeenCalledWith({
+      type: 'click', subtype: 'English', id: 'language-change-existing',
+    })
+
+    // Closing the menu with the same button is not a language-change click.
+    host.querySelector<HTMLButtonElement>('.lang-pill-btn')!.click()
+    expect(component.isLangMenuOpen).toBe(false)
+    expect(telemetrySvc.raiseInteract).toHaveBeenCalledTimes(1)
+  })
+
+  it('raises language-change-target with the chosen language, by its English name', () => {
+    const host: HTMLElement = fixture.nativeElement
+    component.open()
+    fixture.detectChanges()
+    host.querySelector<HTMLButtonElement>('.lang-pill-btn')!.click()
+    fixture.detectChanges()
+    telemetrySvc.raiseInteract.mockClear()
+
+    // Hindi is labelled in Devanagari; telemetry still gets "Hindi".
+    host.querySelectorAll<HTMLButtonElement>('.lang-item')[1].click()
+    fixture.detectChanges()
+
+    expect(component.selectedLanguage.code).toBe('hin')
+    expect(component.isLangMenuOpen).toBe(false)
+    expect(telemetrySvc.raiseInteract).toHaveBeenCalledTimes(1)
+    expect(telemetrySvc.raiseInteract).toHaveBeenCalledWith({
+      type: 'click', subtype: 'Hindi', id: 'language-change-target',
+    })
+
+    // Reopening the menu now reports Hindi as the existing language.
+    host.querySelector<HTMLButtonElement>('.lang-pill-btn')!.click()
+    expect(telemetrySvc.raiseInteract).toHaveBeenLastCalledWith({
+      type: 'click', subtype: 'Hindi', id: 'language-change-existing',
+    })
+  })
+
+  it('gives every language an English name for telemetry', () => {
+    component.languages.forEach(lang => expect(lang.name).toMatch(/^[A-Za-z]+$/))
   })
 
   it('sends the query with history and language, then types out the formatted answer', fakeAsync(() => {

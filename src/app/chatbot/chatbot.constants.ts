@@ -2,21 +2,23 @@ export interface ChatbotLanguage {
   code: string
   label: string
   native?: string
+  /** English name of the language, sent as the telemetry subtype (the label may be in another script). */
+  name: string
   isDefault?: boolean
 }
 
 export const CHATBOT_LANGUAGES: ChatbotLanguage[] = [
-  { code: 'eng', label: 'English', isDefault: true },
-  { code: 'hin', label: 'हिन्दी', native: 'Hindi' },
-  { code: 'gnd', label: 'Gondi', native: 'गोंडी' },
-  { code: 'sat', label: 'Santali', native: 'ᱥᱟᱱᱛᱟᱲᱤ' },
-  { code: 'mun', label: 'Mundari', native: 'मुंडारी' },
-  { code: 'bhili', label: 'Bhili', native: 'भीली' },
-  { code: 'bettakuruba', label: 'Bettakuruba', native: 'ಬೆಟ್ಟ ಕುರುಬ' },
-  { code: 'garo', label: 'Garo', native: 'A·chik' },
-  { code: 'kokborok', label: 'Kokborok', native: 'Tripuri' },
-  { code: 'koya', label: 'Koya', native: 'కోయ' },
-  { code: 'kui', label: 'Kui', native: 'କୁଇ' },
+  { code: 'eng', label: 'English', name: 'English', isDefault: true },
+  { code: 'hin', label: 'हिन्दी', native: 'Hindi', name: 'Hindi' },
+  { code: 'gnd', label: 'Gondi', native: 'गोंडी', name: 'Gondi' },
+  { code: 'sat', label: 'Santali', native: 'ᱥᱟᱱᱛᱟᱲᱤ', name: 'Santali' },
+  { code: 'mun', label: 'Mundari', native: 'मुंडारी', name: 'Mundari' },
+  { code: 'bhili', label: 'Bhili', native: 'भीली', name: 'Bhili' },
+  { code: 'bettakuruba', label: 'Bettakuruba', native: 'ಬೆಟ್ಟ ಕುರುಬ', name: 'Bettakuruba' },
+  { code: 'garo', label: 'Garo', native: 'A·chik', name: 'Garo' },
+  { code: 'kokborok', label: 'Kokborok', native: 'Tripuri', name: 'Kokborok' },
+  { code: 'koya', label: 'Koya', native: 'కోయ', name: 'Koya' },
+  { code: 'kui', label: 'Kui', native: 'କୁଇ', name: 'Kui' },
 ]
 
 export const CHATBOT_PLACEHOLDERS: { [code: string]: string } = {
@@ -57,6 +59,10 @@ export const CHATBOT_SUGGESTIONS = [
 export const CHATBOT_TELEMETRY = {
   name: 'Jago',
   openId: 'chatbot-open',
+  /** Language menu opened; subtype is the language in use. */
+  languageExistingId: 'language-change-existing',
+  /** Language picked from the menu; subtype is the chosen language. */
+  languageTargetId: 'language-change-target',
 }
 
 export const CHATBOT_ERROR_MESSAGE =

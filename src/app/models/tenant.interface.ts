@@ -269,6 +269,26 @@ export interface TenantContact {
   address: string;
 }
 
+/** `jagochatbot` block of the form configuration. */
+export interface TenantJagoChatbot {
+  /**
+   * Shows the Jago chatbot on the landing page. The form stores it as a string
+   * ("true" / "false"); a boolean is accepted too. Defaults to false.
+   */
+  enabled?: boolean | string;
+  /** Chat backend api key. Falls back to the environment (`chatbotApiKey`). */
+  apiKey?: string;
+  /** Chat backend base url. Falls back to the environment (`chatbotApiUrl`). */
+  apiUrl?: string;
+}
+
+/** `TenantJagoChatbot` after defaults are applied. */
+export interface ResolvedJagoChatbot {
+  enabled: boolean;
+  apiKey: string;
+  apiUrl: string;
+}
+
 export interface TenantConfig {
   id: string;
   name: string;
@@ -280,4 +300,6 @@ export interface TenantConfig {
   contact: TenantContact;
   /** Footer block as stored by the form (`content.footer` is also supported). */
   footer?: TenantFooter;
+  /** Jago chatbot settings. The chatbot is hidden when this is missing or not enabled. */
+  jagochatbot?: TenantJagoChatbot;
 }

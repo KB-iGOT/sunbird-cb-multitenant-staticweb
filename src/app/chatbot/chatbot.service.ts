@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { timeout } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
+import { InitService } from '../services/init.service';
+import { resolveJagoChatbot } from './chatbot.config';
 
 export interface ChatHistoryMessage {
   role: 'user' | 'assistant'
@@ -31,7 +32,7 @@ const REQUEST_TIMEOUT_MS = 45000
 })
 export class ChatbotService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private initSvc: InitService) {}
 
   /**
    * Sends a query to the chat backend.
@@ -51,13 +52,14 @@ export class ChatbotService {
       top_k: 10,
     }
 
+    // Url and key come from the form configuration (`jagochatbot`), falling back to the environment.
+    const { apiUrl, apiKey } = resolveJagoChatbot(this.initSvc.configDetails)
     return this.http
-      .post<ChatResponse>(`${environment.chatbotApiUrl}/chat`, body, { headers: this.getHeaders() })
+      .post<ChatResponse>(`${apiUrl}/chat`, body, { headers: this.getHeaders(apiKey) })
       .pipe(timeout(REQUEST_TIMEOUT_MS))
   }
 
-  private getHeaders(): HttpHeaders {
-    const apiKey = environment.chatbotApiKey
+  private getHeaders(apiKey: string): HttpHeaders {
     let headers = new HttpHeaders({ 'Content-Type': 'application/json' })
     if (apiKey) {
       headers = headers

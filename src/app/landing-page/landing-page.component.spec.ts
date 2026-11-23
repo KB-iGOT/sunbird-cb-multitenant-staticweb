@@ -168,6 +168,30 @@ describe('LandingPageComponent statistics', () => {
     expect(logo.classList).toContain('w-auto');
   });
 
+  const renderWithChatbot = (jagochatbot?: Record<string, any>): HTMLElement => {
+    const config: any = tenant();
+    if (jagochatbot) {
+      config.jagochatbot = jagochatbot;
+    }
+    initService.configDetails = config;
+    fixture = TestBed.createComponent(LandingPageComponent);
+    fixture.detectChanges();
+    return fixture.nativeElement as HTMLElement;
+  };
+
+  it('shows the Jago chatbot when the form configuration enables it', () => {
+    expect(renderWithChatbot({ enabled: 'true' }).querySelector('app-chatbot')).not.toBeNull();
+  });
+
+  it.each([
+    ['the jagochatbot block is missing', undefined],
+    ['enabled is "false"', { enabled: 'false' }],
+    ['enabled is false', { enabled: false }],
+    ['enabled is not set', { apiUrl: 'https://chat.example.com' }],
+  ])('keeps the Jago chatbot hidden when %s', (_case, jagochatbot) => {
+    expect(renderWithChatbot(jagochatbot).querySelector('app-chatbot')).toBeNull();
+  });
+
   it('renders the hooks used by the responsive photo gallery styles', () => {
     const images = Array.from({ length: 5 }, (_, index) => ({
       url: `/gallery-${index + 1}.jpg`,
